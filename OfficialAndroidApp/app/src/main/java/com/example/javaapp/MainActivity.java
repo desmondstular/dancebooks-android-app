@@ -24,14 +24,11 @@ public class MainActivity extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
         // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
-        addClientsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate back to MainActivity
-                Intent intent = new Intent(MainActivity.this, AddClient.class);
-                startActivity(intent);
-                //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
-            }
+        addClientsBtn.setOnClickListener(view -> {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(MainActivity.this, AddClient.class);
+            startActivity(intent);
+            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
         });
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
