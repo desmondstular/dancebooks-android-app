@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">JavaApp</string>
+    <string name="CustomerName">Customer Name</string>
+    <string name="ClassName">Class Name</string>
+    <string name="ClassYear">Class Year</string>
+    <string name="g">Annual Price\n</string>
+    <string name="AnnualPrice">Annual Price</string>
+    <string name="BiYearly">Bi-Yearly</string>
+    <string name="MonthlyPrice">Monthly Price</string>
+    <string name="AddClass">Add Class</string>
+    <string name="BiYearly_Price">Bi-Yearly Price</string>
+    <string name="BtnViewClass">View Classes</string>
+    <string name="BtnViewClasses">View</string>
+    <string name="AddClients">Add Clients</string>
+    <string name="ViewClients">View Clients</string>
+    <string name="FirstName">First Name</string>
+    <string name="LastName">Last Name</string>
+    <string name="EmailAddress">Email Address</string>
+    <string name="PhoneNumber">Phone Number</string>
+    <string name="addClientBtn">Add Client</string>
+</resources>
