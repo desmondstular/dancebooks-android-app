@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.javaapp.database.DanceClassModel;
+
 public class MainActivity extends AppCompatActivity {
 
     //references to buttons and other controls on the layout
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    DanceClassModel danceClassModel = new DanceClassModel(-1, ClName.getText().toString(),
+                    DanceClassModel danceClassModel = new DanceClassModel(ClName.getText().toString(),
                             Integer.parseInt(ClYear.getText().toString()),
                             Integer.parseInt(An_Price.getText().toString()),
                             Integer.parseInt(Bi_Price.getText().toString()),

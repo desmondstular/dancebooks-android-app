@@ -1,4 +1,4 @@
-package com.example.javaapp;
+package com.example.javaapp.database;
 
 public class ClientModel {
     private int clientID;

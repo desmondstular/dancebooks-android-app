@@ -1,4 +1,4 @@
-package com.example.javaapp;
+package com.example.javaapp.database;
 
 public class DanceClassModel {
     private String className;
@@ -7,8 +7,8 @@ public class DanceClassModel {
     private float classBiAnnualCost;
     private float classMonthlyCost;
 
-    public DanceClassModel(int id, String className, int classYear, int classLumpSumCost,
-                           int classBiAnnualCost, int classMonthlyCost) {
+    public DanceClassModel(String className, int classYear, float classLumpSumCost,
+                           float classBiAnnualCost, float classMonthlyCost) {
         this.className = className;
         this.classYear = classYear;
         this.classLumpSumCost = classLumpSumCost;
