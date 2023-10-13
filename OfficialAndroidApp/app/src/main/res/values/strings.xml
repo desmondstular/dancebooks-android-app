@@ -18,4 +18,7 @@
     <string name="EmailAddress">Email Address</string>
     <string name="PhoneNumber">Phone Number</string>
     <string name="addClientBtn">Add Client</string>
+    <string name="AddInvoice">Add Inv</string>
+    <string name="ViewInvoice">View Inv</string>
+    <string name="ViewClass">View Classes</string>
 </resources>
