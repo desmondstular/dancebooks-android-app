@@ -14,11 +14,9 @@ import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
-
     //references to buttons and other controls on the layout
     Button btnAddClass, addClientsBtn, viewClientsBtn;
     EditText ClName, ClYear, An_Price, Bi_Price, Mn_Price;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,25 +24,18 @@ public class MainActivity extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
         // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
-        addClientsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Navigate back to MainActivity
-                Intent intent = new Intent(MainActivity.this, AddClient.class);
-                startActivity(intent);
-                finish(); // Optional: Close this activity if you don't want to keep it in the back stack
-            }
+        addClientsBtn.setOnClickListener(view -> {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(MainActivity.this, AddClient.class);
+            startActivity(intent);
+            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
         });
-
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
-        viewClientsBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Start the ClientView activity
-                Intent intent = new Intent(MainActivity.this, ClientView.class);
-                startActivity(intent);
-            }
+        viewClientsBtn.setOnClickListener(view -> {
+            // Start the ClientView activity
+            Intent intent = new Intent(MainActivity.this, ClientView.class);
+            startActivity(intent);
         });
         //------------------------------------------------------------------------------------------
 
