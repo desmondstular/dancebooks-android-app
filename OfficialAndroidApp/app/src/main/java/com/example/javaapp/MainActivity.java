@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DanceClassModel;
+import com.example.javaapp.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -67,13 +69,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
                     DanceClassModel danceClassModel = new DanceClassModel(ClName.getText().toString(),
                             Integer.parseInt(ClYear.getText().toString()),
                             Integer.parseInt(An_Price.getText().toString()),
                             Integer.parseInt(Bi_Price.getText().toString()),
                             Integer.parseInt(Mn_Price.getText().toString()));
-                    Toast.makeText(MainActivity.this, danceClassModel.toString(),
-                            Toast.LENGTH_SHORT).show();
+
+                    boolean i = databaseHelper.addOneDanceClass(danceClassModel);
+                    if (!i) {
+                        Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                        ClName.getText().clear();
+                        ClYear.getText().clear();
+                        An_Price.getText().clear();
+                        Bi_Price.getText().clear();
+                        Mn_Price.getText().clear();
+                    }
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "Error Creating Dance Class",
                             Toast.LENGTH_SHORT).show();
