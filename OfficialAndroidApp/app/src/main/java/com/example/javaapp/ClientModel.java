@@ -1,73 +1,56 @@
 package com.example.javaapp;
 
-import androidx.annotation.NonNull;
-
 public class ClientModel {
-    private int id;
-    private String firstName;
-    private String lastName;
+    private int clientID;
+    private String clientFirstName;
+    private String clientLastName;
     private String clientEmail;
     private int clientPhone;
 
     //constructor
-    public ClientModel(int id, String firstName, String lastName,
+    public ClientModel(int clientID, String clientFirstName, String clientLastName,
                        String clientEmail, int clientPhone) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.clientID = clientID;
+        this.clientFirstName = clientFirstName;
+        this.clientLastName = clientLastName;
         this.clientEmail = clientEmail;
         this.clientPhone = clientPhone;
     }
-    public ClientModel() {
+
+    public int getClientID() {
+        return clientID;
     }
 
-    //to string
-    @Override
-    public String toString() {
-        return "ClientModel{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", clientEmail='" + clientEmail + '\'' +
-                ", clientPhone=" + clientPhone +
-                '}';
+    public String getClientFirstName() {
+        return clientFirstName;
     }
 
-    //getters and setters
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public String getClientLastName() {
+        return clientLastName;
     }
 
     public String getClientEmail() {
         return clientEmail;
     }
 
-    public void setClientEmail(String clientEmail) {
-        this.clientEmail = clientEmail;
-    }
-
     public int getClientPhone() {
         return clientPhone;
+    }
+
+    public void setClientID(int clientID) {
+        this.clientID = clientID;
+    }
+
+    public void setClientFirstName(String clientFirstName) {
+        this.clientFirstName = clientFirstName;
+    }
+
+    public void setClientLastName(String clientLastName) {
+        this.clientLastName = clientLastName;
+    }
+
+    public void setClientEmail(String clientEmail) {
+        this.clientEmail = clientEmail;
     }
 
     public void setClientPhone(int clientPhone) {

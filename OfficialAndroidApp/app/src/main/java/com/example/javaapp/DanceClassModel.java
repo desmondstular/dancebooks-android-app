@@ -1,26 +1,30 @@
 package com.example.javaapp;
 
 public class DanceClassModel {
-    private int id;
     private String className;
     private int classYear;
-    private int annualPrice;
+    private float classLumpSumCost;
+    private float classBiAnnualCost;
+    private float classMonthlyCost;
 
-    private int biYearlyPrice;
-    private int monthlyPrice;
-
-    public DanceClassModel(int id, String className, int yearOfClass, int annualPrice,
-                           int biYearlyPrice, int monthlyPrice) {
-        this.id = id;
+    public DanceClassModel(int id, String className, int classYear, int classLumpSumCost,
+                           int classBiAnnualCost, int classMonthlyCost) {
         this.className = className;
-        this.classYear = yearOfClass;
-        this.annualPrice = annualPrice;
-        this.biYearlyPrice = biYearlyPrice;
-        this.monthlyPrice = monthlyPrice;
+        this.classYear = classYear;
+        this.classLumpSumCost = classLumpSumCost;
+        this.classBiAnnualCost = classBiAnnualCost;
+        this.classMonthlyCost = classMonthlyCost;
     }
-    //Getters
-    public int getId() {
-        return id;
+
+    @Override
+    public String toString() {
+        return "DanceClass{" +
+                "className=" + className + '\'' +
+                ", classYear=" + classYear +
+                ", classLumpSumCost=" + classLumpSumCost +
+                ", classBiAnnualCost=" + classBiAnnualCost +
+                ", classMonthlyCost=" + classMonthlyCost +
+                '}';
     }
 
     public String getClassName() {
@@ -31,22 +35,16 @@ public class DanceClassModel {
         return classYear;
     }
 
-    public int getAnnualPrice() {
-        return annualPrice;
+    public float getClassLumpSumCost() {
+        return classLumpSumCost;
     }
-    //ToString
-    @Override
-    public String toString() {
-        return "DanceClass{" +
-                "id=" + id +
-                ", className='" + className + '\'' +
-                ", yearOfClass=" + classYear +
-                ", annualPrice=" + annualPrice +
-                '}';
+
+    public float getClassBiAnnualCost() {
+        return classBiAnnualCost;
     }
-    //Setters
-    public void setId(int id) {
-        this.id = id;
+
+    public float getClassMonthlyCost() {
+        return classMonthlyCost;
     }
 
     public void setClassName(String className) {
@@ -57,15 +55,15 @@ public class DanceClassModel {
         this.classYear = classYear;
     }
 
-    public void setAnnualPrice(int annualPrice) {
-        this.annualPrice = annualPrice;
+    public void setClassLumpSumCost(float classLumpSumCost) {
+        this.classLumpSumCost = classLumpSumCost;
     }
 
-    public void setBiYearlyPrice(int biYearlyPrice) {
-        this.biYearlyPrice = biYearlyPrice;
+    public void setClassBiAnnualCost(float classBiAnnualCost) {
+        this.classBiAnnualCost = classBiAnnualCost;
     }
 
-    public void setMonthlyPrice(int monthlyPrice) {
-        this.monthlyPrice = monthlyPrice;
+    public void setClassMonthlyCost(float classMonthlyCost) {
+        this.classMonthlyCost = classMonthlyCost;
     }
 }
