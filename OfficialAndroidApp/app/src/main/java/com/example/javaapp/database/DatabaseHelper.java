@@ -82,6 +82,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_CLIENT_PHONE, clientModel.getClientPhone());
 
         long insert = db.insert(TABLE_CLIENT, null, cv);
+        db.close();
         if (insert == -1) {
             return false;
         } else {
@@ -195,6 +196,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 float classBiAnnualCost = cursor.getFloat(3);
                 float classMonthlyCost = cursor.getFloat(4);
                 DanceClassModel newCLass = new DanceClassModel(className, classYear, classLumpSumCost, classBiAnnualCost, classMonthlyCost);
+                returnList.add(newCLass);
             } while (cursor.moveToNext());
         } else {
             // failure. do not add anything to the list.
