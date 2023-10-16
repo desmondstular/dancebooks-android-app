@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Pair;
 
 import androidx.annotation.Nullable;
 
@@ -107,6 +108,44 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+    public ClientModel getOneClientByName(String clientFirstName, String clientLastName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + TABLE_CLIENT + " WHERE " + COLUMN_CLIENT_FIRSTNAME + " = " + clientFirstName + " and " + COLUMN_CLIENT_LASTNAME + " = " + clientLastName;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return new ClientModel(cursor.getInt(0),    //ID number
+                    cursor.getString(1),                //First Name
+                    cursor.getString(2),                //Last Name
+                    cursor.getString(3),                //Email
+                    cursor.getInt(4));                  //Phone number
+        }
+        else {
+            return null;
+        }
+    }
+
+    public List<String> getAllClientNames() {
+        List<String> returnList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT " + COLUMN_CLIENT_FIRSTNAME + ", " + COLUMN_CLIENT_LASTNAME + " FROM " + TABLE_CLIENT;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String clientFirstName = cursor.getString(0);
+                String clientLastName = cursor.getString(1);
+                returnList.add(clientFirstName + " " + clientFirstName);
+            } while (cursor.moveToNext());
+        } else {
+            // Failure. Do not anything to the list
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
     public List<ClientModel> getAllClients() {
         List<ClientModel> returnList = new ArrayList<>();
 
@@ -178,6 +217,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
+
+    public DanceClassModel getOneDanceClass(String danceClassName, int danceClassYear) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM " + TABLE_DANCECLASS + " WHERE " + COLUMN_DANCECLASS_NAME + " = " + danceClassName + " and " + COLUMN_DANCECLASS_YEAR + " = " + danceClassYear;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return new DanceClassModel(cursor.getString(0),
+                    cursor.getInt(1),
+                    cursor.getFloat(2),
+                    cursor.getFloat(3),
+                    cursor.getFloat(4));
+        } else {
+            return null;
+        }
+    }
     public List<DanceClassModel> getAllDanceClasses() {
         List<DanceClassModel> returnList = new ArrayList<>();
 
