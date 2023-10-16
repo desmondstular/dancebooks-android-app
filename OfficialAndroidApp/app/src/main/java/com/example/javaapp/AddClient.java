@@ -13,7 +13,7 @@ import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
 
 public class AddClient extends AppCompatActivity {
-    Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn;
+    Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
     EditText clientFirstNameTextBox, clientLastNameTextBox, clientEmailTextBox, clientPhoneNumberTextBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +47,23 @@ public class AddClient extends AppCompatActivity {
             Intent intent = new Intent(AddClient.this, MainActivity.class);
             startActivity(intent);
         });
+        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
+        addInvoiceBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(AddClient.this, AddInvoices.class);
+            startActivity(intent);
+        });
+        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
+        viewInvoiceBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(AddClient.this, com.example.javaapp.InvoiceView.class);
+            startActivity(intent);
+        });
+        viewClassBtn = findViewById(R.id.viewClassBtn);
+        viewClassBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(AddClient.this, DanceClassView.class);
+            startActivity(intent);
+        });
         //------------------------------------------------------------------------------------------
         // Set listener for Add client button that adds client to database
         clientAddButton = findViewById(R.id.clientAddButton);
@@ -78,30 +95,6 @@ public class AddClient extends AppCompatActivity {
                 }
             }
         });
-        /*clientAddButton.setOnClickListener(view -> {
-            try {
-                DatabaseHelper databaseHelper = new DatabaseHelper(AddClient.this);
-                // Create client data object from getting info from text boxes
-                ClientModel clientModel = new ClientModel(0,
-                        clientFirstNameTextBox.getText().toString(),
-                        clientLastNameTextBox.getText().toString(),
-                        clientEmailTextBox.getText().toString(),
-                        Integer.parseInt(clientPhoneNumberTextBox.getText().toString()));
-
-                boolean i = databaseHelper.addOneClient(clientModel);
-                if (!i) {
-                    Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(AddClient.this, "Successfully added", Toast.LENGTH_SHORT).show();
-                    clientFirstNameTextBox.getText().clear();
-                    clientLastNameTextBox.getText().clear();
-                    clientEmailTextBox.getText().clear();
-                    clientPhoneNumberTextBox.getText().clear();
-                }
-            } catch (Exception e) {
-                Toast.makeText(AddClient.this, "Error Creating Client",
-                        Toast.LENGTH_SHORT).show();
-            }*/
     }
 
     public static class InvoiceView extends AppCompatActivity {

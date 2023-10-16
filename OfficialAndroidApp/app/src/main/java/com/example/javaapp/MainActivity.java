@@ -14,7 +14,7 @@ import com.example.javaapp.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     //references to buttons and other controls on the layout
-    Button addClassBtn, addClientsBtn, viewClientsBtn, viewClassBtn;
+    Button addClassBtn, addClientsBtn, viewClientsBtn, viewClassBtn, addInvoiceBtn, viewInvoiceBtn;
     EditText ClName, ClYear, An_Price, Bi_Price, Mn_Price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +40,17 @@ public class MainActivity extends AppCompatActivity {
         viewClassBtn.setOnClickListener(view -> {
             //Start the viewClass Activity
             Intent intent = new Intent(MainActivity.this, DanceClassView.class);
+            startActivity(intent);
+        });
+        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
+        addInvoiceBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(MainActivity.this, AddInvoices.class);
+            startActivity(intent);
+        });
+        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
+        viewInvoiceBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(MainActivity.this, InvoiceView.class);
             startActivity(intent);
         });
         //------------------------------------------------------------------------------------------
