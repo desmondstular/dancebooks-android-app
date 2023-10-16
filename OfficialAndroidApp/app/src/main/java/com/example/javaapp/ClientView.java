@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.widget.Button;
 
 public class ClientView extends AppCompatActivity {
-    Button addClientsBtn, addClassBtn;
+    Button addClientsBtn, addClassBtn, addInvoiceBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +26,13 @@ public class ClientView extends AppCompatActivity {
             Intent intent = new Intent(ClientView.this, MainActivity.class);
             startActivity(intent);
         });
+        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
+        addInvoiceBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(ClientView.this, AddInvoices.class);
+            startActivity(intent);
+        });
+
 
         //------------------------------------------------------------------------------------------
     }

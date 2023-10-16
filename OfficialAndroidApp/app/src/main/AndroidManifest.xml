@@ -15,9 +15,9 @@
         <activity
             android:name=".InvoiceView"
             android:exported="false" />
-        <activity
-            android:name=".AddClient$InvoiceView"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".AddClient$InvoiceView"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".DanceClassView"
             android:exported="false" /> <!-- <activity -->
