@@ -9,13 +9,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     //references to buttons and other controls on the layout
-    Button btnAddClass, addClientsBtn, viewClientsBtn;
+    Button addClassBtn, addClientsBtn, viewClientsBtn, viewClassBtn;
     EditText ClName, ClYear, An_Price, Bi_Price, Mn_Price;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +36,15 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, ClientView.class);
             startActivity(intent);
         });
+        viewClassBtn = findViewById(R.id.viewClassBtn);
+        viewClassBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(MainActivity.this, DanceClassView.class);
+            startActivity(intent);
+        });
         //------------------------------------------------------------------------------------------
 
-        btnAddClass = findViewById(R.id.btnAddClass);
+        addClassBtn = findViewById(R.id.btnAddClass);
         ClName = findViewById(R.id.Cl_Name);
         ClYear = findViewById(R.id.Cl_Year);
         An_Price = findViewById(R.id.An_Price);
@@ -49,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         //btn listeners
         //btn_Add_Class.set
 
-        btnAddClass.setOnClickListener(new View.OnClickListener() {
+        addClassBtn.setOnClickListener(new View.OnClickListener() {
             /**
              * @param v
              * Purpose:

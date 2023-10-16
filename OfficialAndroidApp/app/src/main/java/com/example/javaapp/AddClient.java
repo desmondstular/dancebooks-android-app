@@ -1,7 +1,5 @@
 package com.example.javaapp;
 
-import static android.util.Log.println;
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -15,7 +13,7 @@ import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
 
 public class AddClient extends AppCompatActivity {
-    Button viewClientsBtn, addClassBtn, clientAddButton;
+    Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn;
     EditText clientFirstNameTextBox, clientLastNameTextBox, clientEmailTextBox, clientPhoneNumberTextBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +25,12 @@ public class AddClient extends AppCompatActivity {
         clientLastNameTextBox = findViewById(R.id.et_last_name);
         clientEmailTextBox = findViewById(R.id.et_email);
         clientPhoneNumberTextBox = findViewById(R.id.et_phone_number);
+
+        //Set click listener
+        //TODO: Add  View Invoice Screen
+        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
+        //TODO: Add ADD Invoice Screen
+        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
 
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
@@ -98,5 +102,13 @@ public class AddClient extends AppCompatActivity {
                 Toast.makeText(AddClient.this, "Error Creating Client",
                         Toast.LENGTH_SHORT).show();
             }*/
+    }
+
+    public static class InvoiceView extends AppCompatActivity {
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+        }
     }
 }

@@ -26,6 +26,7 @@ public class ClientView extends AppCompatActivity {
             Intent intent = new Intent(ClientView.this, MainActivity.class);
             startActivity(intent);
         });
+
         //------------------------------------------------------------------------------------------
     }
 }
