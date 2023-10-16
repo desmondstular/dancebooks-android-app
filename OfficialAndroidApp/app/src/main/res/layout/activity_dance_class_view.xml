@@ -27,4 +27,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="251dp"
+        android:layout_height="52dp"
+        android:text="@string/DanceClassViewScreen"
+        app:layout_constraintBottom_toTopOf="@+id/bottomButtonsLayout"
+        app:layout_constraintEnd_toEndOf="@+id/danceClassList"
+        app:layout_constraintStart_toStartOf="@+id/danceClassList"
+        app:layout_constraintTop_toTopOf="@+id/danceClassList" />
 </androidx.constraintlayout.widget.ConstraintLayout>

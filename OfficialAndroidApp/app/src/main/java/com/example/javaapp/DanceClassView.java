@@ -48,6 +48,11 @@ public class DanceClassView extends AppCompatActivity {
             Intent intent = new Intent(DanceClassView.this, AddInvoices.class);
             startActivity(intent);
         });
+        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
+        viewInvoiceBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(DanceClassView.this, InvoiceView.class);
+            startActivity(intent);
+        });
 
 
 

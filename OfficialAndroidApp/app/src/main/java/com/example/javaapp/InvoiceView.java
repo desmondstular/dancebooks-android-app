@@ -28,6 +28,27 @@ public class InvoiceView extends AppCompatActivity {
             Intent intent = new Intent(InvoiceView.this, AddInvoices.class);
             startActivity(intent);
         });
+        // Set click listener for Add Clients button
+        addClientsBtn = findViewById(R.id.addClientsBtn);
+        addClientsBtn.setOnClickListener(view -> {
+            // Navigate back to MainActivity
+            Intent intent = new Intent(InvoiceView.this, AddClient.class);
+            startActivity(intent);
+            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
+        });
+        // Set click listener for View Clients button
+        viewClientsBtn = findViewById(R.id.viewClientsBtn);
+        viewClientsBtn.setOnClickListener(view -> {
+            // Start the ClientView activity
+            Intent intent = new Intent(InvoiceView.this, ClientView.class);
+            startActivity(intent);
+        });
+        viewClassBtn = findViewById(R.id.viewClassBtn);
+        viewClassBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(InvoiceView.this, DanceClassView.class);
+            startActivity(intent);
+        });
 
 
     }

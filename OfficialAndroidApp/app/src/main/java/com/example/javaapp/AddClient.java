@@ -13,7 +13,7 @@ import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
 
 public class AddClient extends AppCompatActivity {
-    Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn;
+    Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
     EditText clientFirstNameTextBox, clientLastNameTextBox, clientEmailTextBox, clientPhoneNumberTextBox;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,17 @@ public class AddClient extends AppCompatActivity {
         addInvoiceBtn.setOnClickListener(view -> {
             //Start the viewClass Activity
             Intent intent = new Intent(AddClient.this, AddInvoices.class);
+            startActivity(intent);
+        });
+        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
+        viewInvoiceBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(AddClient.this, com.example.javaapp.InvoiceView.class);
+            startActivity(intent);
+        });
+        viewClassBtn = findViewById(R.id.viewClassBtn);
+        viewClassBtn.setOnClickListener(view -> {
+            //Start the viewClass Activity
+            Intent intent = new Intent(AddClient.this, DanceClassView.class);
             startActivity(intent);
         });
         //------------------------------------------------------------------------------------------

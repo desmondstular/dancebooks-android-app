@@ -65,4 +65,7 @@
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
     <string name="AddInvoiceBtn">Add Invoice</string>
+    <string name="ClientViewScreen">Client View Screen</string>
+    <string name="DanceClassViewScreen">Dance Class View Screen</string>
+    <string name="InvoiceViewScreen">Invoice View Screen</string>
 </resources>
