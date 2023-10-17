@@ -18,13 +18,7 @@ public class DanceClassModel {
 
     @Override
     public String toString() {
-        return "DanceClass{" +
-                "className=" + className + '\'' +
-                ", classYear=" + classYear +
-                ", classLumpSumCost=" + classLumpSumCost +
-                ", classBiAnnualCost=" + classBiAnnualCost +
-                ", classMonthlyCost=" + classMonthlyCost +
-                '}';
+        return className + " " + classYear ;
     }
 
     public String getClassName() {

@@ -53,10 +53,10 @@ public class ClientView extends AppCompatActivity {
             Intent intent = new Intent(ClientView.this, DanceClassView.class);
             startActivity(intent);
         });
-        DatabaseHelper databaseHelper = new DatabaseHelper(ClientView.this);
-        List<ClientModel> everyone = databaseHelper.getAllClients();
+        DatabaseHelper databaseHelperClient = new DatabaseHelper(ClientView.this);
+        List<ClientModel> everyClient = databaseHelperClient.getAllClients();
         ArrayAdapter clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,
-                android.R.layout.simple_list_item_1, everyone);
+                android.R.layout.simple_list_item_1, everyClient);
         lv_clientList.setAdapter(clientArrayAdapter);
 
 

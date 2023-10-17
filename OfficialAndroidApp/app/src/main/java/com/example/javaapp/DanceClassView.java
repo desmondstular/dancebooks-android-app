@@ -5,23 +5,26 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+
+import com.example.javaapp.database.DanceClassModel;
+import com.example.javaapp.database.DatabaseHelper;
+
+import java.util.List;
 
 public class DanceClassView extends AppCompatActivity {
     //references to buttons and other controls on the layout
     Button addClassBtn, addClientBtn, viewClientsBtn, addInvoiceBtn, viewInvoiceBtn;
-    RecyclerView danceClassList;
+    ListView lv_danceClassList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dance_class_view);
+        lv_danceClassList = findViewById(R.id.lv_danceClassList);
         //------------------------------------------------------------------------------------------
 
-        //Set click listener
-        //TODO: Add  View Invoice Screen
-        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
-        //TODO: Add ADD Invoice Screen
-        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
@@ -53,6 +56,11 @@ public class DanceClassView extends AppCompatActivity {
             Intent intent = new Intent(DanceClassView.this, InvoiceView.class);
             startActivity(intent);
         });
+        DatabaseHelper databaseHelper = new DatabaseHelper(DanceClassView.this);
+        List<DanceClassModel> everyDanceClass = databaseHelper.getAllDanceClasses();
+        ArrayAdapter danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>(DanceClassView.this,
+                android.R.layout.simple_list_item_1, everyDanceClass);
+        lv_danceClassList.setAdapter(danceClassArrayAdapter);
 
 
 
