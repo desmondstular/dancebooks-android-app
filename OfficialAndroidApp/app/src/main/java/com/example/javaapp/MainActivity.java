@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
             // Navigate back to MainActivity
             Intent intent = new Intent(MainActivity.this, AddClient.class);
             startActivity(intent);
-            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
+            //finish(); // Close this activity if you don't want to keep it in the back stack
         });
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);

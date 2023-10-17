@@ -68,4 +68,10 @@
     <string name="ClientViewScreen">Client View Screen</string>
     <string name="DanceClassViewScreen">Dance Class View Screen</string>
     <string name="InvoiceViewScreen">Invoice View Screen</string>
+    <string name="SelectClientName">Select Client Name</string>
+    <string name="SelectClient">Select Client</string>
+    <string name="SelectClass">Select Class</string>
+    <string name="ByTheYear">By the year</string>
+    <string name="Monthly">Monthly</string>
+    <string name="PaymentOption">Select a payment option</string>
 </resources>
