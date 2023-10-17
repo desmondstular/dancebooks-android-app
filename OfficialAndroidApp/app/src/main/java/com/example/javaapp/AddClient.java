@@ -26,12 +26,6 @@ public class AddClient extends AppCompatActivity {
         clientEmailTextBox = findViewById(R.id.et_email);
         clientPhoneNumberTextBox = findViewById(R.id.et_phone_number);
 
-        //Set click listener
-        //TODO: Add  View Invoice Screen
-        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
-        //TODO: Add ADD Invoice Screen
-        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
-
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
