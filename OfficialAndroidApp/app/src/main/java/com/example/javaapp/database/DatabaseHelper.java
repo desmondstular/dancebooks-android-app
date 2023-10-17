@@ -58,7 +58,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLE_INVOICE + " (" +
                 COLUMN_CLIENT_ID + " INTEGER NOT NULL, " +
                 COLUMN_DANCECLASS_NAME + " TEXT NOT NULL, " +
-                COLUMN_DANCECLASS_YEAR + " TEXT NOT NULL, " +
+                COLUMN_DANCECLASS_YEAR + " INTEGER NOT NULL, " +
                 "PRIMARY KEY(" + COLUMN_CLIENT_ID + ", " + COLUMN_DANCECLASS_NAME + ", " + COLUMN_DANCECLASS_YEAR + ")," +
                 "FOREIGN KEY(" + COLUMN_CLIENT_ID + ") REFERENCES " + TABLE_CLIENT + "(" + COLUMN_CLIENT_ID + "), " +
                 "FOREIGN KEY(" + COLUMN_DANCECLASS_NAME + ") REFERENCES " + TABLE_DANCECLASS + "(" + COLUMN_DANCECLASS_NAME + ") ON DELETE CASCADE, " +
@@ -315,7 +315,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 int clientID = cursor.getInt(0);
                 String className = cursor.getString(1);
                 int classYear = cursor.getInt(2);
-                //ClassModel newInvoice = new Model(clientID, className, classYear);
+                InvoiceModel newInvoice = new InvoiceModel(clientID, className, classYear);
+                returnList.add(newInvoice);
             } while (cursor.moveToNext());
             ;        } else {
             // failure. do not add anything to the list.

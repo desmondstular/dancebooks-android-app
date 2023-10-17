@@ -3,9 +3,9 @@ package com.example.javaapp.database;
 public class InvoiceModel {
     private int clientID;
     private String className;
-    private String classYear;
+    private int classYear;
 
-    public InvoiceModel(int clientID, String className, String classYear) {
+    public InvoiceModel(int clientID, String className, int classYear) {
         this.clientID = clientID;
         this.className = className;
         this.classYear = classYear;
@@ -19,8 +19,13 @@ public class InvoiceModel {
         return className;
     }
 
-    public String getClassYear() {
+    public int getClassYear() {
         return classYear;
+    }
+
+    @Override
+    public String toString() {
+        return clientID + " " + className + " " + classYear;
     }
 
     public void setClientID(int clientID) {
@@ -31,7 +36,7 @@ public class InvoiceModel {
         this.className = className;
     }
 
-    public void setClassYear(String classYear) {
+    public void setClassYear(int classYear) {
         this.classYear = classYear;
     }
 }

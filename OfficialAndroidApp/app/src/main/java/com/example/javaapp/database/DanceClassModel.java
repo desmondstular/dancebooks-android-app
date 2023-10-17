@@ -16,6 +16,11 @@ public class DanceClassModel {
         this.classMonthlyCost = classMonthlyCost;
     }
 
+    public DanceClassModel(DanceClassModel danceClassModel) {
+
+    }
+
+
     @Override
     public String toString() {
         return className + " " + classYear ;
