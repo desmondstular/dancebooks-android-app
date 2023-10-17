@@ -26,6 +26,7 @@ public class AddClient extends AppCompatActivity {
         clientEmailTextBox = findViewById(R.id.et_email);
         clientPhoneNumberTextBox = findViewById(R.id.et_phone_number);
 
+        //Navigation Bar Start *********************************************************************
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
@@ -58,6 +59,7 @@ public class AddClient extends AppCompatActivity {
             Intent intent = new Intent(AddClient.this, DanceClassView.class);
             startActivity(intent);
         });
+        //Navigation Bar End ***********************************************************************
         //------------------------------------------------------------------------------------------
         // Set listener for Add client button that adds client to database
         clientAddButton = findViewById(R.id.clientAddButton);

@@ -24,7 +24,7 @@ public class DanceClassView extends AppCompatActivity {
         setContentView(R.layout.activity_dance_class_view);
         lv_danceClassList = findViewById(R.id.lv_danceClassList);
         //------------------------------------------------------------------------------------------
-
+        //Navigation Bar Start**********************************************************************
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
@@ -56,10 +56,13 @@ public class DanceClassView extends AppCompatActivity {
             Intent intent = new Intent(DanceClassView.this, InvoiceView.class);
             startActivity(intent);
         });
+        //Navigation Bar End************************************************************************
+        //------------------------------------------------------------------------------------------
+        //DATA BASE VIEW
         DatabaseHelper databaseHelper = new DatabaseHelper(DanceClassView.this);
         List<DanceClassModel> everyDanceClass = databaseHelper.getAllDanceClasses();
-        ArrayAdapter danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>(DanceClassView.this,
-                android.R.layout.simple_list_item_1, everyDanceClass);
+        ArrayAdapter danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>
+                (DanceClassView.this, android.R.layout.simple_list_item_1, everyDanceClass);
         lv_danceClassList.setAdapter(danceClassArrayAdapter);
 
 

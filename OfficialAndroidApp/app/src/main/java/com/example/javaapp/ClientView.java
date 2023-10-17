@@ -22,6 +22,7 @@ public class ClientView extends AppCompatActivity {
         setContentView(R.layout.activity_client_view);
         lv_clientList = findViewById(R.id.lv_clientList);
         //------------------------------------------------------------------------------------------
+        //Navigation Bar Start**********************************************************************
         // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
@@ -53,6 +54,8 @@ public class ClientView extends AppCompatActivity {
             Intent intent = new Intent(ClientView.this, DanceClassView.class);
             startActivity(intent);
         });
+        //Navigation Bar End ***********************************************************************
+        //View the Database
         DatabaseHelper databaseHelperClient = new DatabaseHelper(ClientView.this);
         List<ClientModel> everyClient = databaseHelperClient.getAllClients();
         ArrayAdapter clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,

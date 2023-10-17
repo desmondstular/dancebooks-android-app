@@ -17,12 +17,14 @@ public class AddInvoices extends AppCompatActivity {
     Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, addInvoiceToDbButton;
 
     EditText clientID, className, classYear;
+    Spinner clientSpinner, classSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_invoices);
         //------------------------------------------------------------------------------------------
+        //Navigation Bar Start**********************************************************************
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
@@ -56,7 +58,15 @@ public class AddInvoices extends AppCompatActivity {
             Intent intent = new Intent(AddInvoices.this, InvoiceView.class);
             startActivity(intent);
         });
+        //Navigation Bar END************************************************************************
         //------------------------------------------------------------------------------------------
+        //Client Spinner setup
+        clientSpinner = findViewById(R.id.clientSpinner);
+
+
+        //Dance Class Spinner setup
+        classSpinner = findViewById(R.id.classSpinner);
+
         addInvoiceToDbButton = findViewById(R.id.addInvoiceToDbBtn);
         addInvoiceToDbButton.setOnClickListener(new View.OnClickListener() {
             @Override
