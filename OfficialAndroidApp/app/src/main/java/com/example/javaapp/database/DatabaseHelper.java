@@ -130,14 +130,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         List<String> returnList = new ArrayList<>();
 
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT " + COLUMN_CLIENT_FIRSTNAME + ", " + COLUMN_CLIENT_LASTNAME + " FROM " + TABLE_CLIENT;
+        String queryString = "SELECT " + COLUMN_CLIENT_ID + ", " + COLUMN_CLIENT_FIRSTNAME + ", " + COLUMN_CLIENT_LASTNAME + " FROM " + TABLE_CLIENT;
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
             do {
-                String clientFirstName = cursor.getString(0);
-                String clientLastName = cursor.getString(1);
-                returnList.add(clientFirstName + " " + clientLastName);
+                int clientID = Integer.parseInt(cursor.getString(0));
+                String clientFirstName = cursor.getString(1);
+                String clientLastName = cursor.getString(2);
+                returnList.add(clientID + " " + clientFirstName + " " + clientLastName);
             } while (cursor.moveToNext());
         } else {
             // Failure. Do not anything to the list
