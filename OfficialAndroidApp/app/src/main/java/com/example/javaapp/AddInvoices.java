@@ -13,14 +13,19 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.javaapp.database.ClientModel;
+import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database.InvoiceModel;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class AddInvoices extends AppCompatActivity {
     Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, addInvoiceToDbButton;
     Spinner clientSpinner, classSpinner;
+    DanceClassModel danceClassModel;
+    ClientModel clientModel;
+    InvoiceModel invoiceModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +72,23 @@ public class AddInvoices extends AppCompatActivity {
         //Client Spinner setup
         clientSpinner = findViewById(R.id.clientSpinner);
         DatabaseHelper databaseHelper = new DatabaseHelper(AddInvoices.this);
-        List<String> clientNames = databaseHelper.getAllClientNames();
-        ArrayAdapter<String> clientAdapter = new ArrayAdapter<>(AddInvoices.this,
-                android.R.layout.simple_spinner_item, clientNames);
+        List<ClientModel> clients = databaseHelper.getAllClients();
+        //List<String> clientNamesString = databaseHelper.getAllClientNames();
+
+        ArrayAdapter<ClientModel> clientAdapter = new ArrayAdapter<>(AddInvoices.this,
+                android.R.layout.simple_spinner_item, clients);
+
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientSpinner.setAdapter(clientAdapter);
         clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id){
-                String selectedClient = clientNames.get(position);
-                Toast.makeText(AddInvoices.this, selectedClient, Toast.LENGTH_SHORT).show();
+                clientModel = clients.get(position);
+                //String selectedClient = clients.get(position).getClientFullName();
+                //ClientModel client = databaseHelper.getOneClientByName(first, last);
+                //ClientModel client  = clients.get(position);
+                //Toast.makeText(AddInvoices.this, selectedClient, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -86,33 +97,76 @@ public class AddInvoices extends AppCompatActivity {
             }
         });
 
-//        DatabaseHelper databaseHelper = new DatabaseHelper(AddInvoices.this);
-//        List<String> clientNames = databaseHelper.getAllClientNames();
-//        ArrayAdapter<List<String>> clientNameArrayAdapter = ArrayAdapter.createFromResource(
-//                AddInvoices.this, clientNames, android.R.layout.simple_spinner_item);
-
-
         //Dance Class Spinner setup
         classSpinner = findViewById(R.id.classSpinner);
 
-        addInvoiceToDbButton = findViewById(R.id.addInvoiceToDbBtn);
-        addInvoiceToDbButton.setOnClickListener(new View.OnClickListener() {
+        List<DanceClassModel> dClass = databaseHelper.getAllDanceClasses();
+        //List<String> clientNamesString = databaseHelper.getAllClientNames();
+
+        ArrayAdapter<DanceClassModel> danceAdapter = new ArrayAdapter<>(AddInvoices.this,
+                android.R.layout.simple_spinner_item, dClass);
+
+        danceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(danceAdapter);
+
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override
-            public void onClick(View view) {
-                try {
-                    DatabaseHelper db = new DatabaseHelper(AddInvoices.this);
-                    /*InvoiceModel invoiceModel = new InvoiceModel();
-                    Boolean isAdded = db.deleteOneInvoice(invoiceModel);
-                    if (isAdded) {
-                        //Will add code to erase all text boxes.
-                    } else {
-                        Toast.makeText(AddInvoices.this, "Unsuccessful",
-                                Toast.LENGTH_SHORT).show();
-                    }*/
-                } catch (Exception e) {
-                    Toast.makeText(AddInvoices.this, "Error Creating Invoice",
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id){
+                danceClassModel = dClass.get(position);
+                //ClientModel client = databaseHelper.getOneClientByName(first, last);
+                //ClientModel client  = clients.get(position);
+                //Toast.makeText(AddInvoices.this, selectedClass, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+        addInvoiceToDbButton = findViewById(R.id.addInvoiceToDbBtn);
+//        addInvoiceToDbButton.setOnClickListener(view -> {
+//            databaseHelper.addOneInvoice(invoiceModel);
+//        });
+        addInvoiceToDbButton.setOnClickListener(view -> {
+            try {
+//                Toast.makeText(AddInvoices.this, danceClassModel.toString(),
+//                        Toast.LENGTH_SHORT).show();
+                invoiceModel = new InvoiceModel(clientModel.getClientID(), danceClassModel.getClassName(),
+                        danceClassModel.getClassYear());
+                Boolean isAdded = databaseHelper.addOneInvoice(invoiceModel);
+                if (isAdded) {
+                    Toast.makeText(AddInvoices.this, invoiceModel.toString(),
+                            Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddInvoices.this, "Unsuccessful",
                             Toast.LENGTH_SHORT).show();
                 }
+
+//                Toast.makeText(AddInvoices.this , invoiceModel.toString(),
+//                        Toast.LENGTH_SHORT).show();
+                //DatabaseHelper db = new DatabaseHelper(AddInvoices.this);
+                /*InvoiceModel invoiceModel = new InvoiceModel();
+                Boolean isAdded = db.deleteOneInvoice(invoiceModel);
+                if (isAdded) {
+                    //Will add code to erase all text boxes.
+                } else {
+                    Toast.makeText(AddInvoices.this, "Unsuccessful",
+                            Toast.LENGTH_SHORT).show();
+                }*/
+            } catch (Exception e) {
+                Toast.makeText(AddInvoices.this, "Error Creating Invoice",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }

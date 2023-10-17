@@ -59,6 +59,7 @@
 
     <Spinner
         android:id="@+id/clientSpinner"
+        android:prompt="@string/select_client_hint"
         android:layout_width="208dp"
         android:layout_height="55dp"
         android:background="@drawable/spinner_background"
@@ -72,6 +73,7 @@
 
     <Spinner
         android:id="@+id/classSpinner"
+        android:prompt="@string/select_danceClass_hint"
         android:layout_width="208dp"
         android:layout_height="55dp"
         android:background="@drawable/spinner_background"

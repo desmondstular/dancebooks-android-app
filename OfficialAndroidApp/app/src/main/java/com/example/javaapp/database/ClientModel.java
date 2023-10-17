@@ -37,6 +37,8 @@ public class ClientModel {
         return clientPhone;
     }
 
+    public String getClientFullName(){return clientFirstName + " " + clientLastName;}
+
     public void setClientID(int clientID) {
         this.clientID = clientID;
     }

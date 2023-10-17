@@ -74,4 +74,6 @@
     <string name="ByTheYear">By the year</string>
     <string name="Monthly">Monthly</string>
     <string name="PaymentOption">Select a payment option</string>
+    <string name="select_client_hint">Select a Client</string>
+    <string name="select_danceClass_hint">Select Dance Class</string>
 </resources>
