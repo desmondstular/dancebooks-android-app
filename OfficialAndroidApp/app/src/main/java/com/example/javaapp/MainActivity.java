@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //------------------------------------------------------------------------------------------
+        //Navigation Bar Start *********************************************************************
         // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, InvoiceView.class);
             startActivity(intent);
         });
+        //Navigation Bar End ***********************************************************************
         //------------------------------------------------------------------------------------------
 
         addClassBtn = findViewById(R.id.btnAddClass);

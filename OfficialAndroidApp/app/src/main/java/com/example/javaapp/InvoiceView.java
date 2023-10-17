@@ -14,7 +14,7 @@ public class InvoiceView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_invoice_view);
-
+        //Navigation Bar Start *********************************************************************
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
@@ -49,6 +49,7 @@ public class InvoiceView extends AppCompatActivity {
             Intent intent = new Intent(InvoiceView.this, DanceClassView.class);
             startActivity(intent);
         });
+        //Navigation Bar End ***********************************************************************
 
 
     }
