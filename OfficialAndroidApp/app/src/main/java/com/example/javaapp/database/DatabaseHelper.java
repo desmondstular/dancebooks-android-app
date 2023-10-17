@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 import android.util.Pair;
 
 import androidx.annotation.Nullable;
@@ -136,7 +137,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             do {
                 String clientFirstName = cursor.getString(0);
                 String clientLastName = cursor.getString(1);
-                returnList.add(clientFirstName + " " + clientFirstName);
+                returnList.add(clientFirstName + " " + clientLastName);
             } while (cursor.moveToNext());
         } else {
             // Failure. Do not anything to the list

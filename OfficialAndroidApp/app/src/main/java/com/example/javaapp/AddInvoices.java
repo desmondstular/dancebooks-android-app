@@ -5,18 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database.InvoiceModel;
 
+import java.util.List;
+
 public class AddInvoices extends AppCompatActivity {
     Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, addInvoiceToDbButton;
-
-    EditText clientID, className, classYear;
     Spinner clientSpinner, classSpinner;
 
     @Override
@@ -60,8 +63,33 @@ public class AddInvoices extends AppCompatActivity {
         });
         //Navigation Bar END************************************************************************
         //------------------------------------------------------------------------------------------
+
         //Client Spinner setup
         clientSpinner = findViewById(R.id.clientSpinner);
+        DatabaseHelper databaseHelper = new DatabaseHelper(AddInvoices.this);
+        List<String> clientNames = databaseHelper.getAllClientNames();
+        ArrayAdapter<String> clientAdapter = new ArrayAdapter<>(AddInvoices.this,
+                android.R.layout.simple_spinner_item, clientNames);
+        clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        clientSpinner.setAdapter(clientAdapter);
+        clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id){
+                String selectedClient = clientNames.get(position);
+                Toast.makeText(AddInvoices.this, selectedClient, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+//        DatabaseHelper databaseHelper = new DatabaseHelper(AddInvoices.this);
+//        List<String> clientNames = databaseHelper.getAllClientNames();
+//        ArrayAdapter<List<String>> clientNameArrayAdapter = ArrayAdapter.createFromResource(
+//                AddInvoices.this, clientNames, android.R.layout.simple_spinner_item);
 
 
         //Dance Class Spinner setup
