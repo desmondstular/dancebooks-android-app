@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.javaapp.database.DatabaseHelper;
@@ -21,7 +22,7 @@ public class AddInvoices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_invoices);
-
+        //------------------------------------------------------------------------------------------
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
@@ -55,7 +56,7 @@ public class AddInvoices extends AppCompatActivity {
             Intent intent = new Intent(AddInvoices.this, InvoiceView.class);
             startActivity(intent);
         });
-
+        //------------------------------------------------------------------------------------------
         addInvoiceToDbButton = findViewById(R.id.addInvoiceToDbBtn);
         addInvoiceToDbButton.setOnClickListener(new View.OnClickListener() {
             @Override
