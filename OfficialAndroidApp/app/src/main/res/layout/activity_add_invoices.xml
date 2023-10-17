@@ -13,9 +13,9 @@
         android:layout_height="25dp"
         android:text="@string/PaymentOption"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/rb_yearlyPrice"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.63"
+        app:layout_constraintHorizontal_bias="0.095"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classSpinner"
         app:layout_constraintVertical_bias="1.0" />
@@ -81,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551" />
+        app:layout_constraintVertical_bias="0.485" />
 
     <TextView
         android:id="@+id/textView"
@@ -96,35 +96,35 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <RadioButton
-        android:id="@+id/rb_yearlyPrice"
+    <RadioGroup
+        android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/ByTheYear"
-        app:layout_constraintBottom_toTopOf="@+id/addInvoiceToDbBtn"
-        app:layout_constraintEnd_toStartOf="@+id/rb_biYearlyPrice"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classSpinner" />
-
-    <RadioButton
-        android:id="@+id/rb_biYearlyPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/BiYearly"
         app:layout_constraintBottom_toTopOf="@+id/addInvoiceToDbBtn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.201"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/classSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/classSpinner"
+        app:layout_constraintVertical_bias="0.837">
 
-    <RadioButton
-        android:id="@+id/rb_monthlyPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/Monthly"
-        app:layout_constraintBottom_toTopOf="@+id/addInvoiceToDbBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/rb_biYearlyPrice"
-        app:layout_constraintTop_toBottomOf="@+id/classSpinner" />
+        <RadioButton
+            android:id="@+id/rb_yearlyPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ByTheYear" />
+
+        <RadioButton
+            android:id="@+id/rb_biYearlyPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/BiYearly" />
+
+        <RadioButton
+            android:id="@+id/rb_monthlyPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/Monthly" />
+    </RadioGroup>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
