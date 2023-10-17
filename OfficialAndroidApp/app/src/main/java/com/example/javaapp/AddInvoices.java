@@ -4,11 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database.InvoiceModel;
 
 public class AddInvoices extends AppCompatActivity {
-    Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn;
+    Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, addInvoiceToDbButton;
 
     EditText clientID, className, classYear;
 
@@ -49,6 +54,27 @@ public class AddInvoices extends AppCompatActivity {
         viewInvoiceBtn.setOnClickListener(view -> {
             Intent intent = new Intent(AddInvoices.this, InvoiceView.class);
             startActivity(intent);
+        });
+
+        addInvoiceToDbButton = findViewById(R.id.addInvoiceToDbBtn);
+        addInvoiceToDbButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try {
+                    DatabaseHelper db = new DatabaseHelper(AddInvoices.this);
+                    /*InvoiceModel invoiceModel = new InvoiceModel();
+                    Boolean isAdded = db.deleteOneInvoice(invoiceModel);
+                    if (isAdded) {
+                        //Will add code to erase all text boxes.
+                    } else {
+                        Toast.makeText(AddInvoices.this, "Unsuccessful",
+                                Toast.LENGTH_SHORT).show();
+                    }*/
+                } catch (Exception e) {
+                    Toast.makeText(AddInvoices.this, "Error Creating Invoice",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 }
