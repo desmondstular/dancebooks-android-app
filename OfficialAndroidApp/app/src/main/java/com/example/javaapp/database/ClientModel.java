@@ -48,13 +48,6 @@ public class ClientModel {
     @Override
     public String toString() {
         return clientFirstName + " " + clientLastName+ " " + clientEmail+ " " + clientPhone;
-//                "ClientModel{" +
-//                "clientID=" + clientID +
-//                ", clientFirstName='" + clientFirstName + '\'' +
-//                ", clientLastName='" + clientLastName + '\'' +
-//                ", clientEmail='" + clientEmail + '\'' +
-//                ", clientPhone=" + clientPhone +
-//                '}';
     }
 
     public void setClientLastName(String clientLastName) {
