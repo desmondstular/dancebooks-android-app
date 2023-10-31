@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database.DanceClassModel;
-import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database_v1.DanceClassModel;
+import com.example.javaapp.database_v1.DatabaseHelper;
 
 public class MainActivity extends AppCompatActivity {
     //references to buttons and other controls on the layout

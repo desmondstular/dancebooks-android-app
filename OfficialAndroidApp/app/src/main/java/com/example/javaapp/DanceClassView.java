@@ -1,7 +1,6 @@
 package com.example.javaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.javaapp.database.DanceClassModel;
-import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database_v1.DanceClassModel;
+import com.example.javaapp.database_v1.DatabaseHelper;
 
 import java.util.List;
 
