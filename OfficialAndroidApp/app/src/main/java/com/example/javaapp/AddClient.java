@@ -9,8 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database_v1.ClientModel;
-import com.example.javaapp.database_v1.DatabaseHelper;
+import com.example.javaapp.database.ClientModel;
+import com.example.javaapp.database.DatabaseHelper;
 
 public class AddClient extends AppCompatActivity {
     Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;

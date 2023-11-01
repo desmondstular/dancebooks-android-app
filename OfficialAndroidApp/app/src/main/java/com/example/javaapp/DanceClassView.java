@@ -8,8 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.javaapp.database_v1.DanceClassModel;
-import com.example.javaapp.database_v1.DatabaseHelper;
+import com.example.javaapp.database.DanceClassModel;
+import com.example.javaapp.database.DatabaseHelper;
 
 import java.util.List;
 

@@ -4,10 +4,10 @@ public class SignedUpModel {
     private String email;
     private String className;
     private int year;
-    private boolean isPaid;
+    private int isPaid;
 
     // SIGNED UP MODEL CONSTRUCTOR
-    public SignedUpModel(String email, String className, int year, boolean isPaid) {
+    public SignedUpModel(String email, String className, int year, int isPaid) {
         this.email = email;
         this.className = className;
         this.year = year;
@@ -27,7 +27,7 @@ public class SignedUpModel {
         return year;
     }
 
-    public boolean getIsPaid() {
+    public int getIsPaid() {
         return isPaid;
     }
 
@@ -44,7 +44,7 @@ public class SignedUpModel {
         this.year = year;
     }
 
-    public void setIsPaid(boolean paid) {
+    public void setIsPaid(int paid) {
         isPaid = paid;
     }
 }

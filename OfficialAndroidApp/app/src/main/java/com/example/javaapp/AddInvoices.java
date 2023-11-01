@@ -11,10 +11,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.javaapp.database_v1.ClientModel;
-import com.example.javaapp.database_v1.DanceClassModel;
-import com.example.javaapp.database_v1.DatabaseHelper;
-import com.example.javaapp.database_v1.InvoiceModel;
+import com.example.javaapp.database.ClientModel;
+import com.example.javaapp.database.DanceClassModel;
+import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database.InvoiceModel;
 
 import java.util.List;
 

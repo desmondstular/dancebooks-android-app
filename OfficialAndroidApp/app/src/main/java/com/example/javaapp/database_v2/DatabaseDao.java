@@ -8,6 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class DatabaseDao extends SQLiteOpenHelper {
 
     public DatabaseDao(@Nullable Context context) {
@@ -23,7 +26,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE CLASS(CLASSNAME TEXT NOT NULL, YEAR INTEGER NOT NULL, COST DECIMAL(10,2) NOT NULL, CAPACITY INTEGER NOT NULL, ENROLLED INTEGER NOT NULL, PRIMARY KEY(CLASSNAME, YEAR))");
 
         // CREATES A SIGNUP TABLE
-        db.execSQL("CREATE TABLE SIGNEDUP(EMAIL TEXT, CLASSNAME TEXT, YEAR INTEGER, ISPAID BOOLEAN, PRIMARY KEY(EMAIL, CLASSNAME, YEAR))");
+        db.execSQL("CREATE TABLE SIGNEDUP(EMAIL TEXT, CLASSNAME TEXT, YEAR INTEGER, ISPAID INTEGER, PRIMARY KEY(EMAIL, CLASSNAME, YEAR))");
     }
 
     @Override
@@ -67,6 +70,57 @@ public class DatabaseDao extends SQLiteOpenHelper {
         }
     }
 
+    // Searches a Client by its Primary Keys and returns it as a Client Model.
+    public ClientModel getOneClientByPrimaryKey(String email) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM CLIENT WHERE EMAIL = " + email;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return new ClientModel(cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getString(2),
+                    cursor.getInt(3),
+                    cursor.getFloat(4));
+        } else {
+            return null;
+        }
+    }
+
+    // Returns an array list of all Clients in the DB as ClientModels
+    public List<ClientModel> getAllClients() {
+        List<ClientModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLIENT";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String firstName = cursor.getString(1);
+                String lastName = cursor.getString(2);
+                int phoneNumber = cursor.getInt(3);
+                float balance = cursor.getFloat(4);
+                ClientModel newClient = new ClientModel(
+                        email,
+                        firstName,
+                        lastName,
+                        phoneNumber,
+                        balance);
+                returnList.add(newClient);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
     // ########## CLASS QUERIES ###########
 
     // Adds a single dance class to the database
@@ -88,6 +142,23 @@ public class DatabaseDao extends SQLiteOpenHelper {
         }
     }
 
+    // Searches a Class by its Primary Keys and returns as a ClassModel object.
+    public ClassModel getOneClassByPrimaryKey(String className, int year) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM CLASS WHERE CLASSNAME = " + className + " and YEAR = " + year;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return new ClassModel(cursor.getString(0),
+                    cursor.getInt(1),
+                    cursor.getFloat(2),
+                    cursor.getInt(3),
+                    cursor.getInt(4));
+        } else {
+            return null;
+        }
+    }
+
     // Deletes a single class from the database
     public boolean deleteOneClass(ClassModel classModel) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -103,13 +174,53 @@ public class DatabaseDao extends SQLiteOpenHelper {
         }
     }
 
+    // Returns an array list of all Classes in the DB as ClassModels
+    public List<ClassModel> getAllClasses() {
+        List<ClassModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLASS";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String className = cursor.getString(0);
+                int year = cursor.getInt(1);
+                float cost = cursor.getFloat(2);
+                int capacity = cursor.getInt(3);
+                int enrolled = cursor.getInt(4);
+                ClassModel newClass = new ClassModel(
+                        className,
+                        year,
+                        cost,
+                        capacity,
+                        enrolled);
+                returnList.add(newClass);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
     // ########## CLASS QUERIES ###########
 
     // Adds a single dance class to the database
     public boolean addOneSignedUp(SignedUpModel signedUpModel) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
 
+        // Class is already full, cannot add anymore Clients
+        if (classModel.getEnrolled() + 1 > classModel.getCapacity()) {
+            return false;
+        }
+
+        ContentValues cv = new ContentValues();
         cv.put("EMAIL", signedUpModel.getEmail());
         cv.put("CLASSNAME", signedUpModel.getClassName());
         cv.put("YEAR", signedUpModel.getYear());
@@ -119,6 +230,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
         if (insert == -1) {
             return false;
         } else {
+            ContentValues cv2 = new ContentValues();
+            cv2.put("CLASSNAME", classModel.getClassName());
+            cv2.put("YEAR", classModel.getYear());
+            cv2.put("COST", classModel.getCost());
+            cv2.put("CAPACITY", classModel.getCapacity());
+            cv2.put("ENROLLED", classModel.getEnrolled() + 1);
+            int updated = db.update("CLASS", cv2, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
             return true;
         }
     }
@@ -136,5 +254,53 @@ public class DatabaseDao extends SQLiteOpenHelper {
         else {
             return false;
         }
+    }
+
+    // Searches a Signed Up entity by Primary Keys and returns it is as Signed Up Model.
+    public SignedUpModel getOneSignedUpByPrimaryKey(String email, String className, int year) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM CLIENT WHERE EMAIL = " + email + " AND CLASSNAME = " + className + " AND YEAR = " + year;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            return new SignedUpModel(cursor.getString(0),
+                    cursor.getString(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3));
+        } else {
+            return null;
+        }
+    }
+
+    // Returns an array list of all Sign Ups in the DB as SignedUpModels
+    public List<SignedUpModel> getAllSignedUps() {
+        List<SignedUpModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM SIGNEDUP";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String className = cursor.getString(1);
+                int year = cursor.getInt(2);
+                int isPaid = cursor.getInt(3);
+                SignedUpModel newSignedUp = new SignedUpModel(
+                        email,
+                        className,
+                        year,
+                        isPaid);
+                returnList.add(newSignedUp);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
     }
 }
