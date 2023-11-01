@@ -244,11 +244,19 @@ public class DatabaseDao extends SQLiteOpenHelper {
     // Deletes a single signed up from the database
     public boolean deleteSignedUp(SignedUpModel signedUpModel) {
         SQLiteDatabase db = this.getWritableDatabase();
+        ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
         String queryString = "DELETE FROM SIGNEDUP WHERE EMAIL = " + signedUpModel.getEmail() + " AND CLASSNAME = " + signedUpModel.getClassName() + " AND YEAR = " + signedUpModel.getYear();
 
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToNext()) {
+            ContentValues cv = new ContentValues();
+            cv.put("CLASSNAME", classModel.getClassName());
+            cv.put("YEAR", classModel.getYear());
+            cv.put("COST", classModel.getCost());
+            cv.put("CAPACITY", classModel.getCapacity());
+            cv.put("ENROLLED", classModel.getEnrolled() - 1);
+            int updated = db.update("CLASS", cv, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
             return true;
         }
         else {
