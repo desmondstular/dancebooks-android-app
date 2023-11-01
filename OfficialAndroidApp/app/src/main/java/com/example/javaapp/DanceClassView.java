@@ -1,7 +1,6 @@
 package com.example.javaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -48,7 +47,7 @@ public class DanceClassView extends AppCompatActivity {
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
             //Start the viewClass Activity
-            Intent intent = new Intent(DanceClassView.this, AddInvoices.class);
+            Intent intent = new Intent(DanceClassView.this, ClassSignUp.class);
             startActivity(intent);
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
