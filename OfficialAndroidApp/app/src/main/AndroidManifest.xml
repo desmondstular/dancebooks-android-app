@@ -26,7 +26,7 @@
         <!-- android:label="@string/title_activity_dance_class_view" -->
         <!-- android:theme="@style/Theme.JavaApp" /> -->
         <activity
-            android:name=".AddInvoices"
+            android:name=".ClassSignUp"
             android:exported="false" />
         <activity
             android:name=".ClientView"

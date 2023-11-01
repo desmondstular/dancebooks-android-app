@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database.InvoiceModel;
 
@@ -38,7 +37,7 @@ public class InvoiceView extends AppCompatActivity {
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
             //Start the viewClass Activity
-            Intent intent = new Intent(InvoiceView.this, AddInvoices.class);
+            Intent intent = new Intent(InvoiceView.this, ClassSignUp.class);
             startActivity(intent);
         });
         // Set click listener for Add Clients button

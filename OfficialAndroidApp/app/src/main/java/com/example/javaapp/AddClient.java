@@ -45,7 +45,7 @@ public class AddClient extends AppCompatActivity {
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
             //Start the viewClass Activity
-            Intent intent = new Intent(AddClient.this, AddInvoices.class);
+            Intent intent = new Intent(AddClient.this, ClassSignUp.class);
             startActivity(intent);
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);

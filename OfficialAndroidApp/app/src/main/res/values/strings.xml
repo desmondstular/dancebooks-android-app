@@ -64,7 +64,6 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="AddInvoiceBtn">Add Invoice</string>
     <string name="ClientViewScreen">Client View Screen</string>
     <string name="DanceClassViewScreen">Dance Class View Screen</string>
     <string name="InvoiceViewScreen">Invoice View Screen</string>
@@ -76,4 +75,7 @@
     <string name="PaymentOption">Select a payment option</string>
     <string name="select_client_hint">Select a Client</string>
     <string name="select_danceClass_hint">Select Dance Class</string>
+    <string name="ClientSearchbtn" />
+    <string name="ClientSearchBtn">Search Client</string>
+    <string name="SignUpBtn">Sign Up</string>
 </resources>
