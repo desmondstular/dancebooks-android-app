@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, InvoiceView.class);
+            Intent intent = new Intent(MainActivity.this, SignUpView.class);
             startActivity(intent);
         });
         //Navigation Bar End ***********************************************************************

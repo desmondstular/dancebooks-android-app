@@ -28,7 +28,7 @@ public class ClassSignUp extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_invoices);
+        setContentView(R.layout.activity_class_sign_up);
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start**********************************************************************
         // Set click listener for Add Classes button
@@ -53,7 +53,7 @@ public class ClassSignUp extends AppCompatActivity {
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, InvoiceView.class));
+            startActivity(new Intent(ClassSignUp.this, SignUpView.class));
         });
         //Navigation Bar END************************************************************************
 

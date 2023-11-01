@@ -45,7 +45,7 @@ public class ClientView extends AppCompatActivity {
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(ClientView.this, InvoiceView.class);
+            Intent intent = new Intent(ClientView.this, SignUpView.class);
             startActivity(intent);
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
