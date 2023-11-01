@@ -22,37 +22,27 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start *********************************************************************
-        // Set click listener for Add Clients button
+        // Set click listener for Add Clients button, and all other screens
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
-            // Navigate back to MainActivity
-            Intent intent = new Intent(MainActivity.this, AddClient.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, AddClient.class));
             //finish(); // Close this activity if you don't want to keep it in the back stack
         });
-        // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(MainActivity.this, ClientView.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, ClientView.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(MainActivity.this, DanceClassView.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, DanceClassView.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(MainActivity.this, ClassSignUp.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, ClassSignUp.class));
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(MainActivity.this, SignUpView.class);
-            startActivity(intent);
+            startActivity(new Intent(MainActivity.this, SignUpView.class));
         });
         //Navigation Bar End ***********************************************************************
         //------------------------------------------------------------------------------------------
@@ -61,29 +51,21 @@ public class MainActivity extends AppCompatActivity {
         ClName = findViewById(R.id.Cl_Name);
         ClYear = findViewById(R.id.Cl_Year);
         An_Price = findViewById(R.id.An_Price);
-        Bi_Price = findViewById(R.id.BI_Price);
-        Mn_Price = findViewById(R.id.Mn_Price);
 
-        //btn listeners
-        //btn_Add_Class.set
 
         addClassBtn.setOnClickListener(new View.OnClickListener() {
-            /**
-             * @param v
-             * Purpose:
-             * Gets the input from the user OnClick of "AddClass" btn
+            /**@param v
+             * Purpose: Gets the input from the user OnClick of "AddClass" btn
              * and creates the Dance Class Object, then displays the toString() of the Dance Class
-             *
              */
             @Override
             public void onClick(View v) {
                 try {
                     DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                    DanceClassModel danceClassModel = new DanceClassModel(ClName.getText().toString(),
+                    DanceClassModel danceClassModel = new DanceClassModel(
+                            ClName.getText().toString(),
                             Integer.parseInt(ClYear.getText().toString()),
-                            Integer.parseInt(An_Price.getText().toString()),
-                            Integer.parseInt(Bi_Price.getText().toString()),
-                            Integer.parseInt(Mn_Price.getText().toString()));
+                            Integer.parseInt(An_Price.getText().toString()));
 
                     boolean i = databaseHelper.addOneDanceClass(danceClassModel);
                     if (!i) {
@@ -93,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
                         ClName.getText().clear();
                         ClYear.getText().clear();
                         An_Price.getText().clear();
-                        Bi_Price.getText().clear();
-                        Mn_Price.getText().clear();
                     }
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "Error Creating Dance Class",
