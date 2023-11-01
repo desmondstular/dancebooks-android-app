@@ -13,7 +13,7 @@
         android:theme="@style/Theme.JavaApp"
         tools:targetApi="31">
         <activity
-            android:name=".InvoiceView"
+            android:name=".SignUpView"
             android:exported="false" />
 <!--        <activity-->
 <!--            android:name=".AddClient$InvoiceView"-->
