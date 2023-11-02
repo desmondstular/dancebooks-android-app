@@ -33,34 +33,24 @@ public class AddClient extends AppCompatActivity {
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(AddClient.this, ClientView.class);
-            startActivity(intent);
+            startActivity(new Intent(AddClient.this, ClientView.class));
         });
-
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(AddClient.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(AddClient.this, MainActivity.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(AddClient.this, ClassSignUp.class);
-            startActivity(intent);
+            startActivity(new Intent(AddClient.this, ClassSignUp.class));
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(AddClient.this, SignUpView.class);
-            startActivity(intent);
+            startActivity(new Intent(AddClient.this, SignUpView.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(AddClient.this, DanceClassView.class);
-            startActivity(intent);
+            startActivity(new Intent(AddClient.this, DanceClassView.class));
         });
         //Navigation Bar End ***********************************************************************
         //------------------------------------------------------------------------------------------

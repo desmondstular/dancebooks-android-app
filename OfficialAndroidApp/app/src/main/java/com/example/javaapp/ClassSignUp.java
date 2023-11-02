@@ -40,25 +40,22 @@ public class ClassSignUp extends AppCompatActivity {
         viewClassBtn.setOnClickListener(view -> {
             startActivity(new Intent(ClassSignUp.this, DanceClassView.class));
         });
-        // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
             startActivity(new Intent(ClassSignUp.this, ClientView.class));
         });
-        // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
             startActivity(new Intent(ClassSignUp.this, AddClient.class));
-            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
+            //finish();
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
             startActivity(new Intent(ClassSignUp.this, SignUpView.class));
         });
         //Navigation Bar END************************************************************************
-
-        //======================================================================================
-        //Client Spinner setup------------------------------------------------------------------
+        //==========================================================================================
+        //Client Spinner setup----------------------------------------------------------------------
         clientSpinner = findViewById(R.id.clientSpinner);
         DatabaseHelper databaseHelper = new DatabaseHelper(ClassSignUp.this);
         List<ClientModel> clients = databaseHelper.getAllClients();

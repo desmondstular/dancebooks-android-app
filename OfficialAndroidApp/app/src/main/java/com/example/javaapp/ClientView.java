@@ -27,33 +27,23 @@ public class ClientView extends AppCompatActivity {
         // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
-            // Navigate back to MainActivity
-            Intent intent = new Intent(ClientView.this, AddClient.class);
-            startActivity(intent);
+            startActivity(new Intent(ClientView.this, AddClient.class));
         });
-        // Set click listener for View Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(ClientView.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(ClientView.this, MainActivity.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(ClientView.this, ClassSignUp.class);
-            startActivity(intent);
+            startActivity(new Intent(ClientView.this, ClassSignUp.class));
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(ClientView.this, SignUpView.class);
-            startActivity(intent);
+            startActivity(new Intent(ClientView.this, SignUpView.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(ClientView.this, DanceClassView.class);
-            startActivity(intent);
+            startActivity(new Intent(ClientView.this, DanceClassView.class));
         });
         //Navigation Bar End ***********************************************************************
         //View the Database

@@ -18,9 +18,6 @@ public class SignUpView extends AppCompatActivity {
 
     ListView lv_Invoice_List;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,46 +27,30 @@ public class SignUpView extends AppCompatActivity {
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(SignUpView.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(SignUpView.this, MainActivity.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(SignUpView.this, ClassSignUp.class);
-            startActivity(intent);
+            startActivity(new Intent(SignUpView.this, ClassSignUp.class));
         });
-        // Set click listener for Add Clients button
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
-            // Navigate back to MainActivity
-            Intent intent = new Intent(SignUpView.this, AddClient.class);
-            startActivity(intent);
-            //finish(); // Optional: Close this activity if you don't want to keep it in the back stack
+            startActivity(new Intent(SignUpView.this, AddClient.class));
         });
-        // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(SignUpView.this, ClientView.class);
-            startActivity(intent);
+            startActivity(new Intent(SignUpView.this, ClientView.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(SignUpView.this, DanceClassView.class);
-            startActivity(intent);
+            startActivity(new Intent(SignUpView.this, DanceClassView.class));
         });
         //Navigation Bar End ***********************************************************************
 
-
         DatabaseHelper databaseHelper = new DatabaseHelper(SignUpView.this);
         List<InvoiceModel> everyInvoice = databaseHelper.getAllInvoices();
-        ArrayAdapter invoiceArrayAdapter = new ArrayAdapter<InvoiceModel>(SignUpView.this,
+        ArrayAdapter<InvoiceModel> invoiceArrayAdapter = new ArrayAdapter<InvoiceModel>(SignUpView.this,
                 android.R.layout.simple_list_item_1, everyInvoice);
         lv_Invoice_List.setAdapter(invoiceArrayAdapter);
-
-
     }
 }
