@@ -11,11 +11,14 @@ import android.widget.Toast;
 
 import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database_v2.ClassModel;
+import com.example.javaapp.database_v2.DatabaseDao;
 
 public class MainActivity extends AppCompatActivity {
     //references to buttons and other controls on the layout
     Button addClassBtn, addClientsBtn, viewClientsBtn, viewClassBtn, addInvoiceBtn, viewInvoiceBtn;
-    EditText ClName, ClYear, An_Price, Bi_Price, Mn_Price;
+    EditText ClName, ClYear, An_Price, classCapacity;
+    DatabaseDao databaseDao;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         ClName = findViewById(R.id.Cl_Name);
         ClYear = findViewById(R.id.Cl_Year);
         An_Price = findViewById(R.id.An_Price);
+        classCapacity = findViewById(R.id.classCapacity);
+
 
 
         addClassBtn.setOnClickListener(new View.OnClickListener() {
@@ -61,13 +66,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-                    DanceClassModel danceClassModel = new DanceClassModel(
+//                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
+//                    DanceClassModel danceClassModel = new DanceClassModel(
+//                            ClName.getText().toString(),
+//                            Integer.parseInt(ClYear.getText().toString()),
+//                            Integer.parseInt(An_Price.getText().toString()));
+                    databaseDao = new DatabaseDao(MainActivity.this);
+                    ClassModel classModel = new ClassModel(
                             ClName.getText().toString(),
                             Integer.parseInt(ClYear.getText().toString()),
-                            Integer.parseInt(An_Price.getText().toString()));
+                            Integer.parseInt(An_Price.getText().toString()),
+                            Integer.parseInt(classCapacity.getText().toString()),0);
 
-                    boolean i = databaseHelper.addOneDanceClass(danceClassModel);
+
+                    boolean i = databaseDao.addOneClass(classModel);
                     if (!i) {
                         Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
                     } else {
@@ -75,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
                         ClName.getText().clear();
                         ClYear.getText().clear();
                         An_Price.getText().clear();
+                        classCapacity.getText().clear();
                     }
                 } catch (Exception e) {
                     Toast.makeText(MainActivity.this, "Error Creating Dance Class",
