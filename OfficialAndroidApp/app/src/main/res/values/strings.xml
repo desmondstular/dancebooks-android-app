@@ -79,4 +79,6 @@
     <string name="SignUpBtn">Sign Up</string>
     <string name="SearchAllOwing">Show Owing Clients</string>
     <string name="ShowAvailableClasses">Show Available Classes</string>
+    <string name="AddSignUp">Sign Up</string>
+    <string name="ViewSignUp">SignUps</string>
 </resources>

@@ -74,7 +74,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
     // Searches a Client by its Primary Keys and returns it as a Client Model.
     public ClientModel getOneClientByPrimaryKey(String email) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT * FROM CLIENT WHERE EMAIL = " + email;
+        String queryString = "SELECT * FROM CLIENT WHERE EMAIL = " + "'"+ email+ "'";
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {
