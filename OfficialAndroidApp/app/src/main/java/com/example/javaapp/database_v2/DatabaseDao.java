@@ -159,6 +159,36 @@ public class DatabaseDao extends SQLiteOpenHelper {
             return null;
         }
     }
+    // show all classes that have enrollment < capacity
+    public List<ClassModel> getAllAvailableClasses(){
+        List<ClassModel> returnList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM CLASS WHERE ENROLLED < CAPACITY";
+        Cursor cursor = db.rawQuery(queryString, null);
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new class list object
+            do {
+                String className = cursor.getString(0);
+                int year = cursor.getInt(1);
+                float cost = cursor.getFloat(2);
+                int capacity = cursor.getInt(3);
+                int enrolled = cursor.getInt(4);
+                ClassModel newClass = new ClassModel(
+                        className,
+                        year,
+                        cost,
+                        capacity,
+                        enrolled);
+                returnList.add(newClass);
+            } while (cursor.moveToNext());
+        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 
     // Deletes a single class from the database
     public boolean deleteOneClass(ClassModel classModel) {
@@ -186,7 +216,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
 
         // returns true if there are results to query
         if (cursor.moveToFirst()) {
-            // Loops through cursor (query results) and adds to new client object
+            // Loops through cursor (query results) and adds to new class list object
             do {
                 String className = cursor.getString(0);
                 int year = cursor.getInt(1);
