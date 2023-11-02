@@ -27,40 +27,32 @@ public class DanceClassView extends AppCompatActivity {
         // Set click listener for View Clients button
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
-            // Start the ClientView activity
-            Intent intent = new Intent(DanceClassView.this, ClientView.class);
-            startActivity(intent);
+            startActivity(new Intent(DanceClassView.this, ClientView.class));
         });
         // Set click listener for Add Client button
         addClientBtn = findViewById(R.id.addClientsBtn);
         addClientBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(DanceClassView.this, AddClient.class);
-            startActivity(intent);
+            startActivity(new Intent(DanceClassView.this, AddClient.class));
         });
         //Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener( view -> {
-            // Start the Client View activity
-            Intent intent = new Intent(DanceClassView.this, MainActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(DanceClassView.this, MainActivity.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            //Start the viewClass Activity
-            Intent intent = new Intent(DanceClassView.this, ClassSignUp.class);
-            startActivity(intent);
+            startActivity(new Intent(DanceClassView.this, ClassSignUp.class));
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(DanceClassView.this, SignUpView.class);
-            startActivity(intent);
+            startActivity(new Intent(DanceClassView.this, SignUpView.class));
         });
         //Navigation Bar End************************************************************************
         //------------------------------------------------------------------------------------------
         //DATA BASE VIEW
         DatabaseHelper databaseHelper = new DatabaseHelper(DanceClassView.this);
         List<DanceClassModel> everyDanceClass = databaseHelper.getAllDanceClasses();
-        ArrayAdapter danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>
+        ArrayAdapter<DanceClassModel> danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>
                 (DanceClassView.this, android.R.layout.simple_list_item_1, everyDanceClass);
         lv_danceClassList.setAdapter(danceClassArrayAdapter);
 
