@@ -9,8 +9,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database.ClientModel;
 import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database_v2.ClientModel;
+import com.example.javaapp.database_v2.DatabaseDao;
+
+import java.math.BigInteger;
 
 public class AddClient extends AppCompatActivity {
     Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
@@ -67,15 +70,22 @@ public class AddClient extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 try {
-                    DatabaseHelper databaseHelper = new DatabaseHelper(AddClient.this);
+                    //DatabaseHelper databaseHelper = new DatabaseHelper(AddClient.this);
+                    DatabaseDao databaseDao = new DatabaseDao(AddClient.this);
                     // Create client data object from getting info from text boxes
-                    ClientModel clientModel = new ClientModel(0,
+//                    ClientModel clientModel = new ClientModel(0,
+//                            clientFirstNameTextBox.getText().toString(),
+//                            clientLastNameTextBox.getText().toString(),
+//                            clientEmailTextBox.getText().toString(),
+//                            Integer.parseInt(clientPhoneNumberTextBox.getText().toString()));
+                    ClientModel clientModel = new ClientModel(
+                            clientEmailTextBox.getText().toString(),
                             clientFirstNameTextBox.getText().toString(),
                             clientLastNameTextBox.getText().toString(),
-                            clientEmailTextBox.getText().toString(),
-                            Integer.parseInt(clientPhoneNumberTextBox.getText().toString()));
+                            clientPhoneNumberTextBox.getText().toString(),
+                            0);
 
-                    boolean i = databaseHelper.addOneClient(clientModel);
+                    boolean i = databaseDao.addOneClient(clientModel);
                     if (!i) {
                         Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
                     } else {

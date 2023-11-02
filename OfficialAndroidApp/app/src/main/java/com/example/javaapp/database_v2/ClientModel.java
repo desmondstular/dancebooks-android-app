@@ -1,14 +1,16 @@
 package com.example.javaapp.database_v2;
 
+import java.math.BigInteger;
+
 public class ClientModel {
     private String email;
     private String firstName;
     private String lastName;
-    private int phoneNumber;
+    private String phoneNumber;
     private float balance;
 
     // CLIENT MODEL CONSTRUCTOR
-    public ClientModel(String email, String firstName, String lastName, int phoneNumber, float balance) {
+    public ClientModel(String email, String firstName, String lastName, String phoneNumber, float balance) {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -29,7 +31,7 @@ public class ClientModel {
         return lastName;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
@@ -50,11 +52,16 @@ public class ClientModel {
         this.lastName = lastName;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
     public void setBalance(float balance) {
         this.balance = balance;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " " + email + " " +   " " + balance;
     }
 }

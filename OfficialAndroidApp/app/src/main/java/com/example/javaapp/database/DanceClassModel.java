@@ -9,6 +9,7 @@ public class DanceClassModel {
         this.className = className;
         this.classYear = classYear;
         this.classLumpSumCost = classLumpSumCost;
+
     }
 
     public DanceClassModel(DanceClassModel danceClassModel) {
