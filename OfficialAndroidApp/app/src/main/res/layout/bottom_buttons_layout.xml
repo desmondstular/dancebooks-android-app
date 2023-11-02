@@ -47,11 +47,11 @@
         android:layout_height="48dp"
         android:layout_weight="1"
         android:background="#6200EA"
-        android:text="@string/AddInvoice"
-        android:textColor="#FFFFFF"
-        android:textSize="8sp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:text="@string/AddSignUp"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp" />
 
     <View
         android:layout_width="2dp"
@@ -64,11 +64,11 @@
         android:layout_height="48dp"
         android:layout_weight="1"
         android:background="#6200EA"
-        android:text="@string/ViewInvoice"
-        android:textColor="#FFFFFF"
-        android:textSize="8sp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp" />
+        android:paddingEnd="16dp"
+        android:text="@string/ViewSignUp"
+        android:textColor="#FFFFFF"
+        android:textSize="8sp" />
 
     <View
         android:layout_width="2dp"
