@@ -81,4 +81,5 @@
     <string name="ShowAvailableClasses">Show Available Classes</string>
     <string name="AddSignUp">Sign Up</string>
     <string name="ViewSignUp">SignUps</string>
+    <string name="ClassCapacity">Class Capacity</string>
 </resources>
