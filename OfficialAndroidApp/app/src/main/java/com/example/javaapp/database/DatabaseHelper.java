@@ -187,8 +187,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put(COLUMN_DANCECLASS_NAME, danceClassModel.getClassName());
         cv.put(COLUMN_DANCECLASS_YEAR, danceClassModel.getClassYear());
         cv.put(COLUMN_DANCECLASS_LUMPSUMCOST, danceClassModel.getClassLumpSumCost());
-        cv.put(COLUMN_DANCECLASS_BIANNUALCOST, danceClassModel.getClassBiAnnualCost());
-        cv.put(COLUMN_DANCECLASS_MONTHLYCOST, danceClassModel.getClassMonthlyCost());
 
         long insert = db.insert(TABLE_DANCECLASS, null, cv);
         if (insert == -1) {
@@ -226,9 +224,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             return new DanceClassModel(cursor.getString(0),
                     cursor.getInt(1),
-                    cursor.getFloat(2),
-                    cursor.getFloat(3),
-                    cursor.getFloat(4));
+                    cursor.getFloat(2));
         } else {
             return null;
         }
@@ -250,7 +246,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 float classLumpSumCost = cursor.getFloat(2);
                 float classBiAnnualCost = cursor.getFloat(3);
                 float classMonthlyCost = cursor.getFloat(4);
-                DanceClassModel newCLass = new DanceClassModel(className, classYear, classLumpSumCost, classBiAnnualCost, classMonthlyCost);
+                DanceClassModel newCLass = new DanceClassModel(className, classYear, classLumpSumCost);
                 returnList.add(newCLass);
             } while (cursor.moveToNext());
         } else {

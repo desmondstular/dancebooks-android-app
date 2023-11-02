@@ -45,6 +45,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         cv.put("FIRSTNAME", clientModel.getFirstName());
         cv.put("LASTNAME", clientModel.getLastName());
         cv.put("PHONENUMBER", clientModel.getPhoneNumber());
+        cv.put("BALANCE", clientModel.getBalance());
 
         long insert = db.insert("CLIENT", null, cv);
         db.close();
@@ -80,7 +81,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
             return new ClientModel(cursor.getString(0),
                     cursor.getString(1),
                     cursor.getString(2),
-                    cursor.getInt(3),
+                    cursor.getString(3),
                     cursor.getFloat(4));
         } else {
             return null;
@@ -103,7 +104,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
                 String email = cursor.getString(0);
                 String firstName = cursor.getString(1);
                 String lastName = cursor.getString(2);
-                int phoneNumber = cursor.getInt(3);
+                String phoneNumber = cursor.getString(3);
                 float balance = cursor.getFloat(4);
                 ClientModel newClient = new ClientModel(
                         email,

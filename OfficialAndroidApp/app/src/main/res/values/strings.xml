@@ -77,4 +77,5 @@
     <string name="select_danceClass_hint">Select Dance Class</string>
     <string name="ClientSearchBtn">Search Client(s)</string>
     <string name="SignUpBtn">Sign Up</string>
+    <string name="SearchAllOwing">Show Owing Clients</string>
 </resources>
