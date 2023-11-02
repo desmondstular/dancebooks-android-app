@@ -78,4 +78,5 @@
     <string name="ClientSearchBtn">Search Client(s)</string>
     <string name="SignUpBtn">Sign Up</string>
     <string name="SearchAllOwing">Show Owing Clients</string>
+    <string name="ShowAvailableClasses">Show Available Classes</string>
 </resources>
