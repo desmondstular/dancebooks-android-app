@@ -57,4 +57,10 @@ public class ClassModel {
     public void setEnrolled(int enrolled) {
         this.enrolled = enrolled;
     }
+
+    @Override
+    public String toString() {
+        return  className + " " + year + " " + cost + " " + enrolled + "/" + capacity;
+    }
+
 }

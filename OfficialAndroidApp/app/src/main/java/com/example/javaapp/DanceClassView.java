@@ -10,6 +10,8 @@ import android.widget.ListView;
 
 import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database.DatabaseHelper;
+import com.example.javaapp.database_v2.ClassModel;
+import com.example.javaapp.database_v2.DatabaseDao;
 
 import java.util.List;
 
@@ -17,6 +19,9 @@ public class DanceClassView extends AppCompatActivity {
     //references to buttons and other controls on the layout
     Button addClassBtn, addClientBtn, viewClientsBtn, addInvoiceBtn, viewInvoiceBtn;
     ListView lv_danceClassList;
+    DatabaseDao databaseDao;
+    ArrayAdapter<ClassModel> classModelArrayAdapter;
+    List<ClassModel> classModelList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,11 +55,17 @@ public class DanceClassView extends AppCompatActivity {
         //Navigation Bar End************************************************************************
         //------------------------------------------------------------------------------------------
         //DATA BASE VIEW
-        DatabaseHelper databaseHelper = new DatabaseHelper(DanceClassView.this);
-        List<DanceClassModel> everyDanceClass = databaseHelper.getAllDanceClasses();
-        ArrayAdapter<DanceClassModel> danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>
-                (DanceClassView.this, android.R.layout.simple_list_item_1, everyDanceClass);
-        lv_danceClassList.setAdapter(danceClassArrayAdapter);
+//        DatabaseHelper databaseHelper = new DatabaseHelper(DanceClassView.this);
+//        List<DanceClassModel> everyDanceClass = databaseHelper.getAllDanceClasses();
+//        ArrayAdapter<DanceClassModel> danceClassArrayAdapter = new ArrayAdapter<DanceClassModel>
+//                (DanceClassView.this, android.R.layout.simple_list_item_1, everyDanceClass);
+//        lv_danceClassList.setAdapter(danceClassArrayAdapter);
+        databaseDao = new DatabaseDao(DanceClassView.this);
+        classModelList = databaseDao.getAllClasses();
+        classModelArrayAdapter = new ArrayAdapter<>(DanceClassView.this,
+                android.R.layout.simple_list_item_1, classModelList);
+        lv_danceClassList.setAdapter(classModelArrayAdapter);
+
 
 
 
