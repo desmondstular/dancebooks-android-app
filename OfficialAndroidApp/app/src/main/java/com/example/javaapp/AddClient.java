@@ -61,9 +61,9 @@ public class AddClient extends AppCompatActivity {
             try {
                 DatabaseDao databaseDao = new DatabaseDao(AddClient.this);
                 ClientModel clientModel = new ClientModel(
-                        clientEmailTextBox.getText().toString(),
-                        clientFirstNameTextBox.getText().toString(),
-                        clientLastNameTextBox.getText().toString(),
+                        clientEmailTextBox.getText().toString().toLowerCase(),
+                        clientFirstNameTextBox.getText().toString().toUpperCase(),
+                        clientLastNameTextBox.getText().toString().toUpperCase(),
                         clientPhoneNumberTextBox.getText().toString(),
                         0);
 
