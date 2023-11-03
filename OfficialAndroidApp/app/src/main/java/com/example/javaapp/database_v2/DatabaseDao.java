@@ -233,8 +233,9 @@ public class DatabaseDao extends SQLiteOpenHelper {
                     cursor.getFloat(2),
                     cursor.getInt(3),
                     cursor.getInt(4));
+        } else {
+            return null;
         }
-        else {return null;}
     }
     // show all classes that have enrollment < capacity
     public List<ClassModel> getAllAvailableClasses(){
@@ -311,6 +312,58 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    // Gets classes by className and/or year. Enter empty string
+    // for className or null for year if you wish to not use either one of
+    // the filters.
+    public List<ClientModel> getAllClassesByClassNameAndOrYear(String className, Integer year) {
+        List<ClientModel> returnList = new ArrayList<>();
+        String cName, classYear;
+
+        if (className.isEmpty()) {
+            cName = "";
+        } else {
+            cName = " WHERE CLASSNAME = '" + className + "'";
+        }
+
+        if (year == null) {
+            classYear = "";
+        } else {
+            classYear = " WHERE YEAR = " + year.toString();
+        }
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLASS" + cName +
+                " INTERSECT " +
+                "SELECT * FROM CLIENT" + classYear;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String fName = cursor.getString(1);
+                String lName = cursor.getString(2);
+                String phoneNumber = cursor.getString(3);
+                float balance = cursor.getFloat(4);
+                ClientModel newClient = new ClientModel(
+                        email,
+                        fName,
+                        lName,
+                        phoneNumber,
+                        balance);
+                returnList.add(newClient);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
 
     // ########## SIGNED UP QUERIES ###########
 
