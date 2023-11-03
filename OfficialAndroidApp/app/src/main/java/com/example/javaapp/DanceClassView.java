@@ -18,6 +18,7 @@ import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
 
 import java.util.List;
+import java.util.Objects;
 
 public class DanceClassView extends AppCompatActivity {
     //references to buttons and other controls on the layout
@@ -32,6 +33,7 @@ public class DanceClassView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dance_class_view);
+        //Objects.requireNonNull(getSupportActionBar()).setTitle("View Dance Classes");
         lv_danceClassList = findViewById(R.id.lv_danceClassList);
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start**********************************************************************
@@ -68,7 +70,6 @@ public class DanceClassView extends AppCompatActivity {
         lv_danceClassList.setAdapter(classModelArrayAdapter);
         //---------------init the fields for search----------------------------------
         searchBtn = findViewById(R.id.searchClassBtn);
-        availableClassesBtn = findViewById(R.id.availableClassesBtn);
         classYear = findViewById(R.id.searchClassYear);
         className = findViewById(R.id.searchClassName);
         //--------------onclick for search----------------------------------------------------------
@@ -119,6 +120,7 @@ public class DanceClassView extends AppCompatActivity {
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         });
         //-------------on click for show all available btn------------------------------------------
+        availableClassesBtn = findViewById(R.id.availableClassesBtn);
         availableClassesBtn.setOnClickListener(view -> {
             try
             {
