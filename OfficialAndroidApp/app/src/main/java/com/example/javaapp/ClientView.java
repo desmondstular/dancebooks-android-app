@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -29,7 +29,6 @@ public class ClientView extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_client_view);
-        lv_clientList = findViewById(R.id.lv_clientList);
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start**********************************************************************
         // Set click listener for Add Clients button
@@ -54,52 +53,72 @@ public class ClientView extends AppCompatActivity {
             startActivity(new Intent(ClientView.this, DanceClassView.class));
         });
         //Navigation Bar End ***********************************************************************
+        //----------------list view, and custom search initializers---------------------------------
+        lv_clientList = findViewById(R.id.lv_clientList);
         databaseDao = new DatabaseDao(ClientView.this);
         clientModelList = databaseDao.getAllClients();
         clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,
                 android.R.layout.simple_list_item_1, clientModelList);
         lv_clientList.setAdapter(clientArrayAdapter);
-        //-------------search button on click---------------------------------------------------
         searchClientBtn = findViewById(R.id.searchClientBtn);
         searchClientEmail = findViewById(R.id.searchClientEmail);
         searchClientFirstName = findViewById(R.id.searchClientFirstName);
         searchClientLastName = findViewById(R.id.searchClientLastName);
-        searchClientBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Toast.makeText((Context) ClientView.this, (CharSequence) databaseDao.getOneClientByPrimaryKey(
-//                                searchClientEmail.getText().toString()),
-//                        Toast.LENGTH_LONG).show();
-                try {
-                    // Create client data object from getting info from text boxes
-                    if (searchClientLastName.getText().toString().isEmpty() &&
-                            searchClientFirstName.getText().toString().isEmpty()){
-                        clientModelList.clear();
-                        clientModelList.add(databaseDao.getOneClientByPrimaryKey(
-                                searchClientEmail.getText().toString()));
-
-                        clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,
-                                android.R.layout.simple_list_item_1, clientModelList);
-                        lv_clientList.setAdapter(clientArrayAdapter);
-                    }
-//                    boolean i = databaseDao.addOneClient(clientModel);
-//                    if (!i) {
-//                        Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
-//                    } else {
-//                        Toast.makeText(AddClient.this, "Successfully added", Toast.LENGTH_SHORT).show();
-//                        clientFirstNameTextBox.getText().clear();
-//                        clientLastNameTextBox.getText().clear();
-//                        clientEmailTextBox.getText().clear();
-//                        clientPhoneNumberTextBox.getText().clear();
-//                    }
-                } catch (Exception e) {
-                    Toast.makeText(ClientView.this, "Not Found",
-                            Toast.LENGTH_SHORT).show();
+        //-------------search button on click---------------------------------------------------
+        searchClientBtn.setOnClickListener(view -> {
+            try {
+                clientModelList.clear();
+                if (searchClientLastName.getText().toString().isEmpty() &&
+                        searchClientFirstName.getText().toString().isEmpty() &&
+                        searchClientEmail.getText().toString().isEmpty())
+                {
+                    clientModelList = databaseDao.getAllClients();
                 }
-                searchClientEmail.getText().clear();
-                searchClientFirstName.getText().clear();
-                searchClientLastName.getText().clear();
+                else if (searchClientLastName.getText().toString().isEmpty() &&
+                        searchClientFirstName.getText().toString().isEmpty())
+                {
+                    clientModelList.add(databaseDao.getOneClientByPrimaryKey(
+                            searchClientEmail.getText().toString()));
+                }
+                else
+                {
+                    clientModelList = databaseDao.getAllClientByFirstNameAndOrLastName(
+                            searchClientFirstName.getText().toString(),
+                            searchClientLastName.getText().toString());
+                }
+                clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
+                        android.R.layout.simple_list_item_1, clientModelList);
+                lv_clientList.setAdapter(clientArrayAdapter);
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(ClientView.this, "Not Found",
+                        Toast.LENGTH_SHORT).show();
+            }
+            searchClientEmail.getText().clear();
+            searchClientFirstName.getText().clear();
+            searchClientLastName.getText().clear();
+            // hide keyboard on click
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        });
+        //------------------------------------------------------------------------------------------
+        //----------on click for show all owing-----------------------------------------------------
+        showAllOwing = findViewById(R.id.showAllOwing);
+        showAllOwing.setOnClickListener(view -> {
+            try
+            {
+                clientModelList.clear();
+                clientModelList = databaseDao.getAllClientWithBalanceGreaterThanZero();
+                clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
+                        android.R.layout.simple_list_item_1, clientModelList);
+                lv_clientList.setAdapter(clientArrayAdapter);
 
+            }
+            catch (Exception e)
+            {
+                Toast.makeText(ClientView.this, "None found",
+                        Toast.LENGTH_SHORT).show();
             }
         });
         //------------------------------------------------------------------------------------------
