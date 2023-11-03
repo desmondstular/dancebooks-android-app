@@ -372,6 +372,9 @@ public class DatabaseDao extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
         ClientModel clientModel = this.getOneClientByPrimaryKey(signedUpModel.getEmail());
+        System.out.println(signedUpModel.getEmail());
+//        //ClientModel clientModel = new ClientModel("jsmith@gmail.com", "John", "Smith",
+//                "123456", 0.0F);
         // Class is already full, cannot add anymore Clients
         if (classModel.getEnrolled() + 1 > classModel.getCapacity()) {
             return false;
@@ -395,7 +398,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
             cv2.put("ENROLLED", classModel.getEnrolled() + 1);
             int updated = db.update("CLASS", cv2, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
 
-            if (signedUpModel.getIsPaid() == 1) {
+            if (signedUpModel.getIsPaid() == 0) {
                 updateClientBalance(clientModel, classModel.getCost());
             }
             return true;

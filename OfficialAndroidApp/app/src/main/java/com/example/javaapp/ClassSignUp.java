@@ -11,19 +11,29 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.javaapp.database.ClientModel;
-import com.example.javaapp.database.DanceClassModel;
-import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database.InvoiceModel;
+import com.example.javaapp.database_v2.ClassModel;
+import com.example.javaapp.database_v2.ClientModel;
+import com.example.javaapp.database_v2.DatabaseDao;
+import com.example.javaapp.database_v2.SignedUpModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClassSignUp extends AppCompatActivity {
     Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, signUpBtn;
     Spinner clientSpinner, classSpinner;
-    DanceClassModel danceClassModel;
+    ClassModel classModel, classModelSelected;
     ClientModel clientModel;
-    InvoiceModel invoiceModel;
+    SignedUpModel signedUpModel;
+    DatabaseDao databaseDao;
+    List<com.example.javaapp.database_v2.ClientModel> clientModelList;
+    ArrayAdapter<String> clientAdapter;
+    ArrayAdapter<ClassModel> classAdapter;
+    List<String> clientsForSpinner, classesForSpinner;
+    String clientSelected, classSelected, className;
+    List<ClassModel> classModelList;
+    int classYear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,39 +67,81 @@ public class ClassSignUp extends AppCompatActivity {
         //==========================================================================================
         //Client Spinner setup----------------------------------------------------------------------
         clientSpinner = findViewById(R.id.clientSpinner);
-        DatabaseHelper databaseHelper = new DatabaseHelper(ClassSignUp.this);
-        List<ClientModel> clients = databaseHelper.getAllClients();
-        ArrayAdapter<ClientModel> clientAdapter = new ArrayAdapter<>(ClassSignUp.this,
-                android.R.layout.simple_spinner_item, clients);
+//        DatabaseHelper databaseHelper = new DatabaseHelper(ClassSignUp.this);
+        databaseDao = new DatabaseDao(ClassSignUp.this);
+        clientModelList = databaseDao.getAllClients();
+        clientsForSpinner = getAllClientStrings(clientModelList);
+
+        clientAdapter = new ArrayAdapter<>(ClassSignUp.this,
+                android.R.layout.simple_spinner_item, clientsForSpinner);
 
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientSpinner.setAdapter(clientAdapter);
-        clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id){
-                clientModel = clients.get(position);
+                                       int position, long id) {
+                //clientModel = clients.get(position);
+                clientSelected = clientsForSpinner.get(position);
+                String[] inputString = clientSelected.split(",");
+                clientSelected = inputString[2].trim();
+                Toast.makeText(ClassSignUp.this, clientSelected,
+                        Toast.LENGTH_LONG).show();
+                //clientSelected = clientSelected.split()
+
+
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
         //Dance Class Spinner setup-------------------------------------------------------------
         classSpinner = findViewById(R.id.classSpinner);
-        List<DanceClassModel> dClass = databaseHelper.getAllDanceClasses();
-        ArrayAdapter<DanceClassModel> danceAdapter = new ArrayAdapter<>(ClassSignUp.this,
-                android.R.layout.simple_spinner_item, dClass);
-        danceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        classSpinner.setAdapter(danceAdapter);
-        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
+        signUpBtn = findViewById(R.id.signUpBtn);
+
+        classModelList = databaseDao.getAllClasses();
+        //classesForSpinner = getAllClassString(classModelList);
+        classAdapter = new ArrayAdapter<>(ClassSignUp.this,
+                android.R.layout.simple_spinner_item, classModelList);
+        classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        classSpinner.setAdapter(classAdapter);
+        classSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id){
-                danceClassModel = dClass.get(position);
+                                       int position, long id) {
+                //classModel = dClass.get(position);
+                classModelSelected = classModelList.get(position);
+                className = classModelSelected.getClassName();
+                classYear = classModelSelected.getYear();
+//                Toast.makeText(ClassSignUp.this, className + " " + classYear,
+//                        Toast.LENGTH_SHORT).show();
+//                Toast.makeText(ClassSignUp.this, classModelSelected.toString(),
+//                        Toast.LENGTH_SHORT).show();
+//                String[] selected = classSelected.split(",");
+//                className = selected[0];
+//                classYear = selected[1];
+//                String[] selected = classSelected.split(",");
+//                className = selected[0];
+//                classYear = selected[1].trim();
+//
+//
+//                Toast.makeText(ClassSignUp.this, "1" + classYear + "1", Toast.LENGTH_LONG).show();
+
+//                if (selected.length >= 2) {
+//                    className = selected[0].trim();
+//                    classYear = selected[1].trim();
+//                }
+
+
+//                Toast.makeText(ClassSignUp.this, selected.length,
+//                        Toast.LENGTH_LONG).show();
+
                 //ClientModel client = databaseHelper.getOneClientByName(first, last);
                 //ClientModel client  = clients.get(position);
                 //Toast.makeText(AddInvoices.this, selectedClass, Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
 
@@ -97,16 +149,29 @@ public class ClassSignUp extends AppCompatActivity {
         });
 
         //sign up based on spinner sections-----------------------------------------------------
-        signUpBtn = findViewById(R.id.signUpBtn);
+
+//        clientModel = databaseDao.getOneClientByPrimaryKey(clientSelected);
+//        classModel = databaseDao.getOneClassByPrimaryKey(className, classYear);
+
+
         signUpBtn.setOnClickListener(view -> {
+//            Toast.makeText(ClassSignUp.this, clientSelected + " " + className
+//                    + " " + classYear,Toast.LENGTH_SHORT).show();
+//            signedUpModel = new SignedUpModel(clientSelected, className,
+//                    classYear, 0);
+//            //Toast.makeText(ClassSignUp.this, signedUpModel.toString(),Toast.LENGTH_SHORT).show();
+//            boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
+//            Toast.makeText(ClassSignUp.this, Boolean.toString(isAdded),Toast.LENGTH_SHORT).show();
+
             try {
+                signedUpModel = new SignedUpModel(clientSelected, className,
+                        classYear, 0);
+                Toast.makeText(ClassSignUp.this, signedUpModel.toString(),Toast.LENGTH_SHORT).show();
 //                Toast.makeText(AddInvoices.this, danceClassModel.toString(),
 //                        Toast.LENGTH_SHORT).show();
-                invoiceModel = new InvoiceModel(clientModel.getClientID(), danceClassModel.getClassName(),
-                        danceClassModel.getClassYear());
-                Boolean isAdded = databaseHelper.addOneInvoice(invoiceModel);
+                Boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
                 if (isAdded) {
-                    Toast.makeText(ClassSignUp.this, invoiceModel.toString(),
+                    Toast.makeText(ClassSignUp.this, signedUpModel.toString(),
                             Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(ClassSignUp.this, "Unsuccessful",
@@ -117,5 +182,21 @@ public class ClassSignUp extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private List<String> getAllClientStrings(
+            List<com.example.javaapp.database_v2.ClientModel> clientModelList){
+        List<String> clientsForSpinner = new ArrayList<>();
+        for(int i = 0; i < clientModelList.size(); i++){
+            clientsForSpinner.add(clientModelList.get(i).getFnameLnameEmail());
+        }
+        return clientsForSpinner;
+    }
+    private List<String> getAllClassString(
+            List<ClassModel> classModelList){
+        List<String> classesForSpinner = new ArrayList<>();
+        for(int i = 0; i < classModelList.size(); i++){
+            classesForSpinner.add(classModelList.get(i).nameYearAvailability());
+        }
+        return classesForSpinner;
     }
 }
