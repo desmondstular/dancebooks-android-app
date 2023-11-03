@@ -64,4 +64,8 @@ public class ClientModel {
     public String toString() {
         return firstName + " " + lastName + " " + email + " " +   " " + balance;
     }
+
+    public String getFnameLnameEmail(){
+        return firstName + ", " + lastName + ", " + email;
+    }
 }

@@ -47,4 +47,9 @@ public class SignedUpModel {
     public void setIsPaid(int paid) {
         isPaid = paid;
     }
+
+    @Override
+    public String toString() {
+        return email + " " + className + " " + year ;
+    }
 }

@@ -63,4 +63,9 @@ public class ClassModel {
         return  className + " " + year + " " + cost + " " + enrolled + "/" + capacity;
     }
 
+    public String nameYearAvailability(){
+        int availability = capacity - enrolled;
+        return className + ", " + year + ", " + availability;
+    }
+
 }
