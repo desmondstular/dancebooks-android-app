@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class DatabaseDao extends SQLiteOpenHelper {
 
@@ -51,9 +52,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.close();
         if (insert == -1) {
             return false;
-        } else {
-            return true;
         }
+        else {return true;}
     }
 
     // Deletes a single client from the database
@@ -66,9 +66,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         if (cursor.moveToNext()) {
             return true;
         }
-        else {
-            return false;
-        }
+        else {return false;}
     }
 
     // Searches a Client by its Primary Keys and returns it as a Client Model.
@@ -83,9 +81,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                     cursor.getString(2),
                     cursor.getString(3),
                     cursor.getFloat(4));
-        } else {
-            return null;
         }
+        else {return null;}
     }
 
     // Returns an array list of all Clients in the DB as ClientModels
@@ -114,9 +111,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         balance);
                 returnList.add(newClient);
             } while (cursor.moveToNext());
-            ;        } else {
-            // failure. do not add anything to the list.
         }
+        else {}
         cursor.close();
         db.close();
         return returnList;
@@ -129,13 +125,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
         String first, last;
 
 
-        if (firstName == "") {
+        if (Objects.equals(firstName, "")) {
             first = "";
         } else {
             first = " WHERE FIRSTNAME = '" + firstName + "'";
         }
 
-        if (lastName == "") {
+        if (Objects.equals(lastName, "")) {
             last = "";
         } else {
             last = " WHERE LASTNAME = '" + lastName + "'";
@@ -165,9 +161,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         balance);
                 returnList.add(newClient);
             } while (cursor.moveToNext());
-            ;        } else {
-            // failure. do not add anything to the list.
         }
+        else {}
         cursor.close();
         db.close();
         return returnList;
@@ -199,9 +194,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         balance);
                 returnList.add(newClient);
             } while (cursor.moveToNext());
-            ;        } else {
-            // failure. do not add anything to the list.
         }
+        else {}
         cursor.close();
         db.close();
         return returnList;
@@ -223,9 +217,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
         long insert = db.insert("CLASS", null, cv);
         if (insert == -1) {
             return false;
-        } else {
-            return true;
         }
+        else {return true;}
     }
 
     // Searches a Class by its Primary Keys and returns as a ClassModel object.
@@ -240,9 +233,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                     cursor.getFloat(2),
                     cursor.getInt(3),
                     cursor.getInt(4));
-        } else {
-            return null;
         }
+        else {return null;}
     }
     // show all classes that have enrollment < capacity
     public List<ClassModel> getAllAvailableClasses(){
@@ -267,9 +259,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         enrolled);
                 returnList.add(newClass);
             } while (cursor.moveToNext());
-        } else {
-            // failure. do not add anything to the list.
         }
+        else {}
         cursor.close();
         db.close();
         return returnList;
@@ -285,9 +276,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         if (cursor.moveToNext()) {
             return true;
         }
-        else {
-            return false;
-        }
+        else {return false;}
     }
 
     // Returns an array list of all Classes in the DB as ClassModels
@@ -316,9 +305,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         enrolled);
                 returnList.add(newClass);
             } while (cursor.moveToNext());
-            ;        } else {
-            // failure. do not add anything to the list.
-        }
+            }
+        else {}
         cursor.close();
         db.close();
         return returnList;
@@ -384,9 +372,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
             }
             return true;
         }
-        else {
-            return false;
-        }
+        else {return false;}
     }
 
     // Updates the client balance by a specific amount passed as a parameter.
@@ -402,9 +388,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
 
         if (updated == 1) {
             return true;
-        } else {
-            return false;
         }
+        else {return false;}
     }
 
     // Searches a Signed Up entity by Primary Keys and returns it is as Signed Up Model.
@@ -418,9 +403,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                     cursor.getString(1),
                     cursor.getInt(2),
                     cursor.getInt(3));
-        } else {
-            return null;
         }
+        else {return null;}
     }
 
     // Returns an array list of all Sign Ups in the DB as SignedUpModels
@@ -447,9 +431,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
                         isPaid);
                 returnList.add(newSignedUp);
             } while (cursor.moveToNext());
-            ;        } else {
-            // failure. do not add anything to the list.
-        }
+            }
+        else {}
         cursor.close();
         db.close();
         return returnList;
