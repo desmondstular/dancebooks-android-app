@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 //                            Integer.parseInt(An_Price.getText().toString()));
                     databaseDao = new DatabaseDao(MainActivity.this);
                     ClassModel classModel = new ClassModel(
-                            ClName.getText().toString(),
+                            ClName.getText().toString().toUpperCase(),
                             Integer.parseInt(ClYear.getText().toString()),
                             Integer.parseInt(An_Price.getText().toString()),
                             Integer.parseInt(classCapacity.getText().toString()),0);

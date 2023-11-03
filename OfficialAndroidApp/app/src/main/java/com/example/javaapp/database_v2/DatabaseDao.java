@@ -316,9 +316,9 @@ public class DatabaseDao extends SQLiteOpenHelper {
     // Gets classes by className and/or year. Enter empty string
     // for className or null for year if you wish to not use either one of
     // the filters.
-    public List<ClientModel> getAllClassesByClassNameAndOrYear(String className, Integer year) {
-        List<ClientModel> returnList = new ArrayList<>();
-        String cName, classYear;
+    public List<ClassModel> getAllClassesByClassNameAndOrYear(String className, Integer year) {
+        List<ClassModel> returnList = new ArrayList<>();
+        String cName, cYear;
 
         if (className.isEmpty()) {
             cName = "";
@@ -327,15 +327,15 @@ public class DatabaseDao extends SQLiteOpenHelper {
         }
 
         if (year == null) {
-            classYear = "";
+            cYear = "";
         } else {
-            classYear = " WHERE YEAR = " + year.toString();
+            cYear = " WHERE YEAR = " + year.toString();
         }
 
         // get client data from the database
         String queryString = "SELECT * FROM CLASS" + cName +
                 " INTERSECT " +
-                "SELECT * FROM CLIENT" + classYear;
+                "SELECT * FROM CLASS" + cYear;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
 
@@ -343,20 +343,20 @@ public class DatabaseDao extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             // Loops through cursor (query results) and adds to new client object
             do {
-                String email = cursor.getString(0);
-                String fName = cursor.getString(1);
-                String lName = cursor.getString(2);
-                String phoneNumber = cursor.getString(3);
-                float balance = cursor.getFloat(4);
-                ClientModel newClient = new ClientModel(
-                        email,
-                        fName,
-                        lName,
-                        phoneNumber,
-                        balance);
-                returnList.add(newClient);
+                String name = cursor.getString(0);
+                int classYear = cursor.getInt(1);
+                float cost = cursor.getFloat(2);
+                int capacity = cursor.getInt(3);
+                int enrolled = cursor.getInt(4);
+                ClassModel newClass = new ClassModel(
+                        name,
+                        classYear,
+                        cost,
+                        capacity,
+                        enrolled);
+                returnList.add(newClass);
             } while (cursor.moveToNext());
-            ;        } else {
+        } else {
             // failure. do not add anything to the list.
         }
         cursor.close();

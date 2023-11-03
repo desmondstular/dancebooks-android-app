@@ -81,7 +81,7 @@ public class DanceClassView extends AppCompatActivity {
             }
             else if (classYear.getText().toString().isEmpty()){
                 // add query for searching classTable by class name
-                //classModelList = databaseDao.
+                classModelList = databaseDao.getAllClassesByClassNameAndOrYear(className.getText().toString().toUpperCase(), null);
             }
             else if (className.getText().toString().isEmpty()){
                 try {
@@ -92,7 +92,7 @@ public class DanceClassView extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 // add query for searching classTable by class year
-                //classModelList = databaseDao.
+                classModelList = databaseDao.getAllClassesByClassNameAndOrYear("", Integer.parseInt(classYear.getText().toString()));
             }
             else {
                 int classYearInt = 0;
