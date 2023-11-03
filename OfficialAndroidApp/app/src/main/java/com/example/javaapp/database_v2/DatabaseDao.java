@@ -224,7 +224,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
     // Searches a Class by its Primary Keys and returns as a ClassModel object.
     public ClassModel getOneClassByPrimaryKey(String className, int year) {
         SQLiteDatabase db = this.getReadableDatabase();
-        String queryString = "SELECT * FROM CLASS WHERE CLASSNAME = " + className + " and YEAR = " + year;
+        String queryString = "SELECT * FROM CLASS WHERE CLASSNAME = '" + className + "' and YEAR = '" + year+"'";
         Cursor cursor = db.rawQuery(queryString, null);
 
         if (cursor.moveToFirst()) {

@@ -8,8 +8,8 @@
 
     <Button
         android:id="@+id/availableClassesBtn"
-        android:layout_width="193dp"
-        android:layout_height="53dp"
+        android:layout_width="196dp"
+        android:layout_height="57dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#8251ED"
         android:text="@string/ShowAvailableClasses"
@@ -32,8 +32,8 @@
 
     <ListView
         android:id="@+id/lv_danceClassList"
-        android:layout_width="395dp"
-        android:layout_height="392dp"
+        android:layout_width="388dp"
+        android:layout_height="387dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
