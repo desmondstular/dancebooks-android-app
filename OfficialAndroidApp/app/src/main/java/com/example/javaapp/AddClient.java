@@ -18,12 +18,13 @@ import java.math.BigInteger;
 public class AddClient extends AppCompatActivity {
     Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
     EditText clientFirstNameTextBox, clientLastNameTextBox, clientEmailTextBox, clientPhoneNumberTextBox;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_client);
         //------------------------------------------------------------------------------------------
-        // Initialize textbox objects by id
+        // Initialize textbook objects by id
         clientFirstNameTextBox = findViewById(R.id.et_first_name);
         clientLastNameTextBox = findViewById(R.id.et_last_name);
         clientEmailTextBox = findViewById(R.id.et_email);
@@ -56,48 +57,39 @@ public class AddClient extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
         // Set listener for Add client button that adds client to database
         clientAddButton = findViewById(R.id.clientAddButton);
-        clientAddButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    //DatabaseHelper databaseHelper = new DatabaseHelper(AddClient.this);
-                    DatabaseDao databaseDao = new DatabaseDao(AddClient.this);
-                    // Create client data object from getting info from text boxes
-//                    ClientModel clientModel = new ClientModel(0,
-//                            clientFirstNameTextBox.getText().toString(),
-//                            clientLastNameTextBox.getText().toString(),
-//                            clientEmailTextBox.getText().toString(),
-//                            Integer.parseInt(clientPhoneNumberTextBox.getText().toString()));
-                    ClientModel clientModel = new ClientModel(
-                            clientEmailTextBox.getText().toString(),
-                            clientFirstNameTextBox.getText().toString(),
-                            clientLastNameTextBox.getText().toString(),
-                            clientPhoneNumberTextBox.getText().toString(),
-                            0);
+        clientAddButton.setOnClickListener(view -> {
+            try {
+                DatabaseDao databaseDao = new DatabaseDao(AddClient.this);
+                ClientModel clientModel = new ClientModel(
+                        clientEmailTextBox.getText().toString(),
+                        clientFirstNameTextBox.getText().toString(),
+                        clientLastNameTextBox.getText().toString(),
+                        clientPhoneNumberTextBox.getText().toString(),
+                        0);
 
-                    boolean i = databaseDao.addOneClient(clientModel);
-                    if (!i) {
-                        Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(AddClient.this, "Successfully added", Toast.LENGTH_SHORT).show();
-                        clientFirstNameTextBox.getText().clear();
-                        clientLastNameTextBox.getText().clear();
-                        clientEmailTextBox.getText().clear();
-                        clientPhoneNumberTextBox.getText().clear();
-                    }
-                } catch (Exception e) {
-                    Toast.makeText(AddClient.this, "Error Creating Client",
-                            Toast.LENGTH_SHORT).show();
+                boolean i = databaseDao.addOneClient(clientModel);
+                if (!i) {
+                    Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(AddClient.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                    clientFirstNameTextBox.getText().clear();
+                    clientLastNameTextBox.getText().clear();
+                    clientEmailTextBox.getText().clear();
+                    clientPhoneNumberTextBox.getText().clear();
                 }
+            } catch (Exception e) {
+                Toast.makeText(AddClient.this, "Error Creating Client",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    public static class InvoiceView extends AppCompatActivity {
-
-        @Override
-        protected void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-        }
-    }
 }
+
+//    public static class InvoiceView extends AppCompatActivity {
+//
+//        @Override
+//        protected void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//        }
+//    }
+//}
