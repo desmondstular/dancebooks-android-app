@@ -233,8 +233,9 @@ public class DatabaseDao extends SQLiteOpenHelper {
                     cursor.getFloat(2),
                     cursor.getInt(3),
                     cursor.getInt(4));
+        } else {
+            return null;
         }
-        else {return null;}
     }
     // show all classes that have enrollment < capacity
     public List<ClassModel> getAllAvailableClasses(){
@@ -311,6 +312,58 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    // Gets classes by className and/or year. Enter empty string
+    // for className or null for year if you wish to not use either one of
+    // the filters.
+    public List<ClassModel> getAllClassesByClassNameAndOrYear(String className, Integer year) {
+        List<ClassModel> returnList = new ArrayList<>();
+        String cName, cYear;
+
+        if (className.isEmpty()) {
+            cName = "";
+        } else {
+            cName = " WHERE CLASSNAME = '" + className + "'";
+        }
+
+        if (year == null) {
+            cYear = "";
+        } else {
+            cYear = " WHERE YEAR = " + year.toString();
+        }
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLASS" + cName +
+                " INTERSECT " +
+                "SELECT * FROM CLASS" + cYear;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String name = cursor.getString(0);
+                int classYear = cursor.getInt(1);
+                float cost = cursor.getFloat(2);
+                int capacity = cursor.getInt(3);
+                int enrolled = cursor.getInt(4);
+                ClassModel newClass = new ClassModel(
+                        name,
+                        classYear,
+                        cost,
+                        capacity,
+                        enrolled);
+                returnList.add(newClass);
+            } while (cursor.moveToNext());
+        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
 
     // ########## SIGNED UP QUERIES ###########
 

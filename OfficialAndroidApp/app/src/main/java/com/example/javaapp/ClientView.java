@@ -79,13 +79,13 @@ public class ClientView extends AppCompatActivity {
                         searchClientFirstName.getText().toString().isEmpty())
                 {
                     clientModelList.add(databaseDao.getOneClientByPrimaryKey(
-                            searchClientEmail.getText().toString()));
+                            searchClientEmail.getText().toString().toLowerCase()));
                 }
                 else
                 {
                     clientModelList = databaseDao.getAllClientByFirstNameAndOrLastName(
-                            searchClientFirstName.getText().toString(),
-                            searchClientLastName.getText().toString());
+                            searchClientFirstName.getText().toString().toUpperCase(),
+                            searchClientLastName.getText().toString().toUpperCase());
                 }
                 clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
                         android.R.layout.simple_list_item_1, clientModelList);
