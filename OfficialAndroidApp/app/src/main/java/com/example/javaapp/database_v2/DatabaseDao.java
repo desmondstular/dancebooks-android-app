@@ -122,6 +122,91 @@ public class DatabaseDao extends SQLiteOpenHelper {
         return returnList;
     }
 
+    // Gets client by first name and/or last name. Enter empty string
+    // for parameters not searching for.
+    public List<ClientModel> getAllClientByFirstNameAndOrLastName(String firstName, String lastName) {
+        List<ClientModel> returnList = new ArrayList<>();
+        String first, last;
+
+
+        if (firstName == "") {
+            first = "";
+        } else {
+            first = " WHERE FIRSTNAME = '" + firstName + "'";
+        }
+
+        if (lastName == "") {
+            last = "";
+        } else {
+            last = " WHERE LASTNAME = '" + lastName + "'";
+        }
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLIENT" + first +
+                " INTERSECT " +
+                "SELECT * FROM CLIENT" + last;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String fName = cursor.getString(1);
+                String lName = cursor.getString(2);
+                String phoneNumber = cursor.getString(3);
+                float balance = cursor.getFloat(4);
+                ClientModel newClient = new ClientModel(
+                        email,
+                        fName,
+                        lName,
+                        phoneNumber,
+                        balance);
+                returnList.add(newClient);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    // Returns a list of Clients with a balance greater than zero as Client Models
+    public List<ClientModel> getAllClientWithBalanceGreaterThanZero() {
+        List<ClientModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM CLIENT WHERE BALANCE > 0";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String firstName = cursor.getString(1);
+                String lastName = cursor.getString(2);
+                String phoneNumber = cursor.getString(3);
+                float balance = cursor.getFloat(4);
+                ClientModel newClient = new ClientModel(
+                        email,
+                        firstName,
+                        lastName,
+                        phoneNumber,
+                        balance);
+                returnList.add(newClient);
+            } while (cursor.moveToNext());
+            ;        } else {
+            // failure. do not add anything to the list.
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
     // ########## CLASS QUERIES ###########
 
     // Adds a single dance class to the database
@@ -239,13 +324,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
         return returnList;
     }
 
-    // ########## CLASS QUERIES ###########
+    // ########## SIGNED UP QUERIES ###########
 
-    // Adds a single dance class to the database
+    // Adds a single Sign Up to the database
     public boolean addOneSignedUp(SignedUpModel signedUpModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
-
+        ClientModel clientModel = this.getOneClientByPrimaryKey(signedUpModel.getEmail());
         // Class is already full, cannot add anymore Clients
         if (classModel.getEnrolled() + 1 > classModel.getCapacity()) {
             return false;
@@ -268,6 +353,10 @@ public class DatabaseDao extends SQLiteOpenHelper {
             cv2.put("CAPACITY", classModel.getCapacity());
             cv2.put("ENROLLED", classModel.getEnrolled() + 1);
             int updated = db.update("CLASS", cv2, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
+
+            if (signedUpModel.getIsPaid() == 1) {
+                updateClientBalance(clientModel, classModel.getCost());
+            }
             return true;
         }
     }
@@ -276,6 +365,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
     public boolean deleteSignedUp(SignedUpModel signedUpModel) {
         SQLiteDatabase db = this.getWritableDatabase();
         ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
+        ClientModel clientModel = this.getOneClientByPrimaryKey(signedUpModel.getEmail());
         String queryString = "DELETE FROM SIGNEDUP WHERE EMAIL = " + signedUpModel.getEmail() + " AND CLASSNAME = " + signedUpModel.getClassName() + " AND YEAR = " + signedUpModel.getYear();
 
         Cursor cursor = db.rawQuery(queryString, null);
@@ -288,9 +378,31 @@ public class DatabaseDao extends SQLiteOpenHelper {
             cv.put("CAPACITY", classModel.getCapacity());
             cv.put("ENROLLED", classModel.getEnrolled() - 1);
             int updated = db.update("CLASS", cv, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
+
+            if (signedUpModel.getIsPaid() == 1) {
+                updateClientBalance(clientModel, -1 * classModel.getCost());
+            }
             return true;
         }
         else {
+            return false;
+        }
+    }
+
+    // Updates the client balance by a specific amount passed as a parameter.
+    public boolean updateClientBalance(ClientModel clientModel, float balance) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("EMAIL", clientModel.getEmail());
+        cv.put("FIRSTNAME", clientModel.getFirstName());
+        cv.put("LASTNAME", clientModel.getLastName());
+        cv.put("PHONENUMBER", clientModel.getPhoneNumber());
+        cv.put("BALANCE", clientModel.getBalance() + balance);
+        int updated = db.update("CLIENT", cv, "EMAIL=?", new String[]{clientModel.getEmail()});
+
+        if (updated == 1) {
+            return true;
+        } else {
             return false;
         }
     }
