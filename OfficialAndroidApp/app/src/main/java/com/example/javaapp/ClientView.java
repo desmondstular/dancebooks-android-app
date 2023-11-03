@@ -60,6 +60,7 @@ public class ClientView extends AppCompatActivity {
         clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,
                 android.R.layout.simple_list_item_1, clientModelList);
         lv_clientList.setAdapter(clientArrayAdapter);
+        //---------------init the fields for search----------------------------------
         searchClientBtn = findViewById(R.id.searchClientBtn);
         searchClientEmail = findViewById(R.id.searchClientEmail);
         searchClientFirstName = findViewById(R.id.searchClientFirstName);
@@ -89,10 +90,14 @@ public class ClientView extends AppCompatActivity {
                 clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
                         android.R.layout.simple_list_item_1, clientModelList);
                 lv_clientList.setAdapter(clientArrayAdapter);
+                if (clientModelList.isEmpty()){
+                    Toast.makeText(ClientView.this, "No Clients found",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
             catch (Exception e)
             {
-                Toast.makeText(ClientView.this, "Not Found",
+                Toast.makeText(ClientView.this, "Invalid Search",
                         Toast.LENGTH_SHORT).show();
             }
             searchClientEmail.getText().clear();
