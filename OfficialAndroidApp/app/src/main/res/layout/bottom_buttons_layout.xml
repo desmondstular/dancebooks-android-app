@@ -10,25 +10,28 @@
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:text="@string/AddClients"
         android:textColor="#FFFFFF"
+        android:shadowColor="#826d8c"
+
         android:textSize="8sp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:layout_gravity="bottom" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+<!--    <View-->
+<!--    views are straight bars for separation when buttons are square-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#000000" />-->
 
     <Button
         android:id="@+id/viewClientsBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:text="@string/ViewClients"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
@@ -36,51 +39,51 @@
         android:paddingEnd="16dp"
         android:layout_gravity="bottom" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+<!--    <View-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#000000" />-->
 
     <Button
         android:id="@+id/addInvoiceBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="@string/AddSignUp"
         android:textColor="#FFFFFF"
         android:textSize="8sp" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+<!--    <View-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#000000" />-->
 
     <Button
         android:id="@+id/viewInvoiceBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="@string/ViewSignUp"
         android:textColor="#FFFFFF"
         android:textSize="8sp" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+<!--    <View-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#000000" />-->
 
     <Button
         android:id="@+id/addClassBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:text="@string/AddClass"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
@@ -88,17 +91,17 @@
         android:paddingEnd="16dp"
         android:layout_gravity="bottom" />
 
-    <View
-        android:layout_width="2dp"
-        android:layout_height="match_parent"
-        android:background="#000000" />
+<!--    <View-->
+<!--        android:layout_width="2dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:background="#000000" />-->
 
     <Button
         android:id="@+id/viewClassBtn"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_weight="1"
-        android:background="#6200EA"
+        android:backgroundTint="#826d8c"
         android:text="@string/ViewClass"
         android:textColor="#FFFFFF"
         android:textSize="8sp"
