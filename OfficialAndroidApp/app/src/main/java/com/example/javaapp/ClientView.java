@@ -38,7 +38,7 @@ public class ClientView extends AppCompatActivity {
         });
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClientView.this, MainActivity.class));
+            startActivity(new Intent(ClientView.this, AddClass.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {

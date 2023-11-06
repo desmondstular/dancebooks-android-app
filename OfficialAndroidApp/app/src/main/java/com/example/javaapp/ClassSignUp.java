@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.javaapp.database.InvoiceModel;
 import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.ClientModel;
 import com.example.javaapp.database_v2.DatabaseDao;
@@ -44,7 +43,7 @@ public class ClassSignUp extends AppCompatActivity {
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, MainActivity.class));
+            startActivity(new Intent(ClassSignUp.this, AddClass.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {

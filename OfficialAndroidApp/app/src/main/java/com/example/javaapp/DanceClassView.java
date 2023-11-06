@@ -12,13 +12,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.javaapp.database.DanceClassModel;
-import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
 
 import java.util.List;
-import java.util.Objects;
 
 public class DanceClassView extends AppCompatActivity {
     //references to buttons and other controls on the layout
@@ -50,7 +47,7 @@ public class DanceClassView extends AppCompatActivity {
         //Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener( view -> {
-            startActivity(new Intent(DanceClassView.this, MainActivity.class));
+            startActivity(new Intent(DanceClassView.this, AddClass.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {

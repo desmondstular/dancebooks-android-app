@@ -4,16 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database_v2.ClientModel;
 import com.example.javaapp.database_v2.DatabaseDao;
-
-import java.math.BigInteger;
 
 public class AddClient extends AppCompatActivity {
     Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
@@ -39,7 +35,7 @@ public class AddClient extends AppCompatActivity {
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(AddClient.this, MainActivity.class));
+            startActivity(new Intent(AddClient.this, AddClass.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
