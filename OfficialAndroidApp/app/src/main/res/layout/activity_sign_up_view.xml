@@ -6,6 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".SignUpView" >
 
+    <EditText
+        android:id="@+id/search_client_email_sign_up"
+        android:layout_width="400dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:hint="@string/EmailAddress"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/search_class_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.941" />
+
+    <EditText
+        android:id="@+id/search_class_year"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="112dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/ClassYear"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/lv_Invoice_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.184" />
+
     <include
         android:id="@+id/bottomButtonsLayout"
         layout="@layout/bottom_buttons_layout"
@@ -17,15 +49,57 @@
 
     <ListView
         android:id="@+id/lv_Invoice_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="372dp"
+        android:layout_height="386dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomButtonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <EditText
+        android:id="@+id/search_class_name"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:ems="10"
+        android:hint="@string/ClassName"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/search_class_year"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.555" />
+
+    <Switch
+        android:id="@+id/is_paid_switch"
+        android:layout_width="116dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
+        android:text="@string/Unpaid"
+        app:layout_constraintBottom_toTopOf="@+id/lv_Invoice_list"
+        app:layout_constraintEnd_toStartOf="@+id/search_sign_ups"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_class_year"
+        app:layout_constraintVertical_bias="0.508" />
+
+    <Button
+        android:id="@+id/search_sign_ups"
+        android:layout_width="123dp"
+        android:layout_height="54dp"
+        android:text="@string/Search"
+        app:layout_constraintBottom_toTopOf="@+id/lv_Invoice_list"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.656"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_class_year" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
