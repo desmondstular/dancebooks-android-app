@@ -82,4 +82,13 @@
     <string name="AddSignUp">Sign Up</string>
     <string name="ViewSignUp">SignUps</string>
     <string name="ClassCapacity">Class Capacity</string>
+    <string name="dance_class_app">Dance Class App</string>
+    <string name="view_invoices">View Invoices</string>
+    <string name="create_invoice">Create Invoice</string>
+    <string name="sign_up_a_client">Sign Up a Client</string>
+    <string name="view_sign_ups">View Sign Ups</string>
+    <string name="view_classes">View Classes</string>
+    <string name="add_a_class">Add a Class</string>
+    <string name="view_client">View Client</string>
+    <string name="add_client">Add Client</string>
 </resources>

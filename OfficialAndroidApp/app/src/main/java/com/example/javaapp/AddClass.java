@@ -9,12 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.javaapp.database.DanceClassModel;
-import com.example.javaapp.database.DatabaseHelper;
 import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
 
-public class MainActivity extends AppCompatActivity {
+public class AddClass extends AppCompatActivity {
     //references to buttons and other controls on the layout
     Button addClassBtn, addClientsBtn, viewClientsBtn, viewClassBtn, addInvoiceBtn, viewInvoiceBtn;
     EditText ClName, ClYear, An_Price, classCapacity;
@@ -28,24 +26,24 @@ public class MainActivity extends AppCompatActivity {
         // Set click listener for Add Clients button, and all other screens
         addClientsBtn = findViewById(R.id.addClientsBtn);
         addClientsBtn.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, AddClient.class));
+            startActivity(new Intent(AddClass.this, AddClient.class));
             //finish(); // Close this activity if you don't want to keep it in the back stack
         });
         viewClientsBtn = findViewById(R.id.viewClientsBtn);
         viewClientsBtn.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, ClientView.class));
+            startActivity(new Intent(AddClass.this, ClientView.class));
         });
         viewClassBtn = findViewById(R.id.viewClassBtn);
         viewClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, DanceClassView.class));
+            startActivity(new Intent(AddClass.this, DanceClassView.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, ClassSignUp.class));
+            startActivity(new Intent(AddClass.this, ClassSignUp.class));
         });
         viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
         viewInvoiceBtn.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, SignUpView.class));
+            startActivity(new Intent(AddClass.this, SignUpView.class));
         });
         //Navigation Bar End ***********************************************************************
         //------------------------------------------------------------------------------------------
@@ -71,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //                            ClName.getText().toString(),
 //                            Integer.parseInt(ClYear.getText().toString()),
 //                            Integer.parseInt(An_Price.getText().toString()));
-                    databaseDao = new DatabaseDao(MainActivity.this);
+                    databaseDao = new DatabaseDao(AddClass.this);
                     ClassModel classModel = new ClassModel(
                             ClName.getText().toString().toUpperCase(),
                             Integer.parseInt(ClYear.getText().toString()),
@@ -81,16 +79,16 @@ public class MainActivity extends AppCompatActivity {
 
                     boolean i = databaseDao.addOneClass(classModel);
                     if (!i) {
-                        Toast.makeText(MainActivity.this, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddClass.this, "Failed", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(MainActivity.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddClass.this, "Successfully added", Toast.LENGTH_SHORT).show();
                         ClName.getText().clear();
                         ClYear.getText().clear();
                         An_Price.getText().clear();
                         classCapacity.getText().clear();
                     }
                 } catch (Exception e) {
-                    Toast.makeText(MainActivity.this, "Error Creating Dance Class",
+                    Toast.makeText(AddClass.this, "Error Creating Dance Class",
                             Toast.LENGTH_SHORT).show();
 
                 }

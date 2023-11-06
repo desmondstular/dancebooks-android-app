@@ -27,7 +27,7 @@ public class SignUpView extends AppCompatActivity {
         // Set click listener for Add Classes button
         addClassBtn = findViewById(R.id.addClassBtn);
         addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(SignUpView.this, MainActivity.class));
+            startActivity(new Intent(SignUpView.this, AddClass.class));
         });
         addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
         addInvoiceBtn.setOnClickListener(view -> {
