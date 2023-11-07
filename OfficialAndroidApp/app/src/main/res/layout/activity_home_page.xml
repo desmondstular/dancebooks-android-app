@@ -14,28 +14,29 @@
         />
 
     <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="387dp"
+        android:layout_height="595dp"
         android:layout_below="@id/top_view"
-        android:columnCount="2"
-        android:rowCount="5"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp"
         android:layout_marginTop="-100dp"
 
-        >
+        android:layout_marginRight="24dp"
+        android:columnCount="2"
+        android:rowCount="5">
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -43,6 +44,7 @@
                 android:id="@+id/addClientClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -64,18 +66,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="1"
             android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -83,6 +86,7 @@
                 android:id="@+id/viewClientClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -104,18 +108,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="2"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -123,6 +128,7 @@
                 android:id="@+id/addClassClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -144,18 +150,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="2"
             android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -163,6 +170,7 @@
                 android:id="@+id/viewClassesClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -184,18 +192,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="3"
             android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -203,6 +212,7 @@
                 android:id="@+id/viewSignUpsClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -224,18 +234,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="3"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -243,6 +254,7 @@
                 android:id="@+id/signUpClientClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -264,25 +276,27 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="4"
             android:layout_rowWeight="1"
             android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
             <LinearLayout
                 android:id="@+id/createInvoiceClick"
-                android:layout_width="match_parent"
+                android:layout_width="175dp"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView
@@ -304,18 +318,19 @@
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
+
         <androidx.cardview.widget.CardView
             android:layout_width="120dp"
             android:layout_height="120dp"
-            app:cardCornerRadius="15dp"
-            android:layout_columnWeight="1"
             android:layout_row="4"
             android:layout_rowWeight="1"
             android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="4dp"
-            android:layout_marginLeft="4dp"
             android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp"
 
             app:cardElevation="12dp">
 
@@ -323,6 +338,7 @@
                 android:id="@+id/viewInvoiceTent"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="#a7a6ba"
                 android:orientation="vertical">
 
                 <ImageView

@@ -56,7 +56,8 @@
         app:layout_constraintHorizontal_bias="0.354"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.168" />
+        app:layout_constraintVertical_bias="0.168"
+        style="@style/SpinnerTextStyle" />
 
     <Spinner
         android:id="@+id/classSpinner"
@@ -70,7 +71,8 @@
         app:layout_constraintHorizontal_bias="0.358"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
+        app:layout_constraintVertical_bias="0.612"
+        style="@style/SpinnerTextStyle" />
 
     <TextView
         android:id="@+id/textView"
