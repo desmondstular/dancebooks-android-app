@@ -523,4 +523,67 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+    public List<SignedUpModel> getFromTextFields(String emailAddress, String className,
+                                                 Integer classYear, Integer isPaid){
+        List<SignedUpModel> returnList = new ArrayList<>();
+        String classYearAsString, isPaidAsString;
+
+        //get client data from the database
+        if (emailAddress.isEmpty()) {
+            emailAddress = "";
+        } else {
+            emailAddress = " WHERE EMAIL = '" + emailAddress + "'";
+        }
+
+        if (className.isEmpty()) {
+            className = "";
+        } else {
+            className = " WHERE CLASSNAME = '" + className + "'";
+        }
+
+        if (classYear == 0) {
+            classYearAsString = "" ;
+        } else {
+            classYearAsString = " WHERE YEAR = " + classYear.toString();
+        }
+        if (isPaid == -1) {
+            isPaidAsString = "" ;
+        } else {
+            isPaidAsString = " WHERE ISPAID = " + isPaid.toString();
+        }
+
+        String queryString =
+                "SELECT * FROM SIGNEDUP" + emailAddress +
+                        " INTERSECT " +
+                "SELECT * FROM SIGNEDUP" + className +
+                        " INTERSECT " +
+                "SELECT * FROM SIGNEDUP" + classYearAsString +
+                        " INTERSECT " +
+                "SELECT * FROM SIGNEDUP" + isPaidAsString;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+        System.out.println(queryString);
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                className = cursor.getString(1);
+                int year = cursor.getInt(2);
+                int isPaidFromdb = cursor.getInt(3);
+                SignedUpModel newSignedUp = new SignedUpModel(
+                        email,
+                        className,
+                        year,
+                        isPaidFromdb);
+                returnList.add(newSignedUp);
+            } while (cursor.moveToNext());
+        }
+        else {}
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }
