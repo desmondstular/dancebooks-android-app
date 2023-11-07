@@ -2,13 +2,17 @@ package com.example.javaapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +32,9 @@ public class SignUpView extends AppCompatActivity {
     DatabaseDao databaseDao;
     ArrayAdapter<SignedUpModel> signedUpModelArrayAdapter;
     List<SignedUpModel> signedUpModelList;
+
+    RadioButton both, paid, unPaid;
+
 
 
     @Override
@@ -70,33 +77,48 @@ public class SignUpView extends AppCompatActivity {
         emailAddress = findViewById(R.id.search_client_email_sign_up);
         className = findViewById(R.id.search_class_name);
         classYear = findViewById(R.id.search_class_year);
+        both   = findViewById(R.id.bothRbtn);
+        paid   = findViewById(R.id.paidRbtn);
+        unPaid = findViewById(R.id.unPaidRbtn);
+        both.setChecked(true);
         //------------------------------------------------------------------------------------------
         //Changes to View Based on Search Criteria
         searchSignupsButton.setOnClickListener(view -> {
             signedUpModelList.clear();
-            if (emailAddress.getText().toString().isEmpty() &&
-                    className.getText().toString().isEmpty() &&
-                    classYear.getText().toString().isEmpty()){
-                signedUpModelList = databaseDao.getAllSignedUpsUnPaid();
-                Toast.makeText(SignUpView.this, "UnPaid", Toast.LENGTH_SHORT).show();
+            int classYearInt, isPaid;
+            if (both.isChecked()){
+                isPaid = -1;
+            } else if (paid.isChecked()) {
+                isPaid = 1;
             }
-
-
-
+            else
+                isPaid = 0;
+            if (classYear.getText().toString().isEmpty()){
+                classYearInt = 0;
+            }
+            else{
+                classYearInt = Integer.parseInt(classYear.getText().toString());
+            }
+            signedUpModelList = databaseDao.getFromTextFields(
+                    emailAddress.getText().toString(),
+                    className.getText().toString(),
+                    classYearInt,
+                    isPaid);
             signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
                     android.R.layout.simple_list_item_1, signedUpModelList);
             lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
+            emailAddress.getText().clear();
+            classYear.getText().clear();
+            className.getText().clear();
+            // hide keyboard on click
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+
             if (signedUpModelList.isEmpty()){
                 Toast.makeText(SignUpView.this, "No Signups found",
                         Toast.LENGTH_SHORT).show();
             }
+
         });
-
-
-
-
-
-
-
     }
 }
