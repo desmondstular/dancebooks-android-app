@@ -84,8 +84,8 @@ public class ClassSignUp extends AppCompatActivity {
                 clientSelected = clientsForSpinner.get(position);
                 String[] inputString = clientSelected.split(",");
                 clientSelected = inputString[2].trim();
-                Toast.makeText(ClassSignUp.this, clientSelected,
-                        Toast.LENGTH_LONG).show();
+//                Toast.makeText(ClassSignUp.this, clientSelected,
+//                        Toast.LENGTH_LONG).show();
                 //clientSelected = clientSelected.split()
 
 

@@ -6,17 +6,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
 import com.example.javaapp.database_v2.SignedUpModel;
 
 import java.util.List;
 
 public class SignUpView extends AppCompatActivity {
-    Button addClientsBtn, viewClientsBtn, addInvoiceBtn, addClassBtn, viewClassBtn;
-
+    Button addClientsBtn, viewClientsBtn, addInvoiceBtn, addClassBtn, viewClassBtn,
+    searchSignupsButton;
+    Switch isPaidSwitch;
     ListView lv_SignedUp_List;
+    EditText emailAddress, className, classYear;
+    DatabaseDao databaseDao;
+    ArrayAdapter<SignedUpModel> signedUpModelArrayAdapter;
+    List<SignedUpModel> signedUpModelList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,17 +58,45 @@ public class SignUpView extends AppCompatActivity {
             startActivity(new Intent(SignUpView.this, DanceClassView.class));
         });
         //Navigation Bar End ***********************************************************************
-
-//        DatabaseHelper databaseHelper = new DatabaseHelper(SignUpView.this);
-//        List<InvoiceModel> everyInvoice = databaseHelper.getAllInvoices();
-//        ArrayAdapter<InvoiceModel> invoiceArrayAdapter = new ArrayAdapter<InvoiceModel>(SignUpView.this,
-//                android.R.layout.simple_list_item_1, everyInvoice);
-//        lv_Invoice_List.setAdapter(invoiceArrayAdapter);
-        DatabaseDao databaseDao = new DatabaseDao(SignUpView.this);
-        List<SignedUpModel> signedUpModels = databaseDao.getAllSignedUps();
-        ArrayAdapter<SignedUpModel> signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
-                android.R.layout.simple_list_item_1, signedUpModels);
+        //DataBase View-----------------------------------------------------------------------------
+        databaseDao = new DatabaseDao(SignUpView.this);
+        signedUpModelList = databaseDao.getAllSignedUps();
+        signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
+                android.R.layout.simple_list_item_1, signedUpModelList);
         lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
+        //--------------------init the fields for search--------------------------------------------
+        searchSignupsButton = findViewById(R.id.search_sign_ups);
+        //isPaidSwitch = findViewById(R.id.is_paid_switch);
+        emailAddress = findViewById(R.id.search_client_email_sign_up);
+        className = findViewById(R.id.search_class_name);
+        classYear = findViewById(R.id.search_class_year);
+        //------------------------------------------------------------------------------------------
+        //Changes to View Based on Search Criteria
+        searchSignupsButton.setOnClickListener(view -> {
+            signedUpModelList.clear();
+            if (emailAddress.getText().toString().isEmpty() &&
+                    className.getText().toString().isEmpty() &&
+                    classYear.getText().toString().isEmpty()){
+                signedUpModelList = databaseDao.getAllSignedUpsUnPaid();
+                Toast.makeText(SignUpView.this, "UnPaid", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+            signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
+                    android.R.layout.simple_list_item_1, signedUpModelList);
+            lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
+            if (signedUpModelList.isEmpty()){
+                Toast.makeText(SignUpView.this, "No Signups found",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+
+
+
 
     }
 }

@@ -71,16 +71,17 @@
     </androidx.cardview.widget.CardView>
 
     <!-- Your ListView and other UI elements -->
+
     <ListView
         android:id="@+id/lv_clientList"
-        android:layout_width="400dp"
+        android:layout_width="0dp"
         android:layout_height="341dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottomButtonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/showAllOwing"
         app:layout_constraintVertical_bias="1.0" />

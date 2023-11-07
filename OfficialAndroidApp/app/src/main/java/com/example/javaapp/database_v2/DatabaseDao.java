@@ -493,4 +493,34 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+
+    public List<SignedUpModel> getAllSignedUpsUnPaid() {
+        List<SignedUpModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM SIGNEDUP WHERE ISPAID=0";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String email = cursor.getString(0);
+                String className = cursor.getString(1);
+                int year = cursor.getInt(2);
+                int isPaid = cursor.getInt(3);
+                SignedUpModel newSignedUp = new SignedUpModel(
+                        email,
+                        className,
+                        year,
+                        isPaid);
+                returnList.add(newSignedUp);
+            } while (cursor.moveToNext());
+        }
+        else {}
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }
