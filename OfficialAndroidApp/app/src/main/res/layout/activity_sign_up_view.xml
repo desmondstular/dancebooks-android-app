@@ -6,41 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SignUpView">
 
-    <EditText
-        android:id="@+id/search_client_email_sign_up"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/EmailAddress"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/search_class_name"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.941" />
-
-    <EditText
-        android:id="@+id/search_class_year"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="112dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="@string/ClassYear"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/lv_Invoice_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184" />
-
     <include
         android:id="@+id/bottomButtonsLayout"
         layout="@layout/bottom_buttons_layout"
@@ -52,74 +17,92 @@
 
     <ListView
         android:id="@+id/lv_Invoice_list"
-        android:layout_width="372dp"
-        android:layout_height="300dp"
+        android:layout_width="384dp"
+        android:layout_height="402dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomButtonsLayout"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.454"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
 
-    <EditText
-        android:id="@+id/search_class_name"
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="52dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:hint="@string/ClassName"
-        android:inputType="text"
-        app:layout_constraintBottom_toTopOf="@+id/search_class_year"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.555" />
-
-    <Button
-        android:id="@+id/search_sign_ups"
-        android:layout_width="0dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
-        android:text="@string/Search"
-        app:layout_constraintBottom_toTopOf="@+id/lv_Invoice_list"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_class_year"
-        app:layout_constraintVertical_bias="0.876" />
-
-    <RadioGroup
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/search_sign_ups"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_class_year">
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RadioButton
-            android:id="@+id/bothRbtn"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/showBoth" />
+            android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/paidRbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Paid" />
+            <EditText
+                android:id="@+id/search_client_email_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="16dp"
 
-        <RadioButton
-            android:id="@+id/unPaidRbtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Unpaid" />
-    </RadioGroup>
+                android:ems="10"
+                android:hint="@string/EmailAddress"
+                android:inputType="text" />
 
+            <EditText
+                android:id="@+id/search_class_year"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+
+                android:ems="10"
+                android:hint="@string/ClassYear"
+                android:inputType="text" />
+
+            <EditText
+                android:id="@+id/search_class_name"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:ems="10"
+                android:hint="@string/ClassName"
+                android:inputType="text" />
+
+            <RadioGroup
+                android:layout_width="400dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/bothRbtn"
+                    android:layout_width="136dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/showBoth" />
+
+                <RadioButton
+                    android:id="@+id/paidRbtn"
+                    android:layout_width="138dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Paid" />
+
+                <RadioButton
+                    android:id="@+id/unPaidRbtn"
+                    android:layout_width="101dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/Unpaid" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/search_sign_ups"
+                android:layout_width="338dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/Search" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>
