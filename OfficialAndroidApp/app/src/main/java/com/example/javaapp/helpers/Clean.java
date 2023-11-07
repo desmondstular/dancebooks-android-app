@@ -1,7 +1,7 @@
 import static java.lang.Character.isAlphabetic;
 import static java.lang.Character.isDigit;
 
-public class clean {
+public class Clean {
     /* String cleanName(String input)
     Accepts a String as input and cleans out all characters
     that are not alphabetic or a "-" character. Returns
