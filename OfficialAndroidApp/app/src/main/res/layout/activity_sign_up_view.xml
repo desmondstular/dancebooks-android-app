@@ -74,6 +74,7 @@
                 android:inputType="text" />
 
             <RadioGroup
+                android:id="@+id/signup_radio_group"
                 android:layout_width="400dp"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
