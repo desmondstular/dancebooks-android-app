@@ -75,15 +75,18 @@
             <View
                 android:layout_width="340dp"
                 android:layout_height="5dp"
-                android:background="#000000" />
+                android:background="#000000"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10dp"/>
 
             <Button
                 android:id="@+id/availableClassesBtn"
-                android:layout_width="335dp"
+                android:layout_width="200dp"
                 android:layout_height="57dp"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#8251ED"
-                android:text="@string/ShowAvailableClasses" />
+                android:text="@string/ShowAvailableClasses"
+                android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
 
