@@ -1,5 +1,8 @@
 package com.example.javaapp;
 
+import static com.example.javaapp.helpers.Clean.cleanIntInput;
+import static com.example.javaapp.helpers.Clean.cleanName;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -64,17 +67,12 @@ public class AddClass extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
-//                    DatabaseHelper databaseHelper = new DatabaseHelper(MainActivity.this);
-//                    DanceClassModel danceClassModel = new DanceClassModel(
-//                            ClName.getText().toString(),
-//                            Integer.parseInt(ClYear.getText().toString()),
-//                            Integer.parseInt(An_Price.getText().toString()));
                     databaseDao = new DatabaseDao(AddClass.this);
                     ClassModel classModel = new ClassModel(
-                            ClName.getText().toString().toUpperCase(),
-                            Integer.parseInt(ClYear.getText().toString()),
-                            Integer.parseInt(An_Price.getText().toString()),
-                            Integer.parseInt(classCapacity.getText().toString()),0);
+                            cleanName(ClName.getText().toString().toUpperCase()),
+                            Integer.parseInt(cleanIntInput(ClYear.getText().toString())),
+                            Integer.parseInt(cleanIntInput(An_Price.getText().toString())),
+                            Integer.parseInt(cleanIntInput(classCapacity.getText().toString())),0);
 
 
                     boolean i = databaseDao.addOneClass(classModel);

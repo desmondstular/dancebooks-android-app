@@ -53,11 +53,11 @@ public class Clean {
         return stringBuilder.toString();
     }
 
-    /* String clearYear(String input)
+    /* String clearIntInput(String input)
         Accepts a String as input and cleans out all characters
         except for numbers. Returns the cleaned String.
      */
-    public static String cleanYear(String input) {
+    public static String cleanIntInput(String input) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = input.toCharArray();
         for (char aChar : chars) {

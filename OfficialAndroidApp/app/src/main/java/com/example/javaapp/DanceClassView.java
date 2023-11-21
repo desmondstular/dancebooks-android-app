@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
+import com.example.javaapp.helpers.Clean;
 
 import java.util.List;
 
@@ -101,7 +102,7 @@ public class DanceClassView extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
                 classModelList.add(databaseDao.getOneClassByPrimaryKey(
-                        className.getText().toString(),classYearInt));
+                        className.getText().toString().toUpperCase(),classYearInt));
             }
             classModelArrayAdapter = new ArrayAdapter<>(DanceClassView.this,
                     android.R.layout.simple_list_item_1, classModelList);
@@ -110,8 +111,6 @@ public class DanceClassView extends AppCompatActivity {
                 Toast.makeText(DanceClassView.this, "No Classes found",
                         Toast.LENGTH_SHORT).show();
             }
-            classYear.getText().clear();
-            className.getText().clear();
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);

@@ -1,5 +1,9 @@
 package com.example.javaapp;
 
+import static com.example.javaapp.helpers.Clean.cleanEmail;
+import static com.example.javaapp.helpers.Clean.cleanName;
+import static com.example.javaapp.helpers.Clean.cleanPhone;
+
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -10,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.javaapp.database_v2.ClientModel;
 import com.example.javaapp.database_v2.DatabaseDao;
+import com.example.javaapp.helpers.Clean;
 
 public class AddClient extends AppCompatActivity {
     Button viewClientsBtn, addClassBtn, clientAddButton, addInvoiceBtn, viewInvoiceBtn, viewClassBtn;
@@ -57,10 +62,10 @@ public class AddClient extends AppCompatActivity {
             try {
                 DatabaseDao databaseDao = new DatabaseDao(AddClient.this);
                 ClientModel clientModel = new ClientModel(
-                        clientEmailTextBox.getText().toString().toLowerCase(),
-                        clientFirstNameTextBox.getText().toString().toUpperCase(),
-                        clientLastNameTextBox.getText().toString().toUpperCase(),
-                        clientPhoneNumberTextBox.getText().toString(),
+                        cleanEmail(clientEmailTextBox.getText().toString().toLowerCase()),
+                        cleanName(clientFirstNameTextBox.getText().toString().toUpperCase()),
+                        cleanName(clientLastNameTextBox.getText().toString().toUpperCase()),
+                        cleanPhone(clientPhoneNumberTextBox.getText().toString()),
                         0);
 
                 boolean i = databaseDao.addOneClient(clientModel);
@@ -80,12 +85,3 @@ public class AddClient extends AppCompatActivity {
         });
     }
 }
-
-//    public static class InvoiceView extends AppCompatActivity {
-//
-//        @Override
-//        protected void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//        }
-//    }
-//}
