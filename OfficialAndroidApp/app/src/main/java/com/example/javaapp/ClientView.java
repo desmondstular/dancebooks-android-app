@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.javaapp.database_v2.ClientModel;
 import com.example.javaapp.database_v2.DatabaseDao;
+import com.example.javaapp.helpers.Clean;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class ClientView extends AppCompatActivity {
                         searchClientFirstName.getText().toString().isEmpty())
                 {
                     clientModelList.add(databaseDao.getOneClientByPrimaryKey(
-                            searchClientEmail.getText().toString().toLowerCase()));
+                            Clean.cleanEmail(searchClientEmail.getText().toString().toUpperCase())));
                 }
                 else
                 {
@@ -100,9 +101,6 @@ public class ClientView extends AppCompatActivity {
                 Toast.makeText(ClientView.this, "Invalid Search",
                         Toast.LENGTH_SHORT).show();
             }
-            searchClientEmail.getText().clear();
-            searchClientFirstName.getText().clear();
-            searchClientLastName.getText().clear();
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);

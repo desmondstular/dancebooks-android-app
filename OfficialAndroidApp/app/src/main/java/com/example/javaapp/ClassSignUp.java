@@ -3,12 +3,14 @@ package com.example.javaapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.javaapp.database_v2.ClassModel;
@@ -80,15 +82,10 @@ public class ClassSignUp extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id) {
-                //clientModel = clients.get(position);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 clientSelected = clientsForSpinner.get(position);
                 String[] inputString = clientSelected.split(",");
                 clientSelected = inputString[2].trim();
-//                Toast.makeText(ClassSignUp.this, clientSelected,
-//                        Toast.LENGTH_LONG).show();
-                //clientSelected = clientSelected.split()
-
-
             }
 
             @Override
@@ -109,36 +106,10 @@ public class ClassSignUp extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id) {
-                //classModel = dClass.get(position);
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 classModelSelected = classModelList.get(position);
                 className = classModelSelected.getClassName();
                 classYear = classModelSelected.getYear();
-//                Toast.makeText(ClassSignUp.this, className + " " + classYear,
-//                        Toast.LENGTH_SHORT).show();
-//                Toast.makeText(ClassSignUp.this, classModelSelected.toString(),
-//                        Toast.LENGTH_SHORT).show();
-//                String[] selected = classSelected.split(",");
-//                className = selected[0];
-//                classYear = selected[1];
-//                String[] selected = classSelected.split(",");
-//                className = selected[0];
-//                classYear = selected[1].trim();
-//
-//
-//                Toast.makeText(ClassSignUp.this, "1" + classYear + "1", Toast.LENGTH_LONG).show();
-
-//                if (selected.length >= 2) {
-//                    className = selected[0].trim();
-//                    classYear = selected[1].trim();
-//                }
-
-
-//                Toast.makeText(ClassSignUp.this, selected.length,
-//                        Toast.LENGTH_LONG).show();
-
-                //ClientModel client = databaseHelper.getOneClientByName(first, last);
-                //ClientModel client  = clients.get(position);
-                //Toast.makeText(AddInvoices.this, selectedClass, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -148,30 +119,21 @@ public class ClassSignUp extends AppCompatActivity {
         });
 
         //sign up based on spinner sections-----------------------------------------------------
-
-//        clientModel = databaseDao.getOneClientByPrimaryKey(clientSelected);
-//        classModel = databaseDao.getOneClassByPrimaryKey(className, classYear);
-
-
         signUpBtn.setOnClickListener(view -> {
-//            Toast.makeText(ClassSignUp.this, clientSelected + " " + className
-//                    + " " + classYear,Toast.LENGTH_SHORT).show();
-//            signedUpModel = new SignedUpModel(clientSelected, className,
-//                    classYear, 0);
-//            //Toast.makeText(ClassSignUp.this, signedUpModel.toString(),Toast.LENGTH_SHORT).show();
-//            boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
-//            Toast.makeText(ClassSignUp.this, Boolean.toString(isAdded),Toast.LENGTH_SHORT).show();
-
             try {
                 signedUpModel = new SignedUpModel(clientSelected, className,
                         classYear, 0);
-                Toast.makeText(ClassSignUp.this, signedUpModel.toString(),Toast.LENGTH_SHORT).show();
-//                Toast.makeText(AddInvoices.this, danceClassModel.toString(),
-//                        Toast.LENGTH_SHORT).show();
                 Boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
                 if (isAdded) {
-                    Toast.makeText(ClassSignUp.this, signedUpModel.toString(),
-                            Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClassSignUp.this, "Successfully added",
+                            Toast.LENGTH_LONG).show();
+                    classModelList = databaseDao.getAllClasses();
+                    //classesForSpinner = getAllClassString(classModelList);
+                    classAdapter = new ArrayAdapter<>(ClassSignUp.this,
+                            android.R.layout.simple_spinner_item, classModelList);
+                    classAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    classSpinner.setAdapter(classAdapter);
+
                 } else {
                     Toast.makeText(ClassSignUp.this, "Unsuccessful",
                             Toast.LENGTH_SHORT).show();
@@ -185,7 +147,7 @@ public class ClassSignUp extends AppCompatActivity {
     private List<String> getAllClientStrings(
             List<com.example.javaapp.database_v2.ClientModel> clientModelList){
         List<String> clientsForSpinner = new ArrayList<>();
-        for(int i = 0; i < clientModelList.size(); i++){
+        for (int i = 0; i < clientModelList.size(); i++) {
             clientsForSpinner.add(clientModelList.get(i).getFnameLnameEmail());
         }
         return clientsForSpinner;

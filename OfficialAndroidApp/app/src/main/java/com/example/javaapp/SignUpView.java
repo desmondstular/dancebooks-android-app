@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.javaapp.database_v2.ClassModel;
 import com.example.javaapp.database_v2.DatabaseDao;
 import com.example.javaapp.database_v2.SignedUpModel;
+import com.example.javaapp.helpers.Clean;
 
 import java.util.List;
 
@@ -100,16 +101,13 @@ public class SignUpView extends AppCompatActivity {
                 classYearInt = Integer.parseInt(classYear.getText().toString());
             }
             signedUpModelList = databaseDao.getFromTextFields(
-                    emailAddress.getText().toString(),
-                    className.getText().toString(),
+                    Clean.cleanEmail(emailAddress.getText().toString()),
+                    className.getText().toString().toUpperCase(),
                     classYearInt,
                     isPaid);
             signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
                     android.R.layout.simple_list_item_1, signedUpModelList);
             lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
-            emailAddress.getText().clear();
-            classYear.getText().clear();
-            className.getText().clear();
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
