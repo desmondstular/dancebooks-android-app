@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+
+import com.example.javaapp.ClassSignUp;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +30,10 @@ public class DatabaseDao extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE CLASS(CLASSNAME TEXT NOT NULL, YEAR INTEGER NOT NULL, COST DECIMAL(10,2) NOT NULL, CAPACITY INTEGER NOT NULL, ENROLLED INTEGER NOT NULL, PRIMARY KEY(CLASSNAME, YEAR))");
 
         // CREATES A SIGNUP TABLE
-        db.execSQL("CREATE TABLE SIGNEDUP(EMAIL TEXT, CLASSNAME TEXT, YEAR INTEGER, ISPAID INTEGER, PRIMARY KEY(EMAIL, CLASSNAME, YEAR))");
+        db.execSQL("CREATE TABLE SIGNEDUP(EMAIL TEXT, CLASSNAME TEXT, YEAR INTEGER, ISPAID INTEGER, INVOICEID INTEGER, PRIMARY KEY(EMAIL, CLASSNAME, YEAR))");
+
+        // CREATES A INVOICE TABLE
+        db.execSQL("CREATE TABLE INVOICE(INVOICEID INTEGER PRIMARY KEY AUTOINCREMENT, EMAIL TEXT NOT NULL, TOTALCOST DECIMAL(10,2) NOT NULL, ISPAID INTEGER NOT NULL)");
     }
 
     @Override
@@ -372,9 +378,6 @@ public class DatabaseDao extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ClassModel classModel = this.getOneClassByPrimaryKey(signedUpModel.getClassName(), signedUpModel.getYear());
         ClientModel clientModel = this.getOneClientByPrimaryKey(signedUpModel.getEmail());
-        System.out.println(signedUpModel.getEmail());
-//        //ClientModel clientModel = new ClientModel("jsmith@gmail.com", "John", "Smith",
-//                "123456", 0.0F);
         // Class is already full, cannot add anymore Clients
         if (classModel.getEnrolled() + 1 > classModel.getCapacity()) {
             return false;
@@ -385,6 +388,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         cv.put("CLASSNAME", signedUpModel.getClassName());
         cv.put("YEAR", signedUpModel.getYear());
         cv.put("ISPAID", signedUpModel.getIsPaid());
+        cv.put("INVOICEID", signedUpModel.getInvoiceID());
 
         long insert = db.insert("SIGNEDUP", null, cv);
         if (insert == -1) {
@@ -398,9 +402,11 @@ public class DatabaseDao extends SQLiteOpenHelper {
             cv2.put("ENROLLED", classModel.getEnrolled() + 1);
             int updated = db.update("CLASS", cv2, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
 
+            /*
             if (signedUpModel.getIsPaid() == 0) {
                 updateClientBalance(clientModel, classModel.getCost());
             }
+             */
             return true;
         }
     }
@@ -458,7 +464,8 @@ public class DatabaseDao extends SQLiteOpenHelper {
             return new SignedUpModel(cursor.getString(0),
                     cursor.getString(1),
                     cursor.getInt(2),
-                    cursor.getInt(3));
+                    cursor.getInt(3),
+                    cursor.getInt(4));
         }
         else {return null;}
     }
@@ -480,11 +487,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
                 String className = cursor.getString(1);
                 int year = cursor.getInt(2);
                 int isPaid = cursor.getInt(3);
+                Integer invoiceID = cursor.getInt(4);
                 SignedUpModel newSignedUp = new SignedUpModel(
                         email,
                         className,
                         year,
-                        isPaid);
+                        isPaid,
+                        invoiceID);
                 returnList.add(newSignedUp);
             } while (cursor.moveToNext());
             }
@@ -510,11 +519,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
                 String className = cursor.getString(1);
                 int year = cursor.getInt(2);
                 int isPaid = cursor.getInt(3);
+                Integer invoiceID = cursor.getInt(4);
                 SignedUpModel newSignedUp = new SignedUpModel(
                         email,
                         className,
                         year,
-                        isPaid);
+                        isPaid,
+                        invoiceID);
                 returnList.add(newSignedUp);
             } while (cursor.moveToNext());
         }
@@ -562,7 +573,6 @@ public class DatabaseDao extends SQLiteOpenHelper {
                 "SELECT * FROM SIGNEDUP" + isPaidAsString;
 
         SQLiteDatabase db = this.getReadableDatabase();
-        System.out.println(queryString);
         Cursor cursor = db.rawQuery(queryString, null);
 
         // returns true if there are results to query
@@ -573,11 +583,13 @@ public class DatabaseDao extends SQLiteOpenHelper {
                 className = cursor.getString(1);
                 int year = cursor.getInt(2);
                 int isPaidFromdb = cursor.getInt(3);
+                Integer invoiceID = cursor.getInt(4);
                 SignedUpModel newSignedUp = new SignedUpModel(
                         email,
                         className,
                         year,
-                        isPaidFromdb);
+                        isPaidFromdb,
+                        invoiceID);
                 returnList.add(newSignedUp);
             } while (cursor.moveToNext());
         }
@@ -585,5 +597,83 @@ public class DatabaseDao extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    //################## INVOICE QUERIES ###################
+
+    // Adds one new Invoice to the database
+    public boolean addOneInvoice(InvoiceModel invoiceModel) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put("EMAIL", invoiceModel.getEmail());
+        cv.put("TOTALCOST", invoiceModel.getTotalCost());
+        cv.put("ISPAID", invoiceModel.getIsPaid());
+
+        long insert = db.insert("INVOICE", null, cv);
+
+        ArrayList<SignedUpModel> signedUpModels = getAllSignUpsForClientWithNullInvoiceID(invoiceModel.getEmail());
+
+        if (insert==-1) {
+            return false;
+        }
+
+        for (SignedUpModel signedUpModel : signedUpModels) {
+            updateSignedUpInvoiceID(signedUpModel, invoiceModel.getInvoiceID());
+        }
+
+        return true;
+    }
+
+    // Returns an ArrayList of all SignedUpModels for a specific client where the InvoiceID == NULL
+    public ArrayList<SignedUpModel> getAllSignUpsForClientWithNullInvoiceID(String email) {
+        ArrayList<SignedUpModel> returnList = new ArrayList<>();
+
+        // get client data from the database
+        String queryString = "SELECT * FROM SIGNEDUP WHERE INVOICEID=NULL and EMAIL=" + email;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // returns true if there are results to query
+        if (cursor.moveToFirst()) {
+            // Loops through cursor (query results) and adds to new client object
+            do {
+                String newEmail = cursor.getString(0);
+                String className = cursor.getString(1);
+                int year = cursor.getInt(2);
+                int isPaid = cursor.getInt(3);
+                Integer invoiceID = cursor.getInt(4);
+                SignedUpModel newSignedUp = new SignedUpModel(
+                        email,
+                        className,
+                        year,
+                        isPaid,
+                        invoiceID);
+                returnList.add(newSignedUp);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    // When a new invoice is created, this method updates all signups associated with that invoice
+    // with the id of the new invoice.
+    public boolean updateSignedUpInvoiceID(SignedUpModel signedUpModel, Integer invoiceID) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("EMAIL", signedUpModel.getEmail());
+        cv.put("CLASSNAME", signedUpModel.getClassName());
+        cv.put("YEAR", signedUpModel.getYear());
+        cv.put("ISPAID", signedUpModel.getIsPaid());
+        cv.put("INVOICEID", invoiceID);
+        int updated = db.update("INVOICE", cv, "EMAIL=? AND CLASSNAME=? AND YEAR=?", new String[]{signedUpModel.getEmail(), signedUpModel.getClassName(), Integer.toString(signedUpModel.getYear())});
+
+        if (updated == 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 }

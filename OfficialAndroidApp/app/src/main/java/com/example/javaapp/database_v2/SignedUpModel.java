@@ -5,13 +5,15 @@ public class SignedUpModel {
     private String className;
     private int year;
     private int isPaid;
+    private Integer invoiceID;
 
     // SIGNED UP MODEL CONSTRUCTOR
-    public SignedUpModel(String email, String className, int year, int isPaid) {
+    public SignedUpModel(String email, String className, int year, int isPaid, Integer invoiceID) {
         this.email = email;
         this.className = className;
         this.year = year;
         this.isPaid = isPaid;
+        this.invoiceID = invoiceID;
     }
 
     // SIGNED UP MODEL GETTERS
@@ -46,6 +48,14 @@ public class SignedUpModel {
 
     public void setIsPaid(int paid) {
         isPaid = paid;
+    }
+
+    public Integer getInvoiceID() {
+        return invoiceID;
+    }
+
+    public void setInvoiceID(Integer invoiceID) {
+        this.invoiceID = invoiceID;
     }
 
     @Override
