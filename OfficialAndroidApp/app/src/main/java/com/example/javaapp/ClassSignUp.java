@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClassSignUp extends AppCompatActivity {
-    Button addClientsBtn, viewClientsBtn, viewInvoiceBtn, addClassBtn, viewClassBtn, signUpBtn;
+    Button signUpBtn;
     Spinner clientSpinner, classSpinner;
     ClassModel classModel, classModelSelected;
     ClientModel clientModel;
@@ -35,6 +36,7 @@ public class ClassSignUp extends AppCompatActivity {
     String clientSelected, classSelected, className;
     List<ClassModel> classModelList;
     int classYear;
+    LinearLayout viewSignUpsClick, goHomeClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,26 +45,13 @@ public class ClassSignUp extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start**********************************************************************
         // Set click listener for Add Classes button
-        addClassBtn = findViewById(R.id.addClassBtn);
-        addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, AddClass.class));
-        });
-        viewClassBtn = findViewById(R.id.viewClassBtn);
-        viewClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, DanceClassView.class));
-        });
-        viewClientsBtn = findViewById(R.id.viewClientsBtn);
-        viewClientsBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, ClientView.class));
-        });
-        addClientsBtn = findViewById(R.id.addClientsBtn);
-        addClientsBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClassSignUp.this, AddClient.class));
-            //finish();
-        });
-        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
-        viewInvoiceBtn.setOnClickListener(view -> {
+        viewSignUpsClick = findViewById(R.id.viewSignUpsClick);
+        viewSignUpsClick.setOnClickListener(view -> {
             startActivity(new Intent(ClassSignUp.this, SignUpView.class));
+        });
+        goHomeClick = findViewById(R.id.goHomeClick);
+        goHomeClick.setOnClickListener(view -> {
+            startActivity(new Intent(ClassSignUp.this, HomePage.class));
         });
         //Navigation Bar END************************************************************************
         //==========================================================================================
@@ -72,10 +61,8 @@ public class ClassSignUp extends AppCompatActivity {
         databaseDao = new DatabaseDao(ClassSignUp.this);
         clientModelList = databaseDao.getAllClients();
         clientsForSpinner = getAllClientStrings(clientModelList);
-
         clientAdapter = new ArrayAdapter<>(ClassSignUp.this,
                 android.R.layout.simple_spinner_item, clientsForSpinner);
-
         clientAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         clientSpinner.setAdapter(clientAdapter);
         clientSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,7 +74,6 @@ public class ClassSignUp extends AppCompatActivity {
                 String[] inputString = clientSelected.split(",");
                 clientSelected = inputString[2].trim();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
@@ -95,7 +81,6 @@ public class ClassSignUp extends AppCompatActivity {
         //Dance Class Spinner setup-------------------------------------------------------------
         classSpinner = findViewById(R.id.classSpinner);
         signUpBtn = findViewById(R.id.signUpBtn);
-
         classModelList = databaseDao.getAllClasses();
         //classesForSpinner = getAllClassString(classModelList);
         classAdapter = new ArrayAdapter<>(ClassSignUp.this,
@@ -111,16 +96,15 @@ public class ClassSignUp extends AppCompatActivity {
                 className = classModelSelected.getClassName();
                 classYear = classModelSelected.getYear();
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
         //sign up based on spinner sections-----------------------------------------------------
         signUpBtn.setOnClickListener(view -> {
             try {
+                //NEED TO CHANGE IS PAID FLAG
                 signedUpModel = new SignedUpModel(clientSelected, className,
                         classYear, 0);
                 Boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
