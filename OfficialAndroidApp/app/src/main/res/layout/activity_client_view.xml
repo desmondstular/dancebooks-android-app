@@ -6,18 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ClientView">
 
-    <!-- Wrap the EditText fields and the Button inside a CardView -->
-
-    <include
-        android:id="@+id/bottomButtonsLayout"
-        layout="@layout/bottom_buttons_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="wrap_content"
@@ -74,31 +62,127 @@
 
     <ListView
         android:id="@+id/lv_clientList"
-        android:layout_width="0dp"
-        android:layout_height="341dp"
+        android:layout_width="400dp"
+        android:layout_height="299dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@id/bottomButtonsLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/showAllOwing"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.772" />
+
+    <!--="#CBC3E3"/> -->
 
     <Button
         android:id="@+id/showAllOwing"
         android:layout_width="189dp"
         android:layout_height="48dp"
         android:layout_marginTop="4dp"
+        android:backgroundTint="#8251ED"
         android:text="@string/SearchAllOwing"
-        app:layout_constraintBottom_toTopOf="@+id/lv_clientList"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
-        android:backgroundTint="#8251ED"
-        />
-    <!--="#CBC3E3"/> -->
+        app:layout_constraintVertical_bias="0.012" />
+
+    <GridLayout
+        android:layout_width="407dp"
+        android:layout_height="98dp"
+        android:layout_below="@+id/lv_clientList"
+        android:layout_centerVertical="true"
+
+        android:columnCount="2"
+        android:rowCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lv_clientList"
+        app:layout_constraintVertical_bias="0.961">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/goHomeClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/home_1_svgrepo_com">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Home"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/addClientClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/add_client">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Add Client"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </GridLayout>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

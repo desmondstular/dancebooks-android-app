@@ -6,31 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".DanceClassView">
 
-    <include
-        android:id="@+id/bottomButtonsLayout"
-        layout="@layout/bottom_buttons_layout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-         />
-
     <ListView
         android:id="@+id/lv_danceClassList"
-        android:layout_width="0dp"
-        android:layout_height="365dp"
+        android:layout_width="396dp"
+        android:layout_height="336dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottomButtonsLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.76" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -47,7 +33,8 @@
             android:layout_width="369dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="16dp"
+            android:background="#555555">
 
             <EditText
                 android:id="@+id/searchClassName"
@@ -75,7 +62,7 @@
             <View
                 android:layout_width="340dp"
                 android:layout_height="5dp"
-                android:background="#000000"
+                android:background="#d3d3d3"
                 android:layout_gravity="center_vertical"
                 android:layout_marginTop="10dp"/>
 
@@ -89,7 +76,101 @@
                 android:layout_gravity="center_horizontal"/>
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
+
+    <GridLayout
+        android:layout_width="407dp"
+        android:layout_height="98dp"
+        android:layout_below="@+id/lv_danceClassList"
+        android:layout_centerVertical="true"
+
+        android:columnCount="2"
+        android:rowCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lv_danceClassList"
+        app:layout_constraintVertical_bias="0.961">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/goHomeClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/home_1_svgrepo_com">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Home"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/addClassClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/add_classes">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Add Class"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

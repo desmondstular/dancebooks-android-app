@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -18,8 +19,8 @@ import com.example.javaapp.helpers.Clean;
 import java.util.List;
 
 public class ClientView extends AppCompatActivity {
-    Button addClientsBtn, addClassBtn, addInvoiceBtn,viewInvoiceBtn, viewClassBtn,
-            searchClientBtn, showAllOwing;
+    Button searchClientBtn, showAllOwing;
+    LinearLayout addClientClick, goHomeClick;
     EditText searchClientEmail, searchClientLastName, searchClientFirstName;
     List<ClientModel> clientModelList;
     ArrayAdapter<ClientModel> clientArrayAdapter;
@@ -33,25 +34,13 @@ public class ClientView extends AppCompatActivity {
         //------------------------------------------------------------------------------------------
         //Navigation Bar Start**********************************************************************
         // Set click listener for Add Clients button
-        addClientsBtn = findViewById(R.id.addClientsBtn);
-        addClientsBtn.setOnClickListener(view -> {
+        addClientClick = findViewById(R.id.addClientClick);
+        addClientClick.setOnClickListener(view -> {
             startActivity(new Intent(ClientView.this, AddClient.class));
         });
-        addClassBtn = findViewById(R.id.addClassBtn);
-        addClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClientView.this, AddClass.class));
-        });
-        addInvoiceBtn = findViewById(R.id.addInvoiceBtn);
-        addInvoiceBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClientView.this, ClassSignUp.class));
-        });
-        viewInvoiceBtn = findViewById(R.id.viewInvoiceBtn);
-        viewInvoiceBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClientView.this, SignUpView.class));
-        });
-        viewClassBtn = findViewById(R.id.viewClassBtn);
-        viewClassBtn.setOnClickListener(view -> {
-            startActivity(new Intent(ClientView.this, DanceClassView.class));
+        goHomeClick = findViewById(R.id.goHomeClick);
+        goHomeClick.setOnClickListener(view -> {
+            startActivity(new Intent(ClientView.this, HomePage.class));
         });
         //Navigation Bar End ***********************************************************************
         //----------------list view, and custom search initializers---------------------------------
