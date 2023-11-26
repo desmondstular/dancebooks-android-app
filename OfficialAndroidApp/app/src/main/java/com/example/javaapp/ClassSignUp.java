@@ -106,7 +106,7 @@ public class ClassSignUp extends AppCompatActivity {
             try {
                 //NEED TO CHANGE IS PAID FLAG
                 signedUpModel = new SignedUpModel(clientSelected, className,
-                        classYear, 0);
+                        classYear, 0, null);
                 Boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
                 if (isAdded) {
                     Toast.makeText(ClassSignUp.this, "Successfully added",
