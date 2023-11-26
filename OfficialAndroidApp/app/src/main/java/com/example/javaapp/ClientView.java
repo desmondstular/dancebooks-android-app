@@ -84,6 +84,9 @@ public class ClientView extends AppCompatActivity {
                     Toast.makeText(ClientView.this, "No Clients found",
                             Toast.LENGTH_SHORT).show();
                 }
+                searchClientLastName.getText().clear();
+                searchClientEmail.getText().clear();
+                searchClientFirstName.getText().clear();
             }
             catch (Exception e)
             {
@@ -105,7 +108,10 @@ public class ClientView extends AppCompatActivity {
                 clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
                         android.R.layout.simple_list_item_1, clientModelList);
                 lv_clientList.setAdapter(clientArrayAdapter);
-
+                //-----------------------------------------------------------
+                searchClientLastName.getText().clear();
+                searchClientEmail.getText().clear();
+                searchClientFirstName.getText().clear();
             }
             catch (Exception e)
             {
