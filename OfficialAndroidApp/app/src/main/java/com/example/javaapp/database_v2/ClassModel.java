@@ -60,7 +60,7 @@ public class ClassModel {
 
     @Override
     public String toString() {
-        return  className + " " + year + " " + cost + " " + enrolled + "/" + capacity;
+        return  className + " " + year + " Cost: " + cost + " Capacity: " + enrolled + "/" + capacity;
     }
 
     public String nameYearAvailability(){

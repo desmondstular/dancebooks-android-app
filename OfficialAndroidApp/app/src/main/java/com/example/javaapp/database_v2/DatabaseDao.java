@@ -430,7 +430,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
             int updated = db.update("CLASS", cv, "CLASSNAME=? AND YEAR=?", new String[]{classModel.getClassName(), Integer.toString(classModel.getYear())});
 
             if (signedUpModel.getIsPaid() == 1) {
-                updateClientBalance(clientModel, -1 * classModel.getCost());
+                updateClientBalanceBySpecificAmount(clientModel, -1 * classModel.getCost());
             }
             return true;
         }
@@ -438,7 +438,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
     }
 
     // Updates the client balance by a specific amount passed as a parameter.
-    public boolean updateClientBalance(ClientModel clientModel, float balance) {
+    public boolean updateClientBalanceBySpecificAmount(ClientModel clientModel, float balance) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("EMAIL", clientModel.getEmail());
@@ -603,6 +603,10 @@ public class DatabaseDao extends SQLiteOpenHelper {
 
     // Adds one new Invoice to the database
     public boolean addOneInvoice(InvoiceModel invoiceModel) {
+        // Check first that there are null signups available; exit and return false if none
+        if (hasNullSignUps(invoiceModel.getEmail()) == false) {
+            return false;
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
@@ -612,15 +616,25 @@ public class DatabaseDao extends SQLiteOpenHelper {
 
         long insert = db.insert("INVOICE", null, cv);
 
-        ArrayList<SignedUpModel> signedUpModels = getAllSignUpsForClientWithNullInvoiceID(invoiceModel.getEmail());
-
+        // If insert went wrong, return -1
         if (insert==-1) {
             return false;
         }
 
+        // Get database generated InvoiceID
+        Integer invoiceID = getNewestInvoiceId();
+
+        // Retrieve all SignUps associated with invoice and assign new invoice ID to invoice ID column in signups
+        ArrayList<SignedUpModel> signedUpModels = getAllSignUpsForClientWithNullInvoiceID(invoiceModel.getEmail());
         for (SignedUpModel signedUpModel : signedUpModels) {
-            updateSignedUpInvoiceID(signedUpModel, invoiceModel.getInvoiceID());
+            updateSignedUpInvoiceID(signedUpModel, invoiceID);
         }
+
+        // Method updates the Invoice's totalcost column
+        updateInvoiceTotalCost(invoiceModel, invoiceID);
+
+        // Method updates the Client's balance with creation of new invoice
+        updateClientBalance(invoiceModel.getEmail());
 
         return true;
     }
@@ -630,10 +644,9 @@ public class DatabaseDao extends SQLiteOpenHelper {
         ArrayList<SignedUpModel> returnList = new ArrayList<>();
 
         // get client data from the database
-        String queryString = "SELECT * FROM SIGNEDUP WHERE INVOICEID=NULL and EMAIL=" + email;
+        String queryString = "SELECT * FROM SIGNEDUP WHERE EMAIL='" + email +"' AND INVOICEID IS NULL";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(queryString, null);
-
         // returns true if there are results to query
         if (cursor.moveToFirst()) {
             // Loops through cursor (query results) and adds to new client object
@@ -667,12 +680,227 @@ public class DatabaseDao extends SQLiteOpenHelper {
         cv.put("YEAR", signedUpModel.getYear());
         cv.put("ISPAID", signedUpModel.getIsPaid());
         cv.put("INVOICEID", invoiceID);
-        int updated = db.update("INVOICE", cv, "EMAIL=? AND CLASSNAME=? AND YEAR=?", new String[]{signedUpModel.getEmail(), signedUpModel.getClassName(), Integer.toString(signedUpModel.getYear())});
-
+        int updated = db.update("SIGNEDUP", cv, "EMAIL=? AND CLASSNAME=? AND YEAR=?", new String[]{signedUpModel.getEmail(), signedUpModel.getClassName(), Integer.toString(signedUpModel.getYear())});
         if (updated == 1) {
             return true;
         }
         else {
+            return false;
+        }
+    }
+
+    // Returns Invoice ID of the newest invoice in the data base as an Integer
+    public int getNewestInvoiceId() {
+        int maxInvoiceID = -1;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT MAX(INVOICEID) FROM INVOICE";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        if (cursor.moveToFirst()) {
+            maxInvoiceID = cursor.getInt(0);
+        } else {
+            System.out.println("ERROR: Could not move cursor to first entry.");
+        }
+        cursor.close();
+        db.close();
+        return maxInvoiceID;
+    }
+
+    // Updates the total cost on an invoice
+    public Boolean updateInvoiceTotalCost(InvoiceModel invoiceModel, Integer invoiceID) {
+        float total = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT COST FROM CLASS, SIGNEDUP WHERE CLASS.CLASSNAME = SIGNEDUP.CLASSNAME AND CLASS.YEAR = SIGNEDUP.YEAR AND SIGNEDUP.INVOICEID=" + invoiceID;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // Moves through each query entry and sums cost
+        if (cursor.moveToFirst()) {
+            do {
+                total += cursor.getFloat(0);
+            } while (cursor.moveToNext());
+        } else {
+            System.out.println("ERROR: Could not move cursor to first entry.");
+        }
+        cursor.close();
+        db.close();
+
+        // No signups found associated
+        if (total == 0) {
+            System.out.println("STDERR: Could not find any signups associated with invoice.");
+            return false;
+        }
+
+        // Open Invoice Table and update totalcost with summed value
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("INVOICEID", invoiceID);
+        cv.put("EMAIL", invoiceModel.getEmail());
+        cv.put("TOTALCOST", total);
+        cv.put("ISPAID", invoiceModel.getIsPaid());
+        int updated = db.update("INVOICE", cv, "INVOICEID=?", new String[]{Integer.toString(invoiceID)});
+        if (updated == 1) {
+            System.out.println("Successfully updated totalcost for invoice in DB.");
+            return true;
+        }
+        else {
+            System.out.println("Unsuccessfully updated totalcost for invoice in DB.");
+            return false;
+        }
+    }
+
+    // Updates the client balance for a specific client
+    public Boolean updateClientBalance(String clientEmail) {
+        float total = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT TOTALCOST FROM INVOICE WHERE EMAIL = '" + clientEmail + "' AND ISPAID=0";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // Moves through each query entry and sums cost
+        if (cursor.moveToFirst()) {
+            do {
+                total += cursor.getFloat(0);
+            } while (cursor.moveToNext());
+        } else {
+            System.out.println("ERROR: Could not move cursor to first entry.");
+        }
+        cursor.close();
+        db.close();
+
+        //Get clients model
+        ClientModel clientModel = getOneClientByPrimaryKey(clientEmail);
+
+        // Open Client Table and update balance with summed value
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("EMAIL", clientModel.getEmail());
+        cv.put("FIRSTNAME", clientModel.getFirstName());
+        cv.put("LASTNAME", clientModel.getLastName());
+        cv.put("PHONENUMBER", clientModel.getPhoneNumber());
+        cv.put("BALANCE", total);
+        int updated = db.update("CLIENT", cv, "EMAIL=?", new String[]{clientEmail});
+
+        if (updated == 1) {
+            System.out.println("Successfully updated totalcost for invoice in DB.");
+            return true;
+        } else {
+            System.out.println("Unsuccessfully updated totalcost for invoice in DB.");
+            return false;
+        }
+    }
+
+    // Returns a list of all Invoices inside the database as InvoiceModels.
+    public ArrayList<InvoiceModel> getAllInvoices() {
+        ArrayList<InvoiceModel> invoiceModels = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM INVOICE";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // Cursor moves through each entry, creates invoice model and adds to array list
+        if (cursor.moveToFirst()) {
+            do {
+                Integer invoiceID = cursor.getInt(0);
+                String clientEmail = cursor.getString(1);
+                float totalCost = cursor.getFloat(2);
+                Integer isPaid = cursor.getInt(3);
+                InvoiceModel invoiceModel = new InvoiceModel(invoiceID, clientEmail, totalCost, isPaid);
+                invoiceModels.add(invoiceModel);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return invoiceModels;
+    }
+
+    // Checks if any null sign ups available. Returns true if yes, false if no
+    public Boolean hasNullSignUps(String clientEmail) {
+        Boolean result;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM SIGNEDUP WHERE EMAIL='" + clientEmail + "' AND INVOICEID IS NULL";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // If cursor moves to first, there are Null entries, otherwise no
+        if (cursor.moveToFirst()) {
+            result = true;
+        } else {
+            result = false;
+        }
+        cursor.close();
+        db.close();
+        return result;
+    }
+
+    // Gets all invoices for a specific client email
+    public ArrayList<InvoiceModel> getAllInvoicesByClientEmail(String clientEmail) {
+        ArrayList<InvoiceModel> invoiceModels = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM INVOICE WHERE EMAIL = '" + clientEmail + "'";
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // Cursor moves through each entry, creates invoice model and adds to array list
+        if (cursor.moveToFirst()) {
+            do {
+                Integer invoiceID = cursor.getInt(0);
+                String clientEmail2 = cursor.getString(1);
+                float totalCost = cursor.getFloat(2);
+                Integer isPaid = cursor.getInt(3);
+                InvoiceModel invoiceModel = new InvoiceModel(invoiceID, clientEmail2, totalCost, isPaid);
+                invoiceModels.add(invoiceModel);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return invoiceModels;
+    }
+
+    // Returns an InvoiceModel for a specific Invoice by its invoice id.
+    public InvoiceModel getInvoiceByInvoiceID(Integer invoiceID) {
+        InvoiceModel invoiceModel = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String queryString = "SELECT * FROM INVOICE WHERE INVOICEID = " + invoiceID;
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        // Cursor moves through each entry, creates invoice model and adds to array list
+        if (cursor.moveToFirst()) {
+            Integer invoiceID2 = cursor.getInt(0);
+            String clientEmail = cursor.getString(1);
+            float totalCost = cursor.getFloat(2);
+            Integer isPaid = cursor.getInt(3);
+            invoiceModel = new InvoiceModel(invoiceID2, clientEmail, totalCost, isPaid);
+        }
+
+        cursor.close();
+        db.close();
+        return invoiceModel;
+    }
+
+    // Updates the isPaid column for an invoice to 1 which equals paid.
+    public Boolean updateInvoiceToPaid(Integer invoiceID) {
+        // Get invoice model for invoice being updated
+        InvoiceModel invoiceModel = getInvoiceByInvoiceID(invoiceID);
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        // Invoice already paid, return false
+        if (invoiceModel.getIsPaid() == 1) {
+            return false;
+        }
+
+        // Enter update values and run update
+        cv.put("INVOICEID", invoiceModel.getInvoiceID());
+        cv.put("EMAIL", invoiceModel.getEmail());
+        cv.put("TOTALCOST", invoiceModel.getTotalCost());
+        cv.put("ISPAID", 1);
+        int updated = db.update("INVOICE", cv, "INVOICEID=?", new String[]{Integer.toString(invoiceID)});
+        if (updated == 1) {
+            updateClientBalance(invoiceModel.getEmail());
+            System.out.println("Successfully updated invoice as paid.");
+            return true;
+        }
+        else {
+            System.out.println("Unsuccessfully updated invoice as paid.");
             return false;
         }
     }

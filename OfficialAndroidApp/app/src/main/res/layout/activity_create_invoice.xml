@@ -50,7 +50,7 @@
         android:id="@+id/gridLayout2"
         android:layout_width="407dp"
         android:layout_height="98dp"
-        android:layout_below="@+id/lv_Invoice_list"
+        android:layout_below="@+id/generateInvoice"
 
         android:layout_centerVertical="true"
         android:columnCount="2"
@@ -58,7 +58,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lv_Invoice_list"
+        app:layout_constraintTop_toBottomOf="@+id/generateInvoice"
         app:layout_constraintVertical_bias="0.961">
 
         <androidx.cardview.widget.CardView

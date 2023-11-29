@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 public class HomePage extends AppCompatActivity {
     LinearLayout addClientClick, viewClientClick, addClassClick,
             viewClassClick, addSignUpClick, viewSignUpClick,
-            createInvoiceClick;
+            createInvoiceClick, viewInvoiceClick;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +22,7 @@ public class HomePage extends AppCompatActivity {
         addSignUpClick = findViewById(R.id.signUpClientClick);
         viewSignUpClick = findViewById(R.id.viewSignUpsClick);
         createInvoiceClick = findViewById(R.id.createInvoiceClick);
+        viewInvoiceClick = findViewById(R.id.viewInvoiceTent);
         //----------------navigation code-----------------------------------------------------------
         addClientClick.setOnClickListener(view -> {
             startActivity(new Intent(HomePage.this, AddClient.class));
@@ -43,6 +44,9 @@ public class HomePage extends AppCompatActivity {
         });
         createInvoiceClick.setOnClickListener(view -> {
             startActivity(new Intent(HomePage.this, CreateInvoice.class));
+        });
+        viewInvoiceClick.setOnClickListener(view -> {
+            startActivity(new Intent(HomePage.this, ViewInvoices.class));
         });
     }
 }

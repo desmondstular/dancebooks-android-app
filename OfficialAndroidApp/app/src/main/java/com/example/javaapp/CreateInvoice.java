@@ -40,9 +40,9 @@ public class CreateInvoice extends AppCompatActivity {
         setContentView(R.layout.activity_create_invoice);
         //----------------navigation code-----------------------------------------------------------
         viewInvoiceClick = findViewById(R.id.viewInvoiceClick);
-//        viewInvoiceClick.setOnClickListener(view -> {
-//            startActivity(new Intent(CreateInvoice.this, ViewInvoice.class));
-//        });
+        viewInvoiceClick.setOnClickListener(view -> {
+            startActivity(new Intent(CreateInvoice.this, ViewInvoices.class));
+        });
         goHomeClick = findViewById(R.id.goHomeClick);
         goHomeClick.setOnClickListener(view -> {
             startActivity(new Intent(CreateInvoice.this, HomePage.class));
@@ -61,7 +61,7 @@ public class CreateInvoice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id) {
-                ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
+                //((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 clientSelected = clientsForSpinner.get(position);
                 String[] inputString = clientSelected.split(",");
                 clientSelected = inputString[2].trim();
@@ -74,7 +74,7 @@ public class CreateInvoice extends AppCompatActivity {
         generateInvoice = findViewById(R.id.generateInvoice);
         generateInvoice.setOnClickListener(view -> {
             try {
-                Toast.makeText(CreateInvoice.this, clientSelected, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CreateInvoice.this, clientSelected, Toast.LENGTH_SHORT).show();
                 //clientSelected = string, format "name@email.com"
                 invoiceModel = new InvoiceModel((Integer) null, clientSelected, (float) 0.0, 0);
                 // update sign ups associated with this email: where invoiceID=Null
@@ -89,8 +89,7 @@ public class CreateInvoice extends AppCompatActivity {
             }
             catch (Exception e)
             {
-                Toast.makeText(CreateInvoice.this, "Error Creating Invoice",
-                    Toast.LENGTH_SHORT).show();
+                //Toast.makeText(CreateInvoice.this, "Error Creating Invoice", Toast.LENGTH_SHORT).show();
             }
 
         });

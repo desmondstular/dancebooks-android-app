@@ -60,6 +60,6 @@ public class SignedUpModel {
 
     @Override
     public String toString() {
-        return email + " " + className + " " + year ;
+        return email + " " + className + " " + year + " invID: " +invoiceID;
     }
 }
