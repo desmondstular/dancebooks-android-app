@@ -4,53 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateInvoice">
+    tools:context=".ViewInvoices">
 
-    <Button
-        android:id="@+id/generateInvoice"
-        android:layout_width="182dp"
-        android:layout_height="60dp"
-        android:text="@string/GenerateInvoice"
-        app:layout_constraintBottom_toBottomOf="@+id/gridLayout2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.348" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="177dp"
-        android:layout_height="38dp"
-        android:text="@string/SelectClient"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.645"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.099" />
-
-    <Spinner
-        android:id="@+id/clientSpinner"
-        style="@style/SpinnerTextStyle"
-        android:layout_width="330dp"
-        android:layout_height="60dp"
-        android:background="@drawable/spinner_background"
-        android:prompt="@string/select_client_hint"
-        android:spinnerMode="dropdown"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.159" />
 
     <GridLayout
         android:id="@+id/gridLayout2"
         android:layout_width="407dp"
         android:layout_height="98dp"
-        android:layout_below="@+id/generateInvoice"
+        android:layout_below="@+id/invoiceList"
 
         android:layout_centerVertical="true"
         android:columnCount="2"
@@ -58,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/generateInvoice"
+        app:layout_constraintTop_toBottomOf="@+id/invoiceList"
         app:layout_constraintVertical_bias="0.961">
 
         <androidx.cardview.widget.CardView
@@ -114,7 +75,7 @@
             app:cardCornerRadius="15dp">
 
             <LinearLayout
-                android:id="@+id/viewInvoiceClick"
+                android:id="@+id/createInvoiceClick"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#a7a6ba"
@@ -125,7 +86,7 @@
                     android:layout_height="60dp"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
-                    android:src="@drawable/view_bill">
+                    android:src="@drawable/add_bill">
                 </ImageView>
 
                 <TextView
@@ -133,11 +94,59 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="View Invoices"
+                    android:text="Generate Invoice"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
             </LinearLayout>
         </androidx.cardview.widget.CardView>
     </GridLayout>
+
+    <ListView
+        android:id="@+id/invoiceList"
+        android:layout_width="392dp"
+        android:layout_height="426dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429" />
+
+    <EditText
+        android:id="@+id/searchByClient"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
+        android:hint="Email Address"
+        android:textColor="#4D000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/payForInvoiceBtn"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#8251ED"
+        android:text="Pay For Invoice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824" />
+
+    <Button
+        android:id="@+id/searchForInvoiceBtn"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#8251ED"
+        android:text="Search Invoices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,4 +42,9 @@ public class InvoiceModel {
     public void setIsPaid(Integer isPaid) {
         this.isPaid = isPaid;
     }
+
+    @Override
+    public String toString() {
+        return "invID: " + invoiceID + " " + email + " " + "Total: " + totalCost + " " + isPaid;
+    }
 }

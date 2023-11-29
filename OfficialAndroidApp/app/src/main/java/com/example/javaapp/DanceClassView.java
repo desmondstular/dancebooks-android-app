@@ -101,6 +101,8 @@ public class DanceClassView extends AppCompatActivity {
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+            classYear.getText().clear();
+            className.getText().clear();
         });
         //-------------on click for show all available btn------------------------------------------
         availableClassesBtn = findViewById(R.id.availableClassesBtn);
@@ -118,6 +120,8 @@ public class DanceClassView extends AppCompatActivity {
                 Toast.makeText(DanceClassView.this, "None found",
                         Toast.LENGTH_SHORT).show();
             }
+            classYear.getText().clear();
+            className.getText().clear();
         });
     }
 }

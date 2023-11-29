@@ -62,7 +62,7 @@ public class ClientModel {
 
     @Override
     public String toString() {
-        return firstName + " " + lastName + " " + email + " " +   " " + balance;
+        return firstName + " " + lastName + " " + email + " " +   " " + "Balance: " + balance;
     }
 
     public String getFnameLnameEmail(){
