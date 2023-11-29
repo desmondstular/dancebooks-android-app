@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewInvoices">
+
+
+    <GridLayout
+        android:id="@+id/gridLayout2"
+        android:layout_width="407dp"
+        android:layout_height="98dp"
+        android:layout_below="@+id/invoiceList"
+
+        android:layout_centerVertical="true"
+        android:columnCount="2"
+        android:rowCount="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoiceList"
+        app:layout_constraintVertical_bias="0.961">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/goHomeClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/home_1_svgrepo_com">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Home"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginBottom="4dp"
+            app:cardCornerRadius="15dp">
+
+            <LinearLayout
+                android:id="@+id/createInvoiceClick"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a7a6ba"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:src="@drawable/add_bill">
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Generate Invoice"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+    <ListView
+        android:id="@+id/invoiceList"
+        android:layout_width="392dp"
+        android:layout_height="426dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.429" />
+
+    <EditText
+        android:id="@+id/searchByClient"
+        android:layout_width="345dp"
+        android:layout_height="48dp"
+        android:hint="Email Address"
+        android:textColor="#4D000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.023" />
+
+    <Button
+        android:id="@+id/payForInvoiceBtn"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:backgroundTint="#8251ED"
+        android:text="Pay For Invoice"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.824" />
+
+    <Button
+        android:id="@+id/searchForInvoiceBtn"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:backgroundTint="#8251ED"
+        android:text="Search Invoices"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.109" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
