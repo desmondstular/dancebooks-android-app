@@ -36,28 +36,6 @@ public class ClassModel {
     public int getEnrolled() {
         return enrolled;
     }
-
-    // CLASS MODEL SETTERS
-    public void setClassName(String className) {
-        this.className = className;
-    }
-
-    public void setYear(int year) {
-        this.year = year;
-    }
-
-    public void setCost(float cost) {
-        this.cost = cost;
-    }
-
-    public void setCapacity(int capacity) {
-        this.capacity = capacity;
-    }
-
-    public void setEnrolled(int enrolled) {
-        this.enrolled = enrolled;
-    }
-
     @Override
     public String toString() {
         return  className + " " + year + " Cost: " + cost + " Capacity: " + enrolled + "/" + capacity;
