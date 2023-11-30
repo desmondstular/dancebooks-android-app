@@ -30,21 +30,34 @@ class ClassModelTest {
     void getYear() {
         assertEquals(classModel1.getYear(), classModel2.getYear());
         assertNotEquals(classModel3.getYear(),classModel1.getYear());
+        assertTrue(classModel1.getYear() == 2020);
     }
-//
-//    @Test
-//    void getCost() {
-//    }
-//
-//    @Test
-//    void getCapacity() {
-//    }
-//
-//    @Test
-//    void getEnrolled() {
-//    }
-//
-//    @Test
-//    void testToString() {
-//    }
+
+    @Test
+    void getCost() {
+        assertTrue(classModel1.getCost() == 500F);
+        assertTrue(classModel3.getCost() == 600F);
+        assertFalse(classModel2.getCost() == classModel3.getCost());
+    }
+
+    @Test
+    void getCapacity() {
+        assertTrue(classModel1.getCapacity() == classModel2.getCapacity());
+        assertTrue(classModel3.getCapacity() == 40);
+        assertFalse(classModel2.getCapacity() == classModel3.getCapacity());
+    }
+    @Test
+    void getEnrolled() {
+            assertTrue(classModel1.getEnrolled() == classModel2.getEnrolled());
+            assertFalse(classModel3.getEnrolled() == classModel2.getEnrolled());
+            assertTrue(classModel3.getEnrolled() == 0);
+        }
+
+//return  className + " " + year + " Cost: " + cost + " Capacity: " + enrolled + "/" + capacity;
+    @Test
+    void testToString() {
+        assertEquals("Tango 2020 Cost: 500.0 Capacity: 20/25", classModel1.toString() );
+        assertEquals(classModel2.toString(), classModel1.toString());
+        assertEquals("Salsa 2023 Cost: 600.0 Capacity: 0/40",  classModel3.toString());
+    }
 }
