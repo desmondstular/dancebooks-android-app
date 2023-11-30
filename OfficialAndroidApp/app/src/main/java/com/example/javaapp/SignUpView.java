@@ -52,8 +52,7 @@ public class SignUpView extends AppCompatActivity {
         //DataBase View-----------------------------------------------------------------------------
         databaseDao = new DatabaseDao(SignUpView.this);
         signedUpModelList = databaseDao.getAllSignedUps();
-        signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
-                android.R.layout.simple_list_item_1, signedUpModelList);
+        signedUpModelArrayAdapter = new SignUpAdapter(SignUpView.this, signedUpModelList);
         lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
         //--------------------init the fields for search--------------------------------------------
         searchSignupsButton = findViewById(R.id.search_sign_ups);

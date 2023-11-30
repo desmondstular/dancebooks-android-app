@@ -61,6 +61,7 @@ public class CreateInvoice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id) {
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 //((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 clientSelected = clientsForSpinner.get(position);
                 String[] inputString = clientSelected.split(",");

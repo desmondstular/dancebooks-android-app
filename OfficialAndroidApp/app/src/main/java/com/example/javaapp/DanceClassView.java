@@ -50,8 +50,7 @@ public class DanceClassView extends AppCompatActivity {
         //DATA BASE VIEW
         databaseDao = new DatabaseDao(DanceClassView.this);
         classModelList = databaseDao.getAllClasses();
-        classModelArrayAdapter = new ArrayAdapter<>(DanceClassView.this,
-                android.R.layout.simple_list_item_1, classModelList);
+        classModelArrayAdapter = new DanceClassAdapter(DanceClassView.this, classModelList);
         lv_danceClassList.setAdapter(classModelArrayAdapter);
         //---------------init the fields for search----------------------------------
         searchBtn = findViewById(R.id.searchClassBtn);
@@ -91,9 +90,7 @@ public class DanceClassView extends AppCompatActivity {
                 classModelList.add(databaseDao.getOneClassByPrimaryKey(
                         className.getText().toString().toUpperCase(),classYearInt));
             }
-            classModelArrayAdapter = new ArrayAdapter<>(DanceClassView.this,
-                    android.R.layout.simple_list_item_1, classModelList);
-            lv_danceClassList.setAdapter(classModelArrayAdapter);
+            classModelArrayAdapter = new DanceClassAdapter(DanceClassView.this, classModelList);
             if (classModelList.isEmpty()){
                 Toast.makeText(DanceClassView.this, "No Classes found",
                         Toast.LENGTH_SHORT).show();
@@ -111,8 +108,7 @@ public class DanceClassView extends AppCompatActivity {
             {
                 classModelList.clear();
                 classModelList = databaseDao.getAllAvailableClasses();
-                classModelArrayAdapter = new ArrayAdapter<>(DanceClassView.this,
-                        android.R.layout.simple_list_item_1, classModelList);
+                classModelArrayAdapter = new DanceClassAdapter(DanceClassView.this, classModelList);
                 lv_danceClassList.setAdapter(classModelArrayAdapter);
             }
             catch (Exception e)
