@@ -54,26 +54,36 @@ public class AddClass extends AppCompatActivity {
              */
             @Override
             public void onClick(View v) {
-                try {
-                    databaseDao = new DatabaseDao(AddClass.this);
-                    ClassModel classModel = new ClassModel(
-                            cleanName(ClName.getText().toString().toUpperCase()),
-                            Integer.parseInt(cleanIntInput(ClYear.getText().toString())),
-                            Integer.parseInt(cleanIntInput(An_Price.getText().toString())),
-                            Integer.parseInt(cleanIntInput(classCapacity.getText().toString())),0);
-                    boolean i = databaseDao.addOneClass(classModel);
-                    if (!i) {
-                        Toast.makeText(AddClass.this, "Class Already Exists", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(AddClass.this, "Successfully Added", Toast.LENGTH_SHORT).show();
-                        ClName.getText().clear();
-                        ClYear.getText().clear();
-                        An_Price.getText().clear();
-                        classCapacity.getText().clear();
+                if (ClName.getText().toString().isEmpty() ||
+                        ClYear.getText().toString().isEmpty() ||
+                        An_Price.getText().toString().isEmpty() ||
+                        classCapacity.getText().toString().isEmpty())
+                {
+                    Toast.makeText(AddClass.this, "PLease Fill Out All Fields", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    try {
+                        databaseDao = new DatabaseDao(AddClass.this);
+                        ClassModel classModel = new ClassModel(
+                                cleanName(ClName.getText().toString().toUpperCase()),
+                                Integer.parseInt(cleanIntInput(ClYear.getText().toString())),
+                                Integer.parseInt(cleanIntInput(An_Price.getText().toString())),
+                                Integer.parseInt(cleanIntInput(classCapacity.getText().toString())), 0);
+                        boolean i = databaseDao.addOneClass(classModel);
+                        if (!i) {
+                            Toast.makeText(AddClass.this, "Class Already Exists", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(AddClass.this, "Successfully Added", Toast.LENGTH_SHORT).show();
+                            ClName.getText().clear();
+                            ClYear.getText().clear();
+                            An_Price.getText().clear();
+                            classCapacity.getText().clear();
+                        }
+                    } catch (Exception e) {
+                        Toast.makeText(AddClass.this, "Error Creating Dance Class",
+                                Toast.LENGTH_SHORT).show();
                     }
-                } catch (Exception e) {
-                    Toast.makeText(AddClass.this, "Error Creating Dance Class",
-                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
