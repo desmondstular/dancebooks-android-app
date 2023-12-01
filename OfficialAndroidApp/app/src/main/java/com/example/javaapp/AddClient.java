@@ -59,9 +59,9 @@ public class AddClient extends AppCompatActivity {
 
                 boolean i = databaseDao.addOneClient(clientModel);
                 if (!i) {
-                    Toast.makeText(AddClient.this, "Failed", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddClient.this, "Invalid Email, Already Exists", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(AddClient.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddClient.this, "Successfully Added", Toast.LENGTH_SHORT).show();
                     clientFirstNameTextBox.getText().clear();
                     clientLastNameTextBox.getText().clear();
                     clientEmailTextBox.getText().clear();

@@ -41,7 +41,7 @@
                 android:layout_width="338dp"
                 android:layout_height="48dp"
                 android:hint="@string/ClassName"
-                android:textColor="#4D000000" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/searchClassYear"
@@ -49,13 +49,13 @@
                 android:layout_height="48dp"
                 android:layout_marginTop="16dp"
                 android:hint="@string/ClassYear"
-                android:textColor="#4D000000" />
+                android:inputType="number" />
 
             <!-- Your search Button -->
 
             <Button
                 android:id="@+id/searchClassBtn"
-                android:layout_width="338dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:text="Search" />
 

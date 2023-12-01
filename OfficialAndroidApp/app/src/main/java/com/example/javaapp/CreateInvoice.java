@@ -61,6 +61,7 @@ public class CreateInvoice extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
                                        int position, long id) {
+                ((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 //((TextView) parentView.getChildAt(0)).setTextColor(Color.GRAY);
                 clientSelected = clientsForSpinner.get(position);
                 String[] inputString = clientSelected.split(",");
@@ -89,7 +90,7 @@ public class CreateInvoice extends AppCompatActivity {
             }
             catch (Exception e)
             {
-                //Toast.makeText(CreateInvoice.this, "Error Creating Invoice", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateInvoice.this, "Error Creating Invoice", Toast.LENGTH_SHORT).show();
             }
 
         });

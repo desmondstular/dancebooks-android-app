@@ -63,9 +63,9 @@ public class AddClass extends AppCompatActivity {
                             Integer.parseInt(cleanIntInput(classCapacity.getText().toString())),0);
                     boolean i = databaseDao.addOneClass(classModel);
                     if (!i) {
-                        Toast.makeText(AddClass.this, "Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddClass.this, "Class Already Exists", Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(AddClass.this, "Successfully added", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AddClass.this, "Successfully Added", Toast.LENGTH_SHORT).show();
                         ClName.getText().clear();
                         ClYear.getText().clear();
                         An_Price.getText().clear();

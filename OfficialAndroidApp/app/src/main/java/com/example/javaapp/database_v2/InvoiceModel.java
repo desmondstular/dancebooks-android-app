@@ -45,6 +45,6 @@ public class InvoiceModel {
 
     @Override
     public String toString() {
-        return "invID: " + invoiceID + " " + email + " " + "Total: " + totalCost + " " + isPaid;
+        return "invID: " + invoiceID + "\n " + email + " \n" + "Total: " + totalCost + " \n" + isPaid;
     }
 }
