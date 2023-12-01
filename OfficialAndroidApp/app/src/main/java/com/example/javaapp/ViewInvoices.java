@@ -65,9 +65,9 @@ public class ViewInvoices extends AppCompatActivity {
                 InvoiceModel selectedItem = invoiceArrayAdapter.getItem(selectedItemPosition);
                 try {
                     if (databaseDao.updateInvoiceToPaid(selectedItem.getInvoiceID())) {
-                        Toast.makeText(ViewInvoices.this, "Paid invID: " + selectedItem.getInvoiceID(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewInvoices.this, "Invoice Paid, ID: " + selectedItem.getInvoiceID(), Toast.LENGTH_SHORT).show();
                     } else {
-                        Toast.makeText(ViewInvoices.this, "Invoice has already been paid", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewInvoices.this, "Invoice Has Already Been Paid", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
                     Toast.makeText(ViewInvoices.this, "Cannot Pay for This Invoice", Toast.LENGTH_SHORT).show();

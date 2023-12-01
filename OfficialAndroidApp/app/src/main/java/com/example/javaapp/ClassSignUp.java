@@ -109,7 +109,7 @@ public class ClassSignUp extends AppCompatActivity {
                         classYear, 0, null);
                 Boolean isAdded = databaseDao.addOneSignedUp(signedUpModel);
                 if (isAdded) {
-                    Toast.makeText(ClassSignUp.this, "Successfully added",
+                    Toast.makeText(ClassSignUp.this, "Successfully Signed Up",
                             Toast.LENGTH_LONG).show();
                     classModelList = databaseDao.getAllClasses();
                     //classesForSpinner = getAllClassString(classModelList);
@@ -123,7 +123,7 @@ public class ClassSignUp extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
                 }
             } catch (Exception e) {
-                Toast.makeText(ClassSignUp.this, "Error Creating Invoice",
+                Toast.makeText(ClassSignUp.this, "Error With Sign Up",
                         Toast.LENGTH_SHORT).show();
             }
         });

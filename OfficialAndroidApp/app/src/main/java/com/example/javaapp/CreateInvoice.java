@@ -90,7 +90,7 @@ public class CreateInvoice extends AppCompatActivity {
             }
             catch (Exception e)
             {
-                //Toast.makeText(CreateInvoice.this, "Error Creating Invoice", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateInvoice.this, "Error Creating Invoice", Toast.LENGTH_SHORT).show();
             }
 
         });

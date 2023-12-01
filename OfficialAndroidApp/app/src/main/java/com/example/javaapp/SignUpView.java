@@ -77,8 +77,7 @@ public class SignUpView extends AppCompatActivity {
                     classYearInt,
                     -1);
             // MIGHT NEED TO REFACTOR getFromTextFields, isPaid is no longer a needed search criteria
-            signedUpModelArrayAdapter = new ArrayAdapter<>(SignUpView.this,
-                    android.R.layout.simple_list_item_1, signedUpModelList);
+            signedUpModelArrayAdapter = new SignUpAdapter(SignUpView.this, signedUpModelList);
             lv_SignedUp_List.setAdapter(signedUpModelArrayAdapter);
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);

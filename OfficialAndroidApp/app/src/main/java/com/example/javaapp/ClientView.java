@@ -47,8 +47,7 @@ public class ClientView extends AppCompatActivity {
         lv_clientList = findViewById(R.id.lv_clientList);
         databaseDao = new DatabaseDao(ClientView.this);
         clientModelList = databaseDao.getAllClients();
-        clientArrayAdapter = new ArrayAdapter<ClientModel>(ClientView.this,
-                android.R.layout.simple_list_item_1, clientModelList);
+        clientArrayAdapter = new ClientViewAdapter(ClientView.this, clientModelList);
         lv_clientList.setAdapter(clientArrayAdapter);
         //---------------init the fields for search----------------------------------
         searchClientBtn = findViewById(R.id.searchClientBtn);
@@ -77,8 +76,7 @@ public class ClientView extends AppCompatActivity {
                             searchClientFirstName.getText().toString().toUpperCase(),
                             searchClientLastName.getText().toString().toUpperCase());
                 }
-                clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
-                        android.R.layout.simple_list_item_1, clientModelList);
+                clientArrayAdapter = new ClientViewAdapter(ClientView.this, clientModelList);
                 lv_clientList.setAdapter(clientArrayAdapter);
                 if (clientModelList.isEmpty()){
                     Toast.makeText(ClientView.this, "No Clients found",
@@ -105,8 +103,7 @@ public class ClientView extends AppCompatActivity {
             {
                 clientModelList.clear();
                 clientModelList = databaseDao.getAllClientWithBalanceGreaterThanZero();
-                clientArrayAdapter = new ArrayAdapter<>(ClientView.this,
-                        android.R.layout.simple_list_item_1, clientModelList);
+                clientArrayAdapter = new ClientViewAdapter(ClientView.this, clientModelList);
                 lv_clientList.setAdapter(clientArrayAdapter);
                 //-----------------------------------------------------------
                 searchClientLastName.getText().clear();

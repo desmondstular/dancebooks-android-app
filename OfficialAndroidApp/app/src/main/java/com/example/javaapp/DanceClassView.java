@@ -95,6 +95,10 @@ public class DanceClassView extends AppCompatActivity {
                 Toast.makeText(DanceClassView.this, "No Classes found",
                         Toast.LENGTH_SHORT).show();
             }
+            else
+            {
+                lv_danceClassList.setAdapter(classModelArrayAdapter);
+            }
             // hide keyboard on click
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);

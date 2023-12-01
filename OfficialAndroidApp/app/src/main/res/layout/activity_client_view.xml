@@ -29,7 +29,7 @@
                 android:layout_width="345dp"
                 android:layout_height="48dp"
                 android:hint="Email Address"
-                android:inputType="text" />
+                android:inputType="textEmailAddress"/>
 
             <EditText
                 android:id="@+id/searchClientLastName"

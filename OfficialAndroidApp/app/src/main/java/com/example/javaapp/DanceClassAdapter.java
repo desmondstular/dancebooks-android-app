@@ -10,9 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.javaapp.database.DanceClassModel;
 import com.example.javaapp.database_v2.ClassModel;
-import com.example.javaapp.database_v2.SignedUpModel;
 
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class DanceClassAdapter extends ArrayAdapter<ClassModel> {
         if (currentItem != null) {
             className.setText("Class Name: " + currentItem.getClassName());
             classYear.setText("Class Year: " + currentItem.getYear());
-            classCost.setText("Class Cost: " + currentItem.getCost());
+            classCost.setText("Class Cost: " + currentItem.getCost() + "$");
             classEnroll.setText("Class Enrollment: " + currentItem.getEnrolled() + "/" + currentItem.getCapacity());
         }
 

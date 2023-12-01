@@ -335,7 +335,7 @@ public class DatabaseDao extends SQLiteOpenHelper {
         if (year == null) {
             cYear = "";
         } else {
-            cYear = " WHERE YEAR = " + year.toString();
+            cYear = " WHERE YEAR = '" + year.toString() + "'";
         }
 
         // get client data from the database
