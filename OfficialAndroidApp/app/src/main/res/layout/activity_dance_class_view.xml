@@ -5,11 +5,37 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DanceClassView">
+    <View
+        android:id="@+id/top_view5"
+        android:layout_width="416dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_view_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="301dp"
+        android:layout_height="51dp"
+        android:text="VIEW CLASSES"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:fontFamily="@font/titilliumwebregular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.854"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_view5"
+        app:layout_constraintVertical_bias="0.02" />
 
     <ListView
         android:id="@+id/lv_danceClassList"
-        android:layout_width="396dp"
-        android:layout_height="336dp"
+        android:layout_width="399dp"
+        android:layout_height="269dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -27,14 +53,15 @@
         app:cardElevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/top_view5"
+        app:layout_constraintBottom_toTopOf="@id/lv_danceClassList">
 
         <LinearLayout
-            android:layout_width="369dp"
+            android:layout_width="389dp"
             android:layout_height="match_parent"
+            android:background="#555555"
             android:orientation="vertical"
-            android:padding="16dp"
-            android:background="#555555">
+            android:padding="16dp">
 
             <EditText
                 android:id="@+id/searchClassName"
@@ -62,18 +89,18 @@
             <View
                 android:layout_width="340dp"
                 android:layout_height="5dp"
-                android:background="#d3d3d3"
                 android:layout_gravity="center_vertical"
-                android:layout_marginTop="10dp"/>
+                android:layout_marginTop="10dp"
+                android:background="#d3d3d3" />
 
             <Button
                 android:id="@+id/availableClassesBtn"
                 android:layout_width="200dp"
                 android:layout_height="57dp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:backgroundTint="#8251ED"
-                android:text="@string/ShowAvailableClasses"
-                android:layout_gravity="center_horizontal"/>
+                android:text="@string/ShowAvailableClasses" />
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>

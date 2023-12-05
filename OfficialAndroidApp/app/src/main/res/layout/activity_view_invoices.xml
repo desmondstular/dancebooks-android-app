@@ -6,6 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ViewInvoices">
 
+    <View
+        android:id="@+id/top_view5"
+        android:layout_width="416dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_view_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="301dp"
+        android:layout_height="51dp"
+        android:text="VIEW INVOICES"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:fontFamily="@font/titilliumwebregular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.754"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_view5"
+        app:layout_constraintVertical_bias="0.023" />
 
     <GridLayout
         android:id="@+id/gridLayout2"
@@ -103,25 +129,24 @@
 
     <ListView
         android:id="@+id/invoiceList"
-        android:layout_width="392dp"
-        android:layout_height="426dp"
+        android:layout_width="404dp"
+        android:layout_height="400dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.429" />
+        app:layout_constraintVertical_bias="0.556" />
 
     <LinearLayout
-        android:layout_width="409dp"
-        android:layout_height="115dp"
+        android:layout_width="417dp"
+        android:layout_height="111dp"
         android:background="#555555"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/invoiceList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.062">
+        app:layout_constraintVertical_bias="0.89">
 
         <EditText
             android:id="@+id/searchByClient"
@@ -162,7 +187,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.824" />
+        app:layout_constraintVertical_bias="0.851" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
