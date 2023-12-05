@@ -5,6 +5,32 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ClientView">
+    <View
+        android:id="@+id/top_view5"
+        android:layout_width="416dp"
+        android:layout_height="65dp"
+        android:background="@drawable/bg_view_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView13"
+        android:layout_width="301dp"
+        android:layout_height="51dp"
+        android:text="VIEW CLIENTS"
+        android:textColor="#000000"
+        android:textSize="34sp"
+        app:fontFamily="@font/titilliumwebregular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.963"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/top_view5"
+        app:layout_constraintVertical_bias="0.02" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -12,13 +38,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/lv_clientList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/top_view5">
 
         <LinearLayout
-            android:layout_width="377dp"
+            android:layout_width="389dp"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:padding="16dp">
@@ -29,7 +56,7 @@
                 android:layout_width="345dp"
                 android:layout_height="48dp"
                 android:hint="Email Address"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/searchClientLastName"
@@ -60,32 +87,32 @@
 
     <!-- Your ListView and other UI elements -->
 
+    <!--="#CBC3E3"/> -->
+
     <ListView
         android:id="@+id/lv_clientList"
-        android:layout_width="400dp"
-        android:layout_height="299dp"
+        android:layout_width="402dp"
+        android:layout_height="255dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.772" />
-
-    <!--="#CBC3E3"/> -->
+        app:layout_constraintVertical_bias="0.68" />
 
     <Button
         android:id="@+id/showAllOwing"
         android:layout_width="189dp"
         android:layout_height="48dp"
-        android:layout_marginTop="4dp"
         android:backgroundTint="#8251ED"
         android:text="@string/SearchAllOwing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        app:layout_constraintVertical_bias="0.012" />
+        app:layout_constraintTop_toBottomOf="@+id/lv_clientList"
+        app:layout_constraintVertical_bias="0.0" />
 
     <GridLayout
         android:layout_width="407dp"
