@@ -91,8 +91,8 @@
 
     <ListView
         android:id="@+id/lv_clientList"
-        android:layout_width="402dp"
-        android:layout_height="255dp"
+        android:layout_width="404dp"
+        android:layout_height="340dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
