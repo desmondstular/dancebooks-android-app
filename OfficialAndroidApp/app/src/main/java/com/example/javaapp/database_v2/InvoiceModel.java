@@ -1,6 +1,6 @@
 package com.example.javaapp.database_v2;
 
-import java.util.ArrayList;
+import java.util.Objects;
 
 public class InvoiceModel {
     private Integer invoiceID;
@@ -46,5 +46,18 @@ public class InvoiceModel {
     @Override
     public String toString() {
         return "invID: " + invoiceID + "\n " + email + " \n" + "Total: " + totalCost + " \n" + isPaid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof InvoiceModel)) return false;
+        InvoiceModel that = (InvoiceModel) o;
+        return Objects.equals(invoiceID, that.invoiceID) && Objects.equals(email, that.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(invoiceID, email);
     }
 }

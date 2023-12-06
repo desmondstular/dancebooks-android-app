@@ -1,5 +1,7 @@
 package com.example.javaapp.database_v2;
 
+import java.util.Objects;
+
 public class SignedUpModel {
     private String email;
     private String className;
@@ -61,5 +63,18 @@ public class SignedUpModel {
     @Override
     public String toString() {
         return email + " " + className + " " + year + " invID: " +invoiceID;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof SignedUpModel)) return false;
+        SignedUpModel that = (SignedUpModel) o;
+        return year == that.year && Objects.equals(email, that.email) && Objects.equals(className, that.className) && Objects.equals(invoiceID, that.invoiceID);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email, className, year, invoiceID);
     }
 }

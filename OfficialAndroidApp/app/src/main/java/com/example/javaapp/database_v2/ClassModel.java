@@ -1,5 +1,7 @@
 package com.example.javaapp.database_v2;
 
+import java.util.Objects;
+
 public class ClassModel {
     private String className;
     private int year;
@@ -46,4 +48,16 @@ public class ClassModel {
         return className + ", " + year + ", " + availability;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClassModel)) return false;
+        ClassModel that = (ClassModel) o;
+        return year == that.year && Objects.equals(className, that.className);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(className, year);
+    }
 }
