@@ -42,11 +42,7 @@ public class DatabaseDaoTestClient {
 
     @Test
     public void addOneClient() {
-        // Context of the app under test.
-        //Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        //assertEquals("com.example.javaapp", appContext.getPackageName());
         assertFalse(databaseDao.addOneClient(clientModel1));
-        //assertFalse(databaseDao.addOneClient(clientModel1));
         assertFalse(databaseDao.addOneClient(clientModel2));
         assertFalse(databaseDao.addOneClient(clientModel3));
     }

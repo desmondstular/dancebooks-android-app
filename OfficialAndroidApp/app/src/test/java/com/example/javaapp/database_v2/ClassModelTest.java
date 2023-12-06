@@ -1,10 +1,5 @@
 package com.example.javaapp.database_v2;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -22,42 +17,42 @@ class ClassModelTest {
 
     @Test
     void getClassName() {
-        assertTrue(classModel1.getClassName().equals(classModel1.getClassName()));
-        assertFalse(classModel2.getClassName().equals(classModel3.getClassName()));
+        Assertions.assertEquals(classModel1.getClassName(), classModel1.getClassName());
+        Assertions.assertNotEquals(classModel2.getClassName(), classModel3.getClassName());
     }
 
     @Test
     void getYear() {
-        assertEquals(classModel1.getYear(), classModel2.getYear());
-        assertNotEquals(classModel3.getYear(),classModel1.getYear());
-        assertTrue(classModel1.getYear() == 2020);
+        Assertions.assertEquals(classModel1.getYear(), classModel2.getYear());
+        Assertions.assertNotEquals(classModel3.getYear(), classModel1.getYear());
+        Assertions.assertEquals(2020, classModel1.getYear());
     }
 
     @Test
     void getCost() {
-        assertTrue(classModel1.getCost() == 500F);
-        assertTrue(classModel3.getCost() == 600F);
-        assertFalse(classModel2.getCost() == classModel3.getCost());
+        Assertions.assertEquals(500F, classModel1.getCost());
+        Assertions.assertEquals(600F, classModel3.getCost());
+        Assertions.assertNotEquals(classModel2.getCost(), classModel3.getCost(), 0.0);
     }
 
     @Test
     void getCapacity() {
-        assertTrue(classModel1.getCapacity() == classModel2.getCapacity());
-        assertTrue(classModel3.getCapacity() == 40);
-        assertFalse(classModel2.getCapacity() == classModel3.getCapacity());
+        Assertions.assertEquals(classModel1.getCapacity(), classModel2.getCapacity());
+        Assertions.assertEquals(40, classModel3.getCapacity());
+        Assertions.assertNotEquals(classModel2.getCapacity(), classModel3.getCapacity());
     }
     @Test
     void getEnrolled() {
-            assertTrue(classModel1.getEnrolled() == classModel2.getEnrolled());
-            assertFalse(classModel3.getEnrolled() == classModel2.getEnrolled());
-            assertTrue(classModel3.getEnrolled() == 0);
+        Assertions.assertEquals(classModel1.getEnrolled(), classModel2.getEnrolled());
+        Assertions.assertNotEquals(classModel3.getEnrolled(), classModel2.getEnrolled());
+        Assertions.assertEquals(0, classModel3.getEnrolled());
         }
 
 //return  className + " " + year + " Cost: " + cost + " Capacity: " + enrolled + "/" + capacity;
     @Test
     void testToString() {
-        assertEquals("Tango 2020 Cost: 500.0 Capacity: 20/25", classModel1.toString() );
-        assertEquals(classModel2.toString(), classModel1.toString());
-        assertEquals("Salsa 2023 Cost: 600.0 Capacity: 0/40",  classModel3.toString());
+        Assertions.assertEquals("Tango 2020 Cost: 500.0 Capacity: 20/25", classModel1.toString() );
+        Assertions.assertEquals(classModel2.toString(), classModel1.toString());
+        Assertions.assertEquals("Salsa 2023 Cost: 600.0 Capacity: 0/40",  classModel3.toString());
     }
 }
