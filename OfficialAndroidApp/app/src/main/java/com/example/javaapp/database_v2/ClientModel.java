@@ -1,6 +1,6 @@
 package com.example.javaapp.database_v2;
 
-import java.math.BigInteger;
+import java.util.Objects;
 
 public class ClientModel {
     private String email;
@@ -45,5 +45,18 @@ public class ClientModel {
 
     public String getFnameLnameEmail(){
         return firstName + ", " + lastName + ", " + email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ClientModel)) return false;
+        ClientModel that = (ClientModel) o;
+        return Objects.equals(getEmail(), that.getEmail()) && Objects.equals(getFirstName(), that.getFirstName()) && Objects.equals(getLastName(), that.getLastName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getEmail(), getFirstName(), getLastName());
     }
 }
