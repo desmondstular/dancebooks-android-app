@@ -34,8 +34,8 @@
 
     <ListView
         android:id="@+id/lv_danceClassList"
-        android:layout_width="399dp"
-        android:layout_height="269dp"
+        android:layout_width="396dp"
+        android:layout_height="346dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
